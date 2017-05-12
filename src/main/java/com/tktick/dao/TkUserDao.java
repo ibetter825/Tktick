@@ -15,6 +15,6 @@ import com.tktick.model.entity.TkUser;
 @Repository
 public interface TkUserDao extends PagingAndSortingRepository<TkUser, Long>, JpaSpecificationExecutor<TkUser> {
 	
-	@Query("from TkUser t where name = :username")
+	@Query("from TkUser t where user_name = :username")
 	public TkUser selectUserByUsername(@Param(value = "username") String username);
 }

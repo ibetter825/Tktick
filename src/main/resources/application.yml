@@ -83,7 +83,7 @@ spring:
         show-sql: true
         
         hibernate:
-            ddl-auto: create
+            #ddl-auto: create #create系统在启动时会先将表删除再创建
             naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
             database: org.hibernate.dialect.MySQL5InnoDBDialect
         properties:
