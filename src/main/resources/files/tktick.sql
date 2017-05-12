@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2017-05-12 16:10:04
+Date: 2017-05-12 16:52:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,12 @@ CREATE TABLE `tk_article` (
   `art_title` varchar(100) NOT NULL COMMENT '文章标题',
   `art_desc` varchar(200) DEFAULT '' COMMENT '文章摘要',
   `acc_id` bigint(20) NOT NULL COMMENT '文章作者FK',
+  `add_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `edit_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  `art_state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '文章状态: 1正常 -1软删除',
+  `art_auth` tinyint(4) NOT NULL COMMENT '文章权限: 0:仅自己可见 1: 所有人可见 2:部分可见(另外一张表配合)',
+  `art_cont` text COMMENT '文章内容',
+  `art_imgs` varchar(4000) DEFAULT '' COMMENT '文章中的图片地址，每张图片之间用";"隔开',
   PRIMARY KEY (`art_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
 
@@ -42,6 +48,21 @@ CREATE TABLE `tk_comment` (
 
 -- ----------------------------
 -- Records of tk_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tk_deliver
+-- ----------------------------
+DROP TABLE IF EXISTS `tk_deliver`;
+CREATE TABLE `tk_deliver` (
+  `dver_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '投稿编号',
+  `art_id` bigint(20) NOT NULL,
+  `set_id` int(11) NOT NULL,
+  PRIMARY KEY (`dver_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投稿记录';
+
+-- ----------------------------
+-- Records of tk_deliver
 -- ----------------------------
 
 -- ----------------------------
@@ -132,7 +153,7 @@ CREATE TABLE `tk_user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) NOT NULL DEFAULT '' COMMENT '登录名',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of tk_user
