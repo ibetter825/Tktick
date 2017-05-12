@@ -1,7 +1,5 @@
 package com.tktick.model.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +14,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tk_user")
-public class TkUser implements Serializable {
+public class TkUser extends BaseEntity {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
