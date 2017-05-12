@@ -18,20 +18,21 @@ public class TkUser extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(name = "name")
-	private String name;
+	@Column(name = "user_id")
+	private Long userId;
+	@Column(name = "user_name")
+	private String userName;
 	
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
