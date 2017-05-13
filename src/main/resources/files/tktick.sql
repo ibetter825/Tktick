@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
-Source Server Version : 50715
-Source Host           : localhost:3306
+Source Server Version : 50711
+Source Host           : 127.0.0.1:3306
 Source Database       : tktick
 
 Target Server Type    : MYSQL
-Target Server Version : 50715
+Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-05-12 16:52:15
+Date: 2017-05-13 17:28:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `tk_article` (
   `art_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键自增',
   `art_title` varchar(100) NOT NULL COMMENT '文章标题',
   `art_desc` varchar(200) DEFAULT '' COMMENT '文章摘要',
-  `acc_id` bigint(20) NOT NULL COMMENT '文章作者FK',
+  `user_id` bigint(20) NOT NULL COMMENT '文章作者FK',
   `add_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `edit_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '最后修改时间',
   `art_state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '文章状态: 1正常 -1软删除',
@@ -43,6 +43,11 @@ CREATE TABLE `tk_article` (
 DROP TABLE IF EXISTS `tk_comment`;
 CREATE TABLE `tk_comment` (
   `comt_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `comt_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论时间',
+  `comt_cont` varchar(500) NOT NULL DEFAULT '' COMMENT '评论内容，140字以内',
+  `user_id` bigint(20) NOT NULL COMMENT '评论人',
+  `art_id` bit(1) NOT NULL COMMENT '被评论的文章',
+  `comt_state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态: 1:正常 -1:软删除',
   PRIMARY KEY (`comt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
 
@@ -56,8 +61,10 @@ CREATE TABLE `tk_comment` (
 DROP TABLE IF EXISTS `tk_deliver`;
 CREATE TABLE `tk_deliver` (
   `dver_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '投稿编号',
-  `art_id` bigint(20) NOT NULL,
-  `set_id` int(11) NOT NULL,
+  `art_id` bigint(20) NOT NULL COMMENT '文章id',
+  `set_id` int(11) NOT NULL COMMENT '合集id',
+  `dver_time` bigint(20) DEFAULT '0' COMMENT '投递时间',
+  `dver_state` tinyint(4) DEFAULT '0' COMMENT '投递状态: -1:软删除 0:未被处理, 1:已处理且被收录 2:已处理但被退回 3:撤回投递',
   PRIMARY KEY (`dver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投稿记录';
 
@@ -71,6 +78,11 @@ CREATE TABLE `tk_deliver` (
 DROP TABLE IF EXISTS `tk_reply`;
 CREATE TABLE `tk_reply` (
   `reply_id` bigint(20) NOT NULL,
+  `reply_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '回复时间',
+  `reply_cont` varchar(500) NOT NULL DEFAULT '' COMMENT '回复内容，140字以内',
+  `comt_id` bigint(20) NOT NULL COMMENT '被回复的评论',
+  `user_id` bigint(20) NOT NULL COMMENT '回复人',
+  `reply_state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '回复状态: 1:正常 -1:软删除',
   PRIMARY KEY (`reply_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='回复表';
 
@@ -84,6 +96,11 @@ CREATE TABLE `tk_reply` (
 DROP TABLE IF EXISTS `tk_set`;
 CREATE TABLE `tk_set` (
   `set_id` int(11) NOT NULL AUTO_INCREMENT,
+  `set_title` varchar(100) NOT NULL DEFAULT '' COMMENT '合集名称',
+  `art_num` int(11) DEFAULT '0' COMMENT '收录的文章数量，使用触发器操作',
+  `add_time` bigint(20) DEFAULT '0' COMMENT '创建时间',
+  `edit_time` bigint(20) DEFAULT '0' COMMENT '修改时间',
+  `set_desc` varchar(2000) DEFAULT '' COMMENT '合集简介',
   PRIMARY KEY (`set_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合集表';
 
@@ -96,8 +113,11 @@ CREATE TABLE `tk_set` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tk_set_keeper`;
 CREATE TABLE `tk_set_keeper` (
-  `set_id` int(11) DEFAULT NULL,
-  `acc_id` int(11) DEFAULT NULL
+  `kpr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `set_id` int(11) NOT NULL COMMENT '合集id',
+  `user_id` bigint(11) NOT NULL COMMENT '用户id',
+  `kpr_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '管理员分类:  1:创建者 0:其他管理员',
+  PRIMARY KEY (`kpr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合集管理员表';
 
 -- ----------------------------
@@ -109,8 +129,8 @@ CREATE TABLE `tk_set_keeper` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tk_tag`;
 CREATE TABLE `tk_tag` (
-  `tag_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `tag_nm` varchar(50) NOT NULL DEFAULT '',
+  `tag_id` int(20) NOT NULL AUTO_INCREMENT,
+  `tag_nm` varchar(50) NOT NULL DEFAULT '' COMMENT '标签名',
   `art_num` int(11) NOT NULL DEFAULT '0' COMMENT '该标签下文章数量，触发器控制',
   PRIMARY KEY (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签表';
@@ -151,10 +171,38 @@ CREATE TABLE `tk_topic` (
 DROP TABLE IF EXISTS `tk_user`;
 CREATE TABLE `tk_user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) NOT NULL DEFAULT '' COMMENT '登录名',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+  `user_name` varchar(255) DEFAULT '' COMMENT '登录名',
+  `user_pwd` varchar(32) NOT NULL COMMENT '用户密码',
+  `user_salt` varchar(10) NOT NULL COMMENT '加密用字符串',
+  `user_phone` int(11) DEFAULT '0' COMMENT '用户电话号码，可用于登录',
+  `user_email` varchar(100) DEFAULT '' COMMENT '用户邮箱，可用于登录',
+  `user_state` tinyint(4) DEFAULT '1' COMMENT '状态: -1：删除，0：限制登陆，1：正常',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `INX_TK_USER_USER_NAME` (`user_name`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of tk_user
+-- ----------------------------
+INSERT INTO `tk_user` VALUES ('10000', 'tktick', 'BB855C106B50CEA148E553154E3DF151', 'yang', '0', '', '1');
+
+-- ----------------------------
+-- Table structure for tk_user_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tk_user_info`;
+CREATE TABLE `tk_user_info` (
+  `user_id` bigint(20) NOT NULL,
+  `user_avatar` varchar(200) DEFAULT '' COMMENT '用户头像',
+  `user_intro` varchar(500) DEFAULT '' COMMENT '用户简介',
+  `nick_name` varchar(100) DEFAULT '' COMMENT '用户昵称',
+  `user_sex` tinyint(4) DEFAULT '1' COMMENT '用户性别: 1: 男  0:女',
+  `login_time` bigint(20) DEFAULT '0' COMMENT '上次登录时间',
+  `login_ip` varchar(50) DEFAULT '' COMMENT '上次登录ip,另外一张表使用触发器自动记录登录时间与ip',
+  `reg_time` bigint(20) DEFAULT '0' COMMENT '注册时间',
+  `err_count` tinyint(20) DEFAULT '0' COMMENT '连续登录错误次数',
+  `stop_time` bigint(20) DEFAULT '0' COMMENT '限制登录开始时间，24小时候才能再次登录并清空'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户详情表';
+
+-- ----------------------------
+-- Records of tk_user_info
 -- ----------------------------
