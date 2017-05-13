@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+	<head>
+		<#assign page_title = "写文章"/>
+		<#include "/web/common/header.html"/>
+		<link rel="stylesheet" href="/static/css/wangEditor.min.css" type="text/css" media="all">
+	</head>
+
+	<body class="write">
+		<div class="header">
+			<div class="top_image"></div>
+			<div class="header_logo">
+				<h1>
+					<img
+						src="http://www.themepark.com.cn/demo/wp-content/themes/foldingtime/images/logo.jpg">
+				</h1>
+			</div>
+			<div class="nav">
+				<span id="nav_b" class="light_span">导航菜单</span>
+				<ul class="header_pic_menu">
+					<li
+						class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"
+						id="menu-item-37"><a
+						href="http://www.themepark.com.cn/demo/?themedemo=foldingtime"><span><b>首页</b></span></a></li>
+					<li
+						class="menu-item menu-item-type-taxonomy menu-item-object-category"
+						id="menu-item-41"><a
+						href="http://www.themepark.com.cn/demo/about-us?themedemo=foldingtime"><span><b>关于我的</b></span></a></li>
+					<li
+						class="menu-item menu-item-type-taxonomy menu-item-object-category"
+						id="menu-item-38"><a
+						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>美食分享</b></span></a></li>
+					<li
+						class="menu-item menu-item-type-taxonomy menu-item-object-category"
+						id="menu-item-39"><a
+						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>工作笔记</b></span></a></li>
+					<li
+						class="menu-item menu-item-type-taxonomy menu-item-object-category"
+						id="menu-item-40"><a
+						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>旅途见闻</b></span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<div class="main_loop">
+				<ul class="main_loop_ul">
+					<li class="mian_li">
+						<div class="">
+							<input class="art_title" name="artTitle" placeholder="标题" />
+	
+							<div class="main_others">
+								<a class="main_cat"
+									href="http://www.themepark.com.cn/demo/category/bbs?themedemo=foldingtime">问答社区
+									/ bbs</a> <a class="main_actor" target="_blank"
+									href="http://www.themepark.com.cn/demo/author/jasson?themedemo=foldingtime">
+									kkvtg</a> 写在2015年03月30日
+							</div>
+							<div class="main_enter">
+								<div id="editor_01" style="height: 600px;"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="sidbar">
+				<div class="widget">
+					<h2>
+						<a href=""> 关于我</a>
+					</h2>
+					<a target="_blank" href="#" class="about_pic"> <img alt="关于我"
+						src="http://www.themepark.com.cn/demo/wp-content/themes/foldingtime/images/demo/me.jpg"></a>
+					<div class="code_s about_p">
+						<strong>MR.Jack</strong><br> 18世纪在世界史上是个特别迷人的世纪，它将启蒙运动紧紧拥在怀中。/<br>
+						这是最好的世界 /<br> 也是最坏的世界 /<br> 旅途路上永远会遇到有趣的事情<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_in">
+				<div class="menu">
+					<ul>
+						<li id="menu-item-36" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-2" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-77" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-281" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-38" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-186" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-63" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-74" class=""><a><span><b></b></span></a></li>
+						<li id="menu-item-249" class=""><a><span><b></b></span></a></li>
+					</ul>
+				</div>
+				<p class="f_bq ">
+					版权所有 ©2017 WEB主题公园 | <a rel="nofollow" target="_blank"
+						href="http://www.miitbeian.gov.cn/"></a> | <a class="banquan"
+						target="_blank" href="http://www.themepark.com.cn">theme by
+						themepark</a> |
+				</p>
+			</div>
+		</div>
+		<a href="#" title="回到顶部" class="top_go_btn"></a>
+	</body>
+	<#include "/web/common/footer.html"/>
+	<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
+	<script type="text/javascript">
+		//添加自定义菜单
+		// 获取 wangEditor 构造函数和 jquery
+	    var E = window.wangEditor;
+	
+	    // 用 createMenu 方法创建菜单
+	    E.createMenu(function (check) {
+	        // 定义菜单id，不要和其他菜单id重复。编辑器自带的所有菜单id，可通过『参数配置-自定义菜单』一节查看
+	        var menuId = 'save';
+	        // check将检查菜单配置（『参数配置-自定义菜单』一节描述）中是否该菜单id，如果没有，则忽略下面的代码。
+	        if (!check(menuId))
+	            return;
+	
+	        // this 指向 editor 对象自身
+	        var editor = this;
+	
+	        // 创建 menu 对象
+	        var menu = new E.Menu({
+	            editor: editor,  // 编辑器对象
+	            id: menuId,  // 菜单id
+	            title: '保存', // 菜单标题
+	
+	            // 正常状态和选中装下的dom对象，样式需要自定义
+	            $domNormal: $('<a href="#" tabindex="-1" id="save-btn" style="color:#FFF;">保存</a>'),
+	            $domSelected: $('<a href="#" tabindex="-1" class="selected">保存中</i></a>')
+	        });
+	
+	        // 菜单正常状态下，点击将触发该事件
+	        menu.clickEvent = function (e) {
+	        	
+	        };
+	        // 增加到editor对象中
+	        editor.menus[menuId] = menu;
+	    });
+    
+		var editor = new wangEditor('editor_01');
+		 // 关闭菜单栏fixed
+    	editor.config.menuFixed = false;
+		// 上传图片
+    	editor.config.uploadImgUrl = '/upload/editor?upload_type=image';
+    	editor.config.uploadImgFileName = 'upload';
+		// 普通的自定义菜单
+	    editor.config.menus = [
+	        'bold',
+	        'underline',
+	        'italic',
+	        'strikethrough',
+	        'head',
+	        'quote',
+	        'fontfamily',
+	        'link',
+        	'unlink',
+	        '|',
+	        'img',
+	        'video',
+	        '|',
+	        'undo',
+        	'redo',
+        	'|',
+        	'fullscreen',
+        	'|',
+        	'save'
+	     ];
+    	 editor.create();
+    	 //编辑器保存菜单的位置修改，靠右
+    	$('.menu-group:last').css({'float':'right','borderRight':0,'padding':0,'background':'#FF766C'}).find('.menu-item').width('60px');
+	</script>
+</html>

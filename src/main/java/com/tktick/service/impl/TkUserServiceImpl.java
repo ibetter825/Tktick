@@ -13,7 +13,6 @@ public class TkUserServiceImpl implements TkUserService {
 	@Autowired
 	private TkUserDao userDao;
 	
-	@Override
 	public TkUser getTkUser(String username) {
 		return userDao.selectUserByUsername(username);
 	}

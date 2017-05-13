@@ -1,22 +1,8 @@
 <!doctype html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport"
-			content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
-		<meta name="screen-orientation" content="portrait">
-		<meta name="full-screen" content="yes">
-		<meta name="x5-orientation" content="portrait">
-		<meta name="x5-fullscreen" content="true">
-		<meta name="keywords" content="">
-		<meta name="description" content="">
-		<title>文章页</title>
-		<link rel="shortcut icon" href="" type="image/x-icon">
-		<meta name="robots" content="noindex,follow">
-		<link rel="stylesheet" id="stylesheet-css" href="css/style.css"
-			type="text/css" media="all">
-		<link rel="stylesheet" id="default-css" href="css/default-skin.css"
-			type="text/css" media="all">
+		<#assign page_title = "文章页面"/>
+		<#include "/web/common/header.html"/>
 	</head>
 
 	<body class="home blog">
@@ -378,6 +364,5 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<#include "/web/common/footer.html"/>
 </html>
