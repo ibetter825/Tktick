@@ -4,6 +4,7 @@
 		<#assign page_title = "写文章"/>
 		<#include "/web/common/header.html"/>
 		<link rel="stylesheet" href="/static/css/wangEditor.min.css" type="text/css" media="all">
+		<link rel="stylesheet" href="/static/css/jquery.tag-editor.css" type="text/css" media="all">
 	</head>
 
 	<body class="write">
@@ -47,13 +48,19 @@
 					<li class="mian_li">
 						<div class="">
 							<input class="art_title" name="artTitle" placeholder="标题" />
-	
 							<div class="main_others">
-								<a class="main_cat"
-									href="http://www.themepark.com.cn/demo/category/bbs?themedemo=foldingtime">问答社区
-									/ bbs</a> <a class="main_actor" target="_blank"
-									href="http://www.themepark.com.cn/demo/author/jasson?themedemo=foldingtime">
-									kkvtg</a> 写在2015年03月30日
+								<div class="fl" style="width: 80%;">
+									<label style="top: -10px;">标签：</label>
+									<input id="article_tags"/>
+								</div>
+								<div class="fr" style="width: 20%; text-align: right;">
+									<label>权限：</label>
+									<select>
+										<option>公开</option>
+										<option>私密</option>
+									</select>
+								</div>
+								<i class="cf"></i>
 							</div>
 							<div class="main_enter">
 								<div id="editor_01" style="height: 600px;"></div>
@@ -103,7 +110,21 @@
 	</body>
 	<#include "/web/common/footer.html"/>
 	<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.tag-editor.min.js"></script>
 	<script type="text/javascript">
+		//初始化标签
+		//初始化标签
+	    var artTags = $('#article_tags');
+	    artTags.tagEditor({
+	        placeholder: '添加标签...',
+	        onChange: function(field, editor, tags) {
+	        	if(tags.length > 5){
+	        		layer.msg('不能超过5个标签!', {time:800})
+	            	artTags.tagEditor('removeTag', tags[5]);
+	            }
+	        }
+	    });
+		
 		//添加自定义菜单
 		// 获取 wangEditor 构造函数和 jquery
 	    var E = window.wangEditor;

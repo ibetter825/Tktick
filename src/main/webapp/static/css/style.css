@@ -248,9 +248,17 @@ b a,h2 a{ color:#333;}
 #relevat_div #relevat_title{ width:98%; border-left: 10px solid  #ccc; background:#EFEFEF; color:#999; display:block; padding:3px 0 3px 5px; margin-bottom:10px;}
 #relevat ul li{ display:block; float:left;  margin:10px 2.5% 10px 2.5%;}
 /* custom style start */
+.fl {float: left;}
+.fr {float: right;}
+.cf {clear: both; display: block;}
 .write .main_enter {margin: 0; width: 100%; padding: 0;}
 .write .art_title {width:95%; margin-bottom: 10px; padding: 5px 2.5% 5px 2.5%; color: #333; text-align: center; border-width: 0 0 1px 0; border-color: #F1F1F1; outline: none; font-weight: bold; font-size: 18px; font-family: 微软雅黑}
 .write .art_title:FOCUS {border-color: #FFC5C1;}
+.write .main_others {text-align: left; padding: 5px 1% 10px 1%; width: 98%;}
+.write .main_others > div {height: 32px; line-height: 32px;}
+.write .main_others label {position:relative;}
+.write .main_others select {border: 1px solid #F1F1F1; height: 30px; color: #8E8E8E; padding: 0 5px;}
+.write .tag-editor {display: inline-block; width: 400px; height: 28px; overflow: auto;}
 .write .wangEditor-container {border-color: #F1F1F1;}
 /* custom style end */
 @media screen and (min-width:767px) and (max-width:2000px){
