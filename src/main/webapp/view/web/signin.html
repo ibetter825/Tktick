@@ -5,7 +5,7 @@
 		<#include "/web/common/header.html"/>
 	</head>
 
-	<body class="home blog">
+	<body class="sign">
 		<div class="header">
 			<div class="top_image"></div>
 			<div class="header_logo">
@@ -14,64 +14,25 @@
 						src="http://www.themepark.com.cn/demo/wp-content/themes/foldingtime/images/logo.jpg">
 				</h1>
 			</div>
-			<div class="nav">
-				<span id="nav_b" class="light_span">导航菜单</span>
-				<ul class="header_pic_menu">
-					<li
-						class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"
-						id="menu-item-37"><a
-						href="http://www.themepark.com.cn/demo/?themedemo=foldingtime"><span><b>首页</b></span></a></li>
-					<li
-						class="menu-item menu-item-type-taxonomy menu-item-object-category"
-						id="menu-item-41"><a
-						href="http://www.themepark.com.cn/demo/about-us?themedemo=foldingtime"><span><b>关于我的</b></span></a></li>
-					<li
-						class="menu-item menu-item-type-taxonomy menu-item-object-category"
-						id="menu-item-38"><a
-						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>美食分享</b></span></a></li>
-					<li
-						class="menu-item menu-item-type-taxonomy menu-item-object-category"
-						id="menu-item-39"><a
-						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>工作笔记</b></span></a></li>
-					<li
-						class="menu-item menu-item-type-taxonomy menu-item-object-category"
-						id="menu-item-40"><a
-						href="http://www.themepark.com.cn/demo/category/company-news?themedemo=foldingtime"><span><b>旅途见闻</b></span></a></li>
-				</ul>
-			</div>
 		</div>
 		<div class="content">
 			<div class="main_loop">
 				<ul class="main_loop_ul">
 					<li class="mian_li">
-						登录页面
+						登录|注册
+						<br/>
+						<form>
+							<input type="text" name="username" placeholder="手机或者邮箱" autocomplete="off"/>
+							<br/>
+							<input type="password" name="password" placeholder="密码" autocomplete="off"/>
+							<br/>
+							记住我:<input type="checkbox" name="remember"/>	<input class="fr" type="submit" value="登录"/>
+						</form>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<div class="footer">
-			<div class="footer_in">
-				<div class="menu">
-					<ul>
-						<li id="menu-item-36" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-2" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-77" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-281" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-38" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-186" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-63" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-74" class=""><a><span><b></b></span></a></li>
-						<li id="menu-item-249" class=""><a><span><b></b></span></a></li>
-					</ul>
-				</div>
-				<p class="f_bq ">
-					版权所有 ©2017 WEB主题公园 | <a rel="nofollow" target="_blank"
-						href="http://www.miitbeian.gov.cn/"></a> | <a class="banquan"
-						target="_blank" href="http://www.themepark.com.cn">theme by
-						themepark</a> |
-				</p>
-			</div>
-		</div>
+		
 	</body>
 	<#include "/web/common/footer.html"/>
 </html>

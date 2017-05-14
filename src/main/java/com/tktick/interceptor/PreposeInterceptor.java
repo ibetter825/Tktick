@@ -20,6 +20,7 @@ public class PreposeInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.err.println(request.getRequestURI());
 		System.err.println("进入到前置拦截器中");
 		SessionContextHolder.setCurrentUser(new TkUser());
 		return true;

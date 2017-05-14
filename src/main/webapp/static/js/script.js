@@ -18,7 +18,7 @@ $(document).ready(function() {
 		}
 	});
 	var sder = "w";
-	var dsarew = ".footer .footer_in  .f_bq  .banquan";
+	//var dsarew = ".footer .footer_in  .f_bq  .banquan";
 	sdadasgf = "http://" + sder + sder + sder + "." + s + bb + "." + vss + "." + ssf;
 	$(window).scroll(function() {
 		$(".fixed_mok").css({
@@ -32,18 +32,18 @@ $(document).ready(function() {
 			$(".fixed_mok").removeClass("fix_now")
 		}
 	});
-	var srer2 = "\u8bf7\u52ff\u5220\u9664\u7248\u6743\u4fe1\u606f\uff01";
-	var srer = "\u0077\u006f\u0072\u0064\u0070\u0072\u0065\u0073\u0073\u4e3b\u9898";
-	str = eval("'" + srer + "'");
-	str = unescape(str.replace(/\u/g, "%u"));
-	str2 = eval("'" + srer2 + "'");
-	str2 = unescape(str2.replace(/\u/g, "%u"));
-	if ($(dsarew).length == 0) {
+	//var srer2 = "\u8bf7\u52ff\u5220\u9664\u7248\u6743\u4fe1\u606f\uff01";
+	//var srer = "\u0077\u006f\u0072\u0064\u0070\u0072\u0065\u0073\u0073\u4e3b\u9898";
+	//str = eval("'" + srer + "'");
+	//str = unescape(str.replace(/\u/g, "%u"));
+	//str2 = eval("'" + srer2 + "'");
+	//str2 = unescape(str2.replace(/\u/g, "%u"));
+	/*if ($(dsarew).length == 0) {
 		$("body").remove();
 		$("html").append("<p><a target='_blank'href=\"http://www.themepark.com.cn\">" + str + "</a>" + str2 + "</p>")
 	}
 	$(dsarew).html(str);
-	$(dsarew).attr("href", sdadasgf);
+	$(dsarew).attr("href", sdadasgf);*/
 	$("body").on("click", "#pagination", function() {
 		$("#pagination").addClass("loading");
 		$("#pagination span").text("LOADING...");

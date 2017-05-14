@@ -18,6 +18,8 @@ a{ text-decoration:none;}
 img{ border:none;max-width:100%; height:auto;}
 li,ul,ol{ list-style:none }
 b a,h2 a{ color:#333;}
+input, textarea{outline: none;}
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !important; -webkit-text-fill-color: #333;}
 .sr-bdimgshare{ margin-top:-25px;}
 .wp-smiley{ max-width:24px !important; height:24px !important; max-height:24px !important; }
 .sticky_images img,.sticky_images,.sticky_ex .btn,.widget ul li a,.tagcloud a,.fixed_mok,#pagination,.top_go_btn{transition:all 0.5s; -moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;}
@@ -54,7 +56,8 @@ b a,h2 a{ color:#333;}
 
 	}
 
-.content{ width:98%; padding:0 1%; max-width:1180px;  margin:30px auto 0 auto;}
+.content{ width:98%; padding:0 1%; max-width:1180px; margin:0 auto;}
+.home .content {margin:30px auto 0 auto;}
 .sticky_post{ width:100%;  background:#fff; box-shadow:0 0 3px #999999; height: auto; overflow:hidden;}
 .sticky_post ul li{ float:left;  margin:1%; display:block; text-align:center;}
 .sticky_post ul li .sticky_title a,.sticky_post ul li .cat,.sticky_post ul li .actor{ display:block; width:100%; margin-bottom:5px;}
@@ -252,7 +255,7 @@ b a,h2 a{ color:#333;}
 .fr {float: right;}
 .cf {clear: both; display: block;}
 .write .main_enter {margin: 0; width: 100%; padding: 0;}
-.write .art_title {width:95%; margin-bottom: 10px; padding: 5px 2.5% 5px 2.5%; color: #333; text-align: center; border-width: 0 0 1px 0; border-color: #F1F1F1; outline: none; font-weight: bold; font-size: 18px; font-family: 微软雅黑}
+.write .art_title {width:95%; margin-bottom: 10px; padding: 5px 2.5% 5px 2.5%; color: #333; text-align: center; border-width: 0 0 1px 0; border-color: #F1F1F1; font-weight: bold; font-size: 18px; font-family: 微软雅黑}
 .write .art_title:FOCUS {border-color: #FFC5C1;}
 .write .main_others {text-align: left; padding: 5px 1% 10px 1%; width: 98%;}
 .write .main_others > div {height: 32px; line-height: 32px;}
@@ -260,6 +263,9 @@ b a,h2 a{ color:#333;}
 .write .main_others select {border: 1px solid #F1F1F1; height: 30px; color: #8E8E8E; padding: 0 5px;}
 .write .tag-editor {display: inline-block; width: 400px; height: 28px; overflow: auto;}
 .write .wangEditor-container {border-color: #F1F1F1;}
+
+.sign .main_loop {width: 100%;}
+.sign .main_loop ul .mian_li {width: 400px; height: 500px; margin: 0 auto; float: none;}
 /* custom style end */
 @media screen and (min-width:767px) and (max-width:2000px){
 	#relevat ul li{width:45%;}
