@@ -17,7 +17,7 @@ import com.tktick.model.entity.TkUser;
  */
 @Aspect  
 @Component
-public class AuthInterceptor {
+public class AuthorityInterceptor {
 	
 	@Before("@annotation(permission)")//会拦截注解Permission的方法，否则不拦截
     public void authority(JoinPoint point, Permission permission) throws Throwable {

@@ -1,5 +1,6 @@
 package com.tktick.controller.web;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import com.tktick.annotation.Permission;
  */
 @RestController
 @RequestMapping("/art")
+@Scope("prototype")
 public class ArticleController extends WebBaseController {
 	
 	@RequestMapping("/{id}.html")

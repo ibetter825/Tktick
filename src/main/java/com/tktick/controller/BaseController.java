@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BaseController {
 	@Autowired  
-	protected  HttpServletRequest request;
+	protected HttpServletRequest request;
 	@Autowired
 	protected HttpServletResponse response;
 	/**
