@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tktick.annotation.Permission;
+
 /**
  * 文章类
  * @author user
@@ -24,6 +26,7 @@ public class ArticleController extends WebBaseController {
 	 * @return
 	 */
 	@RequestMapping("/write.html")
+	@Permission
 	public ModelAndView write(){
 		return new ModelAndView("web/write");
 	}

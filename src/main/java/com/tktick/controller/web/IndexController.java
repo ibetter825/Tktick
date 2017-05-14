@@ -27,6 +27,6 @@ public class IndexController extends WebBaseController {
 	
 	@RequestMapping("/get/{name}")
 	public TkUser get(@PathVariable(value = "name") String name){
-		return userService.getTkUser(name);
+		return userService.getTkUserByUsername(name);
 	}
 }

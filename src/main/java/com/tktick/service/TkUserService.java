@@ -8,5 +8,5 @@ public interface TkUserService {
 	 * @param username
 	 * @return
 	 */
-	public TkUser getTkUser(String username);
+	public TkUser getTkUserByUsername(String username);
 }

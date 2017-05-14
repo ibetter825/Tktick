@@ -13,7 +13,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 @Configuration
 public class EhcacheConfigure {
-	@Bean
+	@Bean(name = "TkCacheManager")
 	public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean bean){
 		return new EhCacheCacheManager(bean.getObject());
 	}
