@@ -1,4 +1,4 @@
-package com.tktick.model.form;
+package com.tktick.bean.form;
 
 import java.io.Serializable;
 

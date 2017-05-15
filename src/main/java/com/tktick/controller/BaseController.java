@@ -1,6 +1,5 @@
 package com.tktick.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RestController;
+import com.google.common.collect.Maps;
 
 @RestController
 public class BaseController {
@@ -25,7 +25,7 @@ public class BaseController {
 	public Map<String, String> resultErrors(BindingResult error){
 		Map<String, String> res = null;
 		if(error.hasErrors()){
-			res = new HashMap<String, String>();//验证错误结果  failed:message
+			res = Maps.newHashMap();//验证错误结果  failed:message
 			List<ObjectError>  errors = error.getAllErrors();
 			for(ObjectError e : errors){
 				if(e instanceof FieldError)

@@ -1,4 +1,4 @@
-package com.tktick.model.constant;
+package com.tktick.bean.constant;
 
 public class WebConstant {
 	/**

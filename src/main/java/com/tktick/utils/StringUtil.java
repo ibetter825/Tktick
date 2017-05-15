@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  * 字符串操作工具
@@ -30,12 +31,6 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class StringUtil {
-	private static Pattern numericPattern = Pattern.compile("^[0-9\\-]+$");
-    private static Pattern numericStringPattern = Pattern.compile("^[0-9\\-\\-]+$");
-    private static Pattern floatNumericPattern = Pattern.compile("^[0-9\\-\\.]+$");
-    private static Pattern abcPattern = Pattern.compile("^[a-z|A-Z]+$");
-    private static Pattern emailPattern = Pattern.compile("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$");
-    public static final String splitStrPattern = ",|，|;|；|、|\\.|。|-|_|\\(|\\)|\\[|\\]|\\{|\\}|\\\\|/| |　|\"";
  
     /**
      * 生成指定长度的字符串<br/>
@@ -122,92 +117,6 @@ public class StringUtil {
         }
         src = src.substring(0, src.length() - 1);
         return src;
-    }
- 
-    /**
-     * 判断是否数字表示
-     * 
-     * @param src
-     *            源字符串
-     * @return 是否数字的标志
-     */
-    public static boolean isNumeric(String src) {
-        boolean return_value = false;
-        if (src != null && src.length() > 0) {
-            Matcher m = numericPattern.matcher(src);
-            if (m.find()) {
-                return_value = true;
-            }
-        }
-        return return_value;
-    }
- 
-    /**
-     * 判断是否数字表示
-     * 
-     * @param src
-     *            源字符串
-     * @return 是否数字的标志
-     */
-    public static boolean isNumericString(String src) {
-        boolean return_value = false;
-        if (src != null && src.length() > 0) {
-            Matcher m = numericStringPattern.matcher(src);
-            if (m.find()) {
-                return_value = true;
-            }
-        }
-        return return_value;
-    }
- 
-    /**
-     * 判断是否为电子邮箱
-     * @param src
-     * @return
-     */
-    public static boolean isEmail(String src){
-    	boolean return_value = false;
-        if (src != null && src.length() > 0) {
-            Matcher m = emailPattern.matcher(src);
-            if (m.find()) return_value = true;
-        }
-        return return_value;
-    }
-    
-    /**
-     * 判断是否纯字母组合
-     * 
-     * @param src
-     *            源字符串
-     * @return 是否纯字母组合的标志
-     */
-    public static boolean isABC(String src) {
-        boolean return_value = false;
-        if (src != null && src.length() > 0) {
-            Matcher m = abcPattern.matcher(src);
-            if (m.find()) {
-                return_value = true;
-            }
-        }
-        return return_value;
-    }
- 
-    /**
-     * 判断是否浮点数字表示
-     * 
-     * @param src
-     *            源字符串
-     * @return 是否数字的标志
-     */
-    public static boolean isFloatNumeric(String src) {
-        boolean return_value = false;
-        if (src != null && src.length() > 0) {
-            Matcher m = floatNumericPattern.matcher(src);
-            if (m.find()) {
-                return_value = true;
-            }
-        }
-        return return_value;
     }
  
     /**
@@ -1319,22 +1228,6 @@ public class StringUtil {
     }
  
     /**
-     * 判断是否与给定字符串样式匹配
-     * 
-     * @param str
-     *            字符串
-     * @param pattern
-     *            正则表达式样式
-     * @return 是否匹配是true,否false
-     */
-    public static boolean isMatch(String str, String pattern) {
-        Pattern pattern_hand = Pattern.compile(pattern);
-        Matcher matcher_hand = pattern_hand.matcher(str);
-        boolean b = matcher_hand.matches();
-        return b;
-    }
- 
-    /**
      * 截取字符串
      * 
      * @param s
@@ -2264,6 +2157,79 @@ public class StringUtil {
 			builder.append(str);
     	return builder.toString();
     }
+    
+    /**
+	 * 字符编码
+	 */
+	public final static String encoding = "UTF-8";
+
+	/**
+	 * Url Base64编码
+	 * 
+	 * @param data
+	 *            待编码数据
+	 * @return String 编码数据
+	 * @throws Exception
+	 */
+	public static String encode(String data) throws Exception {
+		// 执行编码
+		byte[] b = Base64.encodeBase64URLSafe(data.getBytes(encoding));
+
+		return new String(b, encoding);
+	}
+
+	/**
+	 * Url Base64解码
+	 * 
+	 * @param data
+	 *            待解码数据
+	 * @return String 解码数据
+	 * @throws Exception
+	 */
+	public static String decode(String data) throws Exception {
+		// 执行解码
+		byte[] b = Base64.decodeBase64(data.getBytes(encoding));
+
+		return new String(b, encoding);
+	}
+
+	/**
+	 * URL编码（utf-8）
+	 * 
+	 * @param source
+	 * @return
+	 */
+	public static String urlEncode(String source) {
+		String result = source;
+		try {
+			result = java.net.URLEncoder.encode(source, encoding);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * 根据内容类型判断文件扩展名
+	 * 
+	 * @param contentType
+	 *            内容类型
+	 * @return
+	 */
+	public static String getFileExt(String contentType) {
+		String fileExt = "";
+		if ("image/jpeg".equals(contentType))
+			fileExt = ".jpg";
+		else if ("audio/mpeg".equals(contentType))
+			fileExt = ".mp3";
+		else if ("audio/amr".equals(contentType))
+			fileExt = ".amr";
+		else if ("video/mp4".equals(contentType))
+			fileExt = ".mp4";
+		else if ("video/mpeg4".equals(contentType))
+			fileExt = ".mp4";
+		return fileExt;
+	}
     
     public static void main(String[] args) {
         //System.out.println(formatSize(1546513));

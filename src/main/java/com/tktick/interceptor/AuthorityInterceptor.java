@@ -6,9 +6,9 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 import com.tktick.annotation.Permission;
+import com.tktick.bean.entity.TkUser;
 import com.tktick.context.SessionContextHolder;
 import com.tktick.exception.TkAuthenticationException;
-import com.tktick.model.entity.TkUser;
 
 /**
  * 使用 AOP检查是否登录

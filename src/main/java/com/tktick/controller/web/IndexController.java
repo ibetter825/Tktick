@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tktick.model.entity.TkUser;
+import com.tktick.bean.entity.TkUser;
 import com.tktick.service.TkUserService;
 
 /**

@@ -1,23 +1,26 @@
-package com.tktick.model.form;
-import com.tktick.annotation.Validation;
-import com.tktick.utils.StringUtil;
+package com.tktick.bean.form;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.tktick.utils.RegexUtil;
 
 /**
  * 登录表单对象
  * @author user
  *
  */
-@Validation
 public class LoginForm extends BaseForm{
 	private static final long serialVersionUID = 1L;
 	
 	public static final short LOGIN_TYPE_PHONE = 1;
 	public static final short LOGIN_TYPE_EMAIL = 2;
 	
+	@NotEmpty
 	private String account;//登录表单中的字段，需要判断是电话号还是电子邮箱
 	private String username;//用户名
 	private Integer phonenum;//手机号码
-	@Validation(email = true, notNull = true)
+	@Email
 	private String email;//电子邮箱
 	private String password;//登录密码
 	private String captcha;//验证码
@@ -31,7 +34,7 @@ public class LoginForm extends BaseForm{
 		//判断登录账号类型
 		//手机号
 		//电子邮箱
-		if(StringUtil.isEmail(account)){
+		if(RegexUtil.isEmail(account)){
 			this.email = account;
 			this.type = LOGIN_TYPE_EMAIL;
 		}

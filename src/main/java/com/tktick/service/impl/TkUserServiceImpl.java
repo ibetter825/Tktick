@@ -1,9 +1,10 @@
 package com.tktick.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.tktick.bean.entity.TkUser;
+import com.tktick.bean.form.LoginForm;
 import com.tktick.dao.TkUserDao;
-import com.tktick.model.entity.TkUser;
-import com.tktick.model.form.LoginForm;
 import com.tktick.service.TkUserService;
 import com.tktick.utils.Md5Util;
 

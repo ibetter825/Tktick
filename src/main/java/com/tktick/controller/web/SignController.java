@@ -1,13 +1,18 @@
 package com.tktick.controller.web;
 
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import com.tktick.annotation.Validation;
-import com.tktick.model.constant.AuthConstant;
-import com.tktick.model.entity.TkUser;
-import com.tktick.model.form.LoginForm;
+
+import com.tktick.bean.constant.AuthConstant;
+import com.tktick.bean.entity.TkUser;
+import com.tktick.bean.form.LoginForm;
 import com.tktick.service.TkUserService;
 import com.tktick.utils.StringUtil;
 import com.tktick.utils.WebUtil;
@@ -43,8 +48,9 @@ public class SignController extends WebBaseController {
 	 * @return
 	 */
 	@RequestMapping("/session.html")
-	@Validation
-	public ModelAndView session(LoginForm form){
+	public ModelAndView session(@Valid LoginForm form, BindingResult vali){
+		Map<String, String> errors = resultErrors(vali);
+		if(errors != null) return new ModelAndView("redirect:/sign/in.html", errors);
 		TkUser user = userService.valiLoginUser(form);
 		if(user != null){
 			System.err.println("登录成功:" + user.getUserEmail());

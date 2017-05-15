@@ -1,4 +1,4 @@
-package com.tktick.model.constant;
+package com.tktick.bean.constant;
 
 public class AuthConstant {
 	public final static String COOKIE_SESSION_ID = "TKSESSIONID";

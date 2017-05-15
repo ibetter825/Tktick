@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.tktick.model.entity.TkUser;
+import com.tktick.bean.entity.TkUser;
 /**
  * JpaSpecificationExecutor 方便分页
  * @author user

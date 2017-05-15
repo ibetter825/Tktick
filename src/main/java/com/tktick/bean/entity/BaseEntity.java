@@ -1,4 +1,4 @@
-package com.tktick.model.entity;
+package com.tktick.bean.entity;
 
 import java.io.Serializable;
 

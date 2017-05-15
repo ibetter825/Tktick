@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tktick.bean.entity.TkUser;
 import com.tktick.context.SessionContextHolder;
-import com.tktick.model.entity.TkUser;
 
 /**
  * 前置拦截器

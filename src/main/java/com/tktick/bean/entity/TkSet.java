@@ -1,4 +1,4 @@
-package com.tktick.model.entity;
+package com.tktick.bean.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

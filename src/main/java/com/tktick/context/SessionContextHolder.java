@@ -1,6 +1,6 @@
 package com.tktick.context;
 
-import com.tktick.model.entity.TkUser;
+import com.tktick.bean.entity.TkUser;
 
 /**
  * ThreadLocal存取当前登录的用户

@@ -1,7 +1,7 @@
 package com.tktick.service;
 
-import com.tktick.model.entity.TkUser;
-import com.tktick.model.form.LoginForm;
+import com.tktick.bean.entity.TkUser;
+import com.tktick.bean.form.LoginForm;
 
 public interface TkUserService {
 	/**

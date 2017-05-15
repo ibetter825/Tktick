@@ -11,7 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tktick.model.constant.WebConstant;
+import com.tktick.bean.constant.WebConstant;
 
 /**
  * 
