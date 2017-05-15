@@ -207,14 +207,12 @@ public class FileUtil {
             fis.skip(Offset);  
         } catch (IOException e) {  
             e.printStackTrace();  
-            return null;  
         }  
         byte[] bytes = new byte[length];  
         try {  
             fis.read(bytes);  
         } catch (IOException e) {  
             e.printStackTrace();  
-            return null;  
         }  
         try {  
             fis.close();  

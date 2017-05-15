@@ -7,6 +7,7 @@ import com.tktick.utils.RegexUtil;
 
 /**
  * 登录表单对象
+ * http://blog.csdn.net/lixiaoxiong55/article/details/51670882
  * @author user
  *
  */

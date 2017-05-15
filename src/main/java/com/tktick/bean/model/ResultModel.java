@@ -1,4 +1,4 @@
-package ResultModel;
+package com.tktick.bean.model;
 
 import java.io.Serializable;
 import java.util.Map;

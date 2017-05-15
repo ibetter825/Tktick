@@ -1,5 +1,7 @@
 package com.tktick.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.form.LoginForm;
 
@@ -15,5 +17,5 @@ public interface TkUserService {
 	 * @param form
 	 * @return
 	 */
-	public TkUser valiLoginUser(LoginForm form);
+	public boolean valiLoginUser(HttpServletResponse response, LoginForm form);
 }

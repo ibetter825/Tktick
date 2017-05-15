@@ -1,12 +1,17 @@
 package com.tktick.service.impl;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.dao.TkUserDao;
 import com.tktick.service.TkUserService;
 import com.tktick.utils.Md5Util;
+import com.tktick.utils.StringUtil;
+import com.tktick.utils.WebUtil;
 
 @Service
 public class TkUserServiceImpl implements TkUserService {
@@ -19,8 +24,9 @@ public class TkUserServiceImpl implements TkUserService {
 	}
 
 	@Override
-	public TkUser valiLoginUser(LoginForm form) {
+	public boolean valiLoginUser(HttpServletResponse response, LoginForm form) {
 		TkUser user = null;
+		boolean res = false;
 		switch (form.getType()) {
 			case LoginForm.LOGIN_TYPE_EMAIL:
 				user = userDao.selectUserByEmail(form.getEmail());
@@ -37,8 +43,13 @@ public class TkUserServiceImpl implements TkUserService {
 			if(Md5Util.md5(salt + form.getPassword()).equals(pwd)){
 				user.setUserPwd(null);
 				user.setUserSalt(null);
+				//登录成功
+				String sessionId = StringUtil.uuid(false) + "|" +user.getUserId();
+				//将sessionId存放在缓存中
+				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_SESSION_ID, sessionId, 1000);
+				res = true;
 			}
 		}
-		return user;
+		return res;
 	}
 }

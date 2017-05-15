@@ -108,7 +108,8 @@ public class CrawlerUtil {
     }  
   
     //从context提取url地址  
-    public void parseContext(String context,int dep) {  
+    @SuppressWarnings("unused")
+	public void parseContext(String context,int dep) {  
         String regex = "<a href.*?/a>";  
         String s = "fdfd<title>我 是</title><a href=\"http://www.iteye.com/blogs/tag/Google\">Google</a>fdfd<>";  
         Pattern pt = Pattern.compile(regex);  
