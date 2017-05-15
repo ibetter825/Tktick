@@ -15,7 +15,7 @@ import com.tktick.model.entity.TkUser;
  * @author user
  *
  */
-@Aspect  
+@Aspect
 @Component
 public class AuthorityInterceptor {
 	

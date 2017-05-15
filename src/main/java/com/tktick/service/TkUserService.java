@@ -1,6 +1,7 @@
 package com.tktick.service;
 
 import com.tktick.model.entity.TkUser;
+import com.tktick.model.form.LoginForm;
 
 public interface TkUserService {
 	/**
@@ -9,4 +10,10 @@ public interface TkUserService {
 	 * @return
 	 */
 	public TkUser getTkUserByUsername(String username);
+	/**
+	 * 登录认证
+	 * @param form
+	 * @return
+	 */
+	public TkUser valiLoginUser(LoginForm form);
 }

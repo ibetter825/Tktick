@@ -22,6 +22,9 @@ public class PreposeInterceptor implements HandlerInterceptor {
 			throws Exception {
 		System.err.println(request.getRequestURI());
 		System.err.println("进入到前置拦截器中");
+		//如果存在cookie SESSIONID 则表示已经登录   就从缓存中取出数据
+		//如果缓存中没有，则从数据库中查询
+		
 		SessionContextHolder.setCurrentUser(new TkUser());
 		return true;
 	}

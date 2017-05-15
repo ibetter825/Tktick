@@ -38,12 +38,12 @@
               timeToLiveSeconds="600"
               memoryStoreEvictionPolicy="LRU" />
        <cache
-              name="demo"  
+              name="session"  
               eternal="false"
-              maxElementsInMemory="500"
+              maxElementsInMemory="1000"
               overflowToDisk="false"
               diskPersistent="false"
               timeToIdleSeconds="0"
-              timeToLiveSeconds="300"
+              timeToLiveSeconds="1200"
               memoryStoreEvictionPolicy="LRU" />
 </ehcache>

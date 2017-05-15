@@ -1,5 +1,6 @@
 package com.tktick.configure;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +13,9 @@ import org.springframework.core.io.ClassPathResource;
  *
  */
 @Configuration
+@EnableCaching
 public class EhcacheConfigure {
-	@Bean(name = "TkCacheManager")
+	@Bean
 	public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean bean){
 		return new EhCacheCacheManager(bean.getObject());
 	}

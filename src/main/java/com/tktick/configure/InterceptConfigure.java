@@ -16,6 +16,6 @@ public class InterceptConfigure extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//注册前置拦截器
-		registry.addInterceptor(new PreposeInterceptor()).addPathPatterns("/**").excludePathPatterns("/sign/**");
+		registry.addInterceptor(new PreposeInterceptor()).addPathPatterns("/**").excludePathPatterns("/","/sign/**");
 	}
 }

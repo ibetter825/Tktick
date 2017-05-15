@@ -34,6 +34,7 @@ public class StringUtil {
     private static Pattern numericStringPattern = Pattern.compile("^[0-9\\-\\-]+$");
     private static Pattern floatNumericPattern = Pattern.compile("^[0-9\\-\\.]+$");
     private static Pattern abcPattern = Pattern.compile("^[a-z|A-Z]+$");
+    private static Pattern emailPattern = Pattern.compile("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$");
     public static final String splitStrPattern = ",|，|;|；|、|\\.|。|-|_|\\(|\\)|\\[|\\]|\\{|\\}|\\\\|/| |　|\"";
  
     /**
@@ -159,6 +160,20 @@ public class StringUtil {
         return return_value;
     }
  
+    /**
+     * 判断是否为电子邮箱
+     * @param src
+     * @return
+     */
+    public static boolean isEmail(String src){
+    	boolean return_value = false;
+        if (src != null && src.length() > 0) {
+            Matcher m = emailPattern.matcher(src);
+            if (m.find()) return_value = true;
+        }
+        return return_value;
+    }
+    
     /**
      * 判断是否纯字母组合
      * 
