@@ -4,7 +4,7 @@ public class AuthConstant {
 	/**
 	 * cookie中的sessionid名
 	 */
-	public final static String COOKIE_SESSION_ID = "TKSESSIONID";
+	public final static String COOKIE_USER_INFO = "TKSESSIONINFO";
 	/**
 	 * 解密cookie时使用的默认字符串
 	 */

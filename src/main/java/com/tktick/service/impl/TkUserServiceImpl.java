@@ -1,16 +1,19 @@
 package com.tktick.service.impl;
-import javax.servlet.http.HttpServletResponse;
 
+import javax.servlet.http.HttpServletResponse;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.dao.TkUserDao;
 import com.tktick.service.TkUserService;
+import com.tktick.utils.DateUtil;
 import com.tktick.utils.Md5Util;
-import com.tktick.utils.StringUtil;
+import com.tktick.utils.SecretUtil;
 import com.tktick.utils.WebUtil;
 
 @Service
@@ -40,13 +43,17 @@ public class TkUserServiceImpl implements TkUserService {
 		if(user != null){
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
-			if(Md5Util.md5(salt + form.getPassword()).equals(pwd)){
-				user.setUserPwd(null);
-				user.setUserSalt(null);
+			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
+				int maxAge = 15*24*60*60;//保存15天
+				long time = DateUtil.getDateByTime();
+				Long userId = user.getUserId();
+				
+				String userLoginInfo = SecretUtil.encrypt(userId + "@" + time + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + pwd + "@" + salt + "@" + time + "@" + maxAge));
+				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, maxAge);
 				//登录成功
-				String sessionId = StringUtil.uuid(false) + "|" +user.getUserId();
 				//将sessionId存放在缓存中
-				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_SESSION_ID, sessionId, 1000);
+				Cache cache = CacheManager.getInstance().getCache("session");
+				cache.put(new Element(userId, user));
 				res = true;
 			}
 		}
