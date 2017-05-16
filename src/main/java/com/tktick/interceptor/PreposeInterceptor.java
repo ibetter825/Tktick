@@ -54,9 +54,10 @@ public class PreposeInterceptor implements HandlerInterceptor {
 					if(cookieUserinfo.equals(dbUserInfo)){//已登录的用户
 						SessionContextHolder.setCurrentUser(user);
 						String newCookieUserInfo = SecretUtil.encrypt(userId + "@" + rtime + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + dbPwd + "@" + dbSalt + "@" + rtime + "@" + maxAge));
-						if(maxAge != 0)
+						if(maxAge != -1)
 							maxAge = (int) (maxAge - (rtime - otime) / 1000);//maxAge-(当前时间戳-老时间戳)/1000得到秒数
-						WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, newCookieUserInfo, maxAge);
+						long expires = DateUtil.getDateByTime() + maxAge;
+						WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, newCookieUserInfo, expires, maxAge);
 					}
 				}
 			}

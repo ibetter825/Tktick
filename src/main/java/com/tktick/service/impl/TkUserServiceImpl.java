@@ -43,7 +43,7 @@ public class TkUserServiceImpl implements TkUserService {
 		String captchaString = WebUtil.getCookieValueByName(request, AuthConstant.COOKIE_CAPTCHA_NAME);
 		if(!Md5Util.md5(form.getCaptcha().toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT).equals(captchaString))
 			return false;//验证码不对
-		WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, null, -1);
+		WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, null, 0);
 		boolean res = false;
 		switch (form.getType()) {
 			case LoginForm.LOGIN_TYPE_EMAIL:
@@ -59,12 +59,13 @@ public class TkUserServiceImpl implements TkUserService {
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
-				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : 0;//保存14天 或者 0
+				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : -1;//保存14天 或者 0
 				long time = DateUtil.getDateByTime();
 				Long userId = user.getUserId();
 				
 				String userLoginInfo = SecretUtil.encrypt(userId + "@" + time + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + pwd + "@" + salt + "@" + time + "@" + maxAge));
-				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, maxAge);
+				long expires = DateUtil.getDateByTime() + maxAge * 1000;
+				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, expires, maxAge);
 				//登录成功
 				//将sessionId存放在缓存中
 				Cache cache = CacheManager.getInstance().getCache(CacheConstant.LOGIN_USER_INFO_CACHE_NAME);

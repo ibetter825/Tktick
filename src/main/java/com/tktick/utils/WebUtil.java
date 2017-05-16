@@ -2,8 +2,11 @@ package com.tktick.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -112,30 +115,57 @@ public class WebUtil {
 	 * @param isHttpOnly	是否只读
 	 * @param name			cookie的名称
 	 * @param value			cookie的值
-	 * @param maxAge		cookie存放的时间(以秒为单位,假如存放三天,即3*24*60*60; 如果值为0,cookie将随浏览器关闭而清除)
+	 * @param maxAge		cookie存放的时间(以秒为单位,假如存放三天,即3*24*60*60; 0立即删除cookie 如果值为-1,cookie将随浏览器关闭而清除)
 	 */
 	public static void addCookie(HttpServletResponse response, 
 			String domain, String path, boolean isHttpOnly, 
 			String name, String value, int maxAge) {
 		Cookie cookie = new Cookie(name, value);
 		// 所在域：比如a1.4bu4.com 和 a2.4bu4.com 共享cookie
-		if(null != domain && !domain.isEmpty()){
-			cookie.setDomain(domain);			
-		}
+		if(null != domain && !domain.isEmpty())
+			cookie.setDomain(domain);
 		// 设置cookie所在路径
 		cookie.setPath("/");
-		if(null != path && !path.isEmpty()){
+		if(null != path && !path.isEmpty())
 			cookie.setPath(path);				
-		}
 		// 是否只读
 		cookie.setHttpOnly(isHttpOnly);
 		// 设置cookie的过期时间
-		if (maxAge > 0)
-			cookie.setMaxAge(maxAge);
-		else if(maxAge == -1)
-			cookie.setMaxAge(0);//立即删除cookie
+		if(maxAge != -1)
+			cookie.setMaxAge(maxAge);//立即删除cookie
 		// 添加cookie
 		response.addCookie(cookie);
+	}
+	/**
+	 * header的具体参数参考
+	 * http://blog.csdn.net/cdnight/article/details/18966475
+	 * @param response
+	 * @param domain		设置cookie所在域
+	 * @param path			设置cookie所在路径
+	 * @param isHttpOnly	是否只读
+	 * @param name			cookie的名称
+	 * @param value			cookie的值
+	 * @param expires	    cookie的过期时间,传入时间戳
+	 * @param maxAge		cookie存放的时间(以秒为单位,假如存放三天,即3*24*60*60; 0立即删除cookie 如果值为-1,cookie将随浏览器关闭而清除)
+	 */
+	public static void addCookie(HttpServletResponse response, String domain, String path, boolean isHttpOnly, String name, String value, long expires, int maxAge){
+		Date date = new Date(expires);
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append(name + "=" + value + ";");
+		if(null != path && !path.isEmpty())
+			builder.append("Path=" + path + ";");
+		else
+			builder.append("Path=/;");
+		if(maxAge != -1)
+			builder.append("Expires=" + sdf.format(date) + ";");
+		if(null != domain && !domain.isEmpty())
+			builder.append("Domain=" + domain + ";");
+		if(isHttpOnly)
+			builder.append("HttpOnly;");
+		String cookieStr = builder.substring(0, builder.length() - 1).toString();//去掉最后的";"
+		response.setHeader("Set-Cookie", cookieStr);
 	}
 	
 	/**

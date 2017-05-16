@@ -73,7 +73,7 @@ public class SignController extends WebBaseController {
         //生成随机字串 
         String verifyCode = VerifyCodeUtil.generateVerifyCode(4);
         String captchaString = Md5Util.md5(verifyCode.toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT);
-        WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, captchaString, 0);
+        WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, captchaString, -1);
         //生成图片
         int w = 150, h = 40;
         VerifyCodeUtil.outputImage(w, h, response.getOutputStream(), verifyCode);
