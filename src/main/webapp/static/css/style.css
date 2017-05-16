@@ -86,7 +86,7 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !importa
 .sticky_ex .btn{ font-size:12px; color:#f5b302;border:solid 1px #f5b302; background:url("../images/black_b2.png"); display:block; float:left; padding:5px 15px;  border-radius:5px; margin-top:20px; text-transform:uppercase;}
 .sticky_ex .btn:hover{ color:#ff7200;border:solid 1px #ff7200; background:url("../images/black_b2.png");}
 
-.main_loop{ float:left; width:65%; height:auto; margin-top:20px;}
+.main_loop{ float:left; width:68%; height:auto; margin-top:20px;}
 .main_loop ul .mian_li,.main_loop ul .mians_li{ width:99%; padding:15px 0.5%; height:auto; background:#fff; box-shadow:0 0 3px #999999; overflow:hidden; float:left; margin-bottom:20px;}
 .main_title{ display:block; width:95%; height:auto; font-size:18px; text-align:center; padding:5px 2.5% 15px 2.5%; color:#333; font-weight:bold;}
 .main_others{width:95%; height:auto; padding:0 2.5% 20px 2.5%; text-align:center; font-size:12px;color:#8e8e8e;}
@@ -135,8 +135,8 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !importa
 #post_admin input { padding:5px; border:solid 1px #CCCCCC; background:#F9F9F9;}
 #post_admin  .wp-editor-container{ border:solid 1px #CCCCCC;}
 
-.sidbar{ float:right; width:32%; height:auto; margin-top:20px;}
-.widget{ width:100%;  background:url("../images/white_47.png"); border:solid 1px #eaeaea; margin-bottom:20px;}
+.sidbar{ float:right; width:30%; height:auto; margin-top:20px;}
+.widget{ width:100%;  background:url("../images/white_47.png"); box-shadow: 0 0 3px #999999; margin-bottom:20px;}
 .widget h2,.relevat_title{ display:block;width:95%; padding:5px 2.5%; margin-bottom:10px; border-bottom:solid 1px #eaeaea; font-size:12px; color:#3a3a3a; font-weight:normal;}
 .widget ul,.code_s,#relevat{ display:block;width:95%; padding:5px 2.5%; overflow:hidden;}
 #relevat{ background:url("../images/white_47.png"); border:solid 1px #eaeaea; margin-bottom:20px;}
@@ -254,6 +254,9 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !importa
 .fl {float: left;}
 .fr {float: right;}
 .cf {clear: both; display: block;}
+
+.write-left {height: 692px;}
+
 .write .main_enter {margin: 0; width: 100%; padding: 0;}
 .write .art_title {width:95%; margin-bottom: 10px; padding: 5px 2.5% 5px 2.5%; color: #333; text-align: center; border-width: 0 0 1px 0; border-color: #F1F1F1; font-weight: bold; font-size: 18px; font-family: 微软雅黑}
 .write .art_title:FOCUS {border-color: #FFC5C1;}
@@ -264,8 +267,6 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !importa
 .write .tag-editor {display: inline-block; width: 400px; height: 28px; overflow: auto;}
 .write .wangEditor-container {border-color: #F1F1F1;}
 
-.sign .main_loop {width: 100%;}
-.sign .main_loop ul .mian_li {width: 400px; height: 500px; margin: 0 auto; float: none;}
 /* custom style end */
 @media screen and (min-width:767px) and (max-width:2000px){
 	#relevat ul li{width:45%;}
