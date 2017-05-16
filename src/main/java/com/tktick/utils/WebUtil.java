@@ -130,9 +130,10 @@ public class WebUtil {
 		// 是否只读
 		cookie.setHttpOnly(isHttpOnly);
 		// 设置cookie的过期时间
-		if (maxAge > 0){
+		if (maxAge > 0)
 			cookie.setMaxAge(maxAge);
-		}
+		else if(maxAge == -1)
+			cookie.setMaxAge(0);//立即删除cookie
 		// 添加cookie
 		response.addCookie(cookie);
 	}

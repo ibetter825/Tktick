@@ -62,7 +62,9 @@ li:after, div:after, ul:after{
 .login-banner{
 	width: 100%;
 	background:url(../images/logo2.jpg) center bottom no-repeat;
+	position: relative;
 }
+.login-banner a {display: block; position: absolute; bottom: 0; left: 50%; margin-left: -98.5px; width: 197px; height: 98px;}
 .login-switch{width:100%; height:40px;}
 .login-switch li {list-style:none;}
 .login-switch-line {width:60%; height:20px; border-bottom:1px solid #EEEEEE; margin:0 auto;}

@@ -6,9 +6,21 @@ public class AuthConstant {
 	 */
 	public final static String COOKIE_USER_INFO = "TKSESSIONINFO";
 	/**
+	 * 验证码cookie名
+	 */
+	public final static String COOKIE_CAPTCHA_NAME = "TKSIGNTOKEN";
+	/**
+	 * 验证码cookie path
+	 */
+	public final static String COOKIE_CAPTCHA_PATH = "/sign";
+	/**
 	 * 解密cookie时使用的默认字符串
 	 */
-	public final static String COOKIE_SESSION_ID_SALT = "TKTICK";
+	public final static String COOKIE_SESSION_SALT = "__TKTICK_YT__";
+	/**
+	 * 解密cookie 验证码 时使用的默认字符串
+	 */
+	public final static String COOKIE_CAPTCHA_SALT = "__TKTICK_CAPTCHA__";
 	/**
 	 * cookie的有效期
 	 */

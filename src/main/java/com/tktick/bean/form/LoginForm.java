@@ -24,6 +24,7 @@ public class LoginForm extends BaseForm{
 	@Email
 	private String email;//电子邮箱
 	private String password;//登录密码
+	@NotEmpty
 	private String captcha;//验证码
 	private Short remember;//记住我
 	private short type;//登录类型

@@ -1,5 +1,6 @@
 package com.tktick.service.impl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -36,8 +37,13 @@ public class TkUserServiceImpl implements TkUserService {
 	}
 	
 	@Override
-	public boolean valiLoginUser(HttpServletResponse response, LoginForm form) {
+	public boolean valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form) {
 		TkUser user = null;
+		//判断验证码是否出错
+		String captchaString = WebUtil.getCookieValueByName(request, AuthConstant.COOKIE_CAPTCHA_NAME);
+		if(!Md5Util.md5(form.getCaptcha().toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT).equals(captchaString))
+			return false;//验证码不对
+		WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, null, -1);
 		boolean res = false;
 		switch (form.getType()) {
 			case LoginForm.LOGIN_TYPE_EMAIL:
