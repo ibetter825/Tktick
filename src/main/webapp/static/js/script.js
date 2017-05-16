@@ -21,15 +21,18 @@ $(document).ready(function() {
 	//var dsarew = ".footer .footer_in  .f_bq  .banquan";
 	sdadasgf = "http://" + sder + sder + sder + "." + s + bb + "." + vss + "." + ssf;
 	$(window).scroll(function() {
-		$(".fixed_mok").css({
-			width: $(".sidbar").width() + "px",
-			left: $(".sidbar").offset().left + "px",
-			top: "20px"
-		});
-		if ($(window).scrollTop() >= $(".sidbar").offset().top + $(".sidbar").height()) {
-			$(".fixed_mok").addClass("fix_now")
-		} else {
-			$(".fixed_mok").removeClass("fix_now")
+		var $sidbar = $(".sidbar");
+		if($sidbar.length !== 0){
+			var $fixedMok = $(".fixed_mok");
+			$fixedMok.css({
+				width: $sidbar.width() + "px",
+				left: $sidbar.offset().left + "px",
+				top: "20px"
+			});
+			if ($(window).scrollTop() >= $sidbar.offset().top + $sidbar.height())
+				$fixedMok.addClass("fix_now")
+			else
+				$fixedMok.removeClass("fix_now")
 		}
 	});
 	//var srer2 = "\u8bf7\u52ff\u5220\u9664\u7248\u6743\u4fe1\u606f\uff01";
