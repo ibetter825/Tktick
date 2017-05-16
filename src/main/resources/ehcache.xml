@@ -38,7 +38,7 @@
               timeToLiveSeconds="600"
               memoryStoreEvictionPolicy="LRU" />
        <cache
-              name="session"  
+              name="SESSIONS"  
               eternal="false"
               maxElementsInMemory="1000"
               overflowToDisk="false"

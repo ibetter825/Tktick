@@ -17,7 +17,7 @@ import javax.crypto.spec.DESKeySpec;
  */
 public class SecretUtil {
 
-	private static final String PASSWORD_CRYPT_KEY = "__TKTICK_";
+	private static final String CRYPT_KEY = "__TKTICK_YT__";
 	private final static String DES = "DES";
 
 	/**
@@ -86,7 +86,7 @@ public class SecretUtil {
 	public final static String decrypt(String str) {
 		try {
 			return new String(decrypt(hex2byte(str.getBytes("UTF-8")),
-					PASSWORD_CRYPT_KEY.getBytes("UTF-8")));
+					CRYPT_KEY.getBytes("UTF-8")));
 		} catch (Exception e) {
 		}
 		return null;
@@ -101,7 +101,7 @@ public class SecretUtil {
 	 */
 	public final static String encrypt(String str) {
 		try {
-			return byte2hex(encrypt(str.getBytes("UTF-8"), PASSWORD_CRYPT_KEY
+			return byte2hex(encrypt(str.getBytes("UTF-8"), CRYPT_KEY
 					.getBytes("UTF-8")));
 		} catch (Exception e) {
 		}

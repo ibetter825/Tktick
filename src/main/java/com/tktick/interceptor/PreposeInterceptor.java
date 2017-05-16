@@ -3,15 +3,14 @@ package com.tktick.interceptor;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.context.SessionContextHolder;
+import com.tktick.service.TkUserService;
 import com.tktick.utils.DateUtil;
 import com.tktick.utils.Md5Util;
 import com.tktick.utils.SecretUtil;
@@ -25,6 +24,9 @@ import com.tktick.utils.WebUtil;
  */
 public class PreposeInterceptor implements HandlerInterceptor {
 
+	@Autowired
+	private TkUserService userService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -44,9 +46,7 @@ public class PreposeInterceptor implements HandlerInterceptor {
 				long rtime = DateUtil.getDateByTime();
 				String cookieUserinfo = userValues[3];
 				
-				Cache cache = CacheManager.getInstance().getCache("session");
-				TkUser user = (TkUser) cache.get(userId).getObjectValue();
-				
+				TkUser user = userService.getTkUserById(userId);
 				if(user != null){
 					String dbPwd = user.getUserPwd();
 					String dbSalt = user.getUserSalt();

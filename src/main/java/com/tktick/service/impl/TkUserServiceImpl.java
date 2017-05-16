@@ -5,8 +5,10 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.tktick.bean.constant.AuthConstant;
+import com.tktick.bean.constant.CacheConstant;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.dao.TkUserDao;
@@ -27,6 +29,13 @@ public class TkUserServiceImpl implements TkUserService {
 	}
 
 	@Override
+	@Cacheable(value = CacheConstant.LOGIN_USER_INFO_CACHE_NAME, key="#userId")
+	public TkUser getTkUserById(Long userId) {
+		System.err.println("without cache");
+		return userDao.findOne(userId);
+	}
+	
+	@Override
 	public boolean valiLoginUser(HttpServletResponse response, LoginForm form) {
 		TkUser user = null;
 		boolean res = false;
@@ -44,7 +53,8 @@ public class TkUserServiceImpl implements TkUserService {
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
-				int maxAge = 15*24*60*60;//保存15天
+				
+				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : 0;//保存14天 或者 0
 				long time = DateUtil.getDateByTime();
 				Long userId = user.getUserId();
 				
@@ -52,7 +62,7 @@ public class TkUserServiceImpl implements TkUserService {
 				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, maxAge);
 				//登录成功
 				//将sessionId存放在缓存中
-				Cache cache = CacheManager.getInstance().getCache("session");
+				Cache cache = CacheManager.getInstance().getCache(CacheConstant.LOGIN_USER_INFO_CACHE_NAME);
 				cache.put(new Element(userId, user));
 				res = true;
 			}
