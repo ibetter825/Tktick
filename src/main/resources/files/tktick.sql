@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
-Source Server Version : 50711
+Source Server Version : 50715
 Source Host           : 127.0.0.1:3306
 Source Database       : tktick
 
 Target Server Type    : MYSQL
-Target Server Version : 50711
+Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2017-05-13 17:28:47
+Date: 2017-05-16 17:08:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -174,7 +174,7 @@ CREATE TABLE `tk_user` (
   `user_name` varchar(255) DEFAULT '' COMMENT '登录名',
   `user_pwd` varchar(32) NOT NULL COMMENT '用户密码',
   `user_salt` varchar(10) NOT NULL COMMENT '加密用字符串',
-  `user_phone` int(11) DEFAULT '0' COMMENT '用户电话号码，可用于登录',
+  `user_phone` bigint(11) DEFAULT '0' COMMENT '用户电话号码，可用于登录',
   `user_email` varchar(100) DEFAULT '' COMMENT '用户邮箱，可用于登录',
   `user_state` tinyint(4) DEFAULT '1' COMMENT '状态: -1：删除，0：限制登陆，1：正常',
   PRIMARY KEY (`user_id`),
@@ -184,7 +184,7 @@ CREATE TABLE `tk_user` (
 -- ----------------------------
 -- Records of tk_user
 -- ----------------------------
-INSERT INTO `tk_user` VALUES ('10000', 'tktick', 'BB855C106B50CEA148E553154E3DF151', 'yang', '0', '', '1');
+INSERT INTO `tk_user` VALUES ('10000', 'tktick', 'BB855C106B50CEA148E553154E3DF151', 'yang', '13408458790', 'y825y@qq.com', '1');
 
 -- ----------------------------
 -- Table structure for tk_user_info
