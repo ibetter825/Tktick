@@ -27,9 +27,9 @@
 					<div class="form-group">
 						<input type="text" id="acc_pwd" name="password" class="validate[required,minSize[6],maxSize[18],funcCall[checkAccNo]]" placeholder="登录密码">
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="display:none">
 						<input type="text" id="captcha" name="captcha" class="validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="验证码" data-prompt-position="centerRight:150,2">
-						<img title="点击切换验证码" id="captcha-img" src="/sign/captcha.jpg" align="middle"/>
+						<img title="点击切换验证码" id="captcha_img" src="" align="middle"/>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="tran pr">
@@ -149,9 +149,12 @@ $(function(){
 		var type = ipt.attr('type');
 		if(type !== 'password')
 			ipt.attr('type', 'password');
+		var src = $('#captcha_img').attr('src');
+		if(src.indexOf('/sign/captcha.jpg') === -1)
+			$('#captcha_img').attr('src', '/sign/captcha.jpg?'+new Date().getTime()).parent().slideDown();
 	});
-	$('#captcha-img').on('click', function(){
-		$(this).attr('src', jui.uri+'/captcha?'+new Date().getTime());
+	$('#captcha_img').on('click', function(){
+		$(this).attr('src', '/sign/captcha.jpg?'+new Date().getTime());
 	});
 	$(".signup-form input").on("focus",function(){
 		$(this).parent().addClass("border");
@@ -210,7 +213,7 @@ $(function(){
 		$(".get-message").on("click",function(){
 			if(_handle){
 				$("#message-inf").fadeIn(100);
-				$(this).html('<a href="javascript:;">下一步</a><img class="loading" src='+jui.uri+'"/static/f/images/loading.gif">').addClass("move-addinf");
+				$(this).html('<a href="javascript:;">下一步</a><img class="loading" src="/static/images/loading.gif">').addClass("move-addinf");
 			}
 		});
 	}();

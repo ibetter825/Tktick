@@ -18,7 +18,7 @@ public interface TkUserDao extends PagingAndSortingRepository<TkUser, Long>, Jpa
 	public TkUser selectUserByUsername(@Param(value = "userName") String userName);
 	
 	@Query("from TkUser t where userPhone = :userPhone and userState <> -1")
-	public TkUser selectUserByPhone(@Param(value = "userPhone") Integer userPhone);
+	public TkUser selectUserByPhone(@Param(value = "userPhone") Long userPhone);
 	
 	@Query("from TkUser t where userEmail = :userEmail and userState <> -1")
 	public TkUser selectUserByEmail(@Param(value = "userEmail") String userEmail);

@@ -59,7 +59,6 @@ public class TkUserServiceImpl implements TkUserService {
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
-				
 				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : 0;//保存14天 或者 0
 				long time = DateUtil.getDateByTime();
 				Long userId = user.getUserId();

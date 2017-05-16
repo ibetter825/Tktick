@@ -16,11 +16,12 @@ public class LoginForm extends BaseForm{
 	
 	public static final short LOGIN_TYPE_PHONE = 1;
 	public static final short LOGIN_TYPE_EMAIL = 2;
+	public static final short LOGIN_TYPE_UNKNOWN = 0;
 	
 	@NotEmpty
 	private String account;//登录表单中的字段，需要判断是电话号还是电子邮箱
 	private String username;//用户名
-	private Integer phonenum;//手机号码
+	private Long phonenum;//手机号码
 	@Email
 	private String email;//电子邮箱
 	private String password;//登录密码
@@ -39,7 +40,11 @@ public class LoginForm extends BaseForm{
 		if(RegexUtil.isEmail(account)){
 			this.email = account;
 			this.type = LOGIN_TYPE_EMAIL;
-		}
+		}else if(RegexUtil.isSelfPhone(account)){
+			this.phonenum = Long.valueOf(account);
+			this.type = LOGIN_TYPE_PHONE;
+		}else
+			this.type = LOGIN_TYPE_UNKNOWN;
 		this.account = account;
 	}
 	public String getUsername() {
@@ -48,10 +53,10 @@ public class LoginForm extends BaseForm{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Integer getPhonenum() {
+	public Long getPhonenum() {
 		return phonenum;
 	}
-	public void setPhonenum(Integer phonenum) {
+	public void setPhonenum(Long phonenum) {
 		this.phonenum = phonenum;
 	}
 	public String getEmail() {

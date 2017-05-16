@@ -1,11 +1,7 @@
 package com.tktick.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +10,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Maps;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 @RestController
 public class BaseController {
@@ -39,17 +33,6 @@ public class BaseController {
 			}
 		}
 		return res;
-	}
-	/**
-	 * 发送图片到前台
-	 * @throws IOException 
-	 */
-	public void renderImage(Object res) throws IOException{
-		response.setContentType("image/jpeg");
-		ServletOutputStream out = response.getOutputStream();
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        encoder.encode((BufferedImage) res);
-        out.flush();
 	}
 	
 	/**

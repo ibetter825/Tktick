@@ -21,7 +21,7 @@ public class TkUser extends BaseEntity {
 	private String userName;
 	private String userPwd;
 	private String userSalt;
-	private Integer userPhone;
+	private Long userPhone;
 	private String userEmail;
 	private Short userState;
 	
@@ -49,10 +49,10 @@ public class TkUser extends BaseEntity {
 	public void setUserSalt(String userSalt) {
 		this.userSalt = userSalt;
 	}
-	public Integer getUserPhone() {
+	public Long getUserPhone() {
 		return userPhone;
 	}
-	public void setUserPhone(Integer userPhone) {
+	public void setUserPhone(Long userPhone) {
 		this.userPhone = userPhone;
 	}
 	public String getUserEmail() {

@@ -2,19 +2,17 @@ package com.tktick.controller.web;
 
 import java.io.IOException;
 import java.util.Map;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.service.TkUserService;
-import com.tktick.utils.CaptchaUtil;
 import com.tktick.utils.Md5Util;
+import com.tktick.utils.VerifyCodeUtil;
 import com.tktick.utils.WebUtil;
 
 /**
@@ -67,9 +65,17 @@ public class SignController extends WebBaseController {
 	 */
 	@RequestMapping("/captcha.jpg")
 	public void captcha() throws IOException{
-		Object[] res = CaptchaUtil.getBufferedImageAndCode(100, 30);
-		String captchaString = Md5Util.md5(res[0].toString().toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT);
-		WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, captchaString, 0);
-		renderImage(res[1]);
+		response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("image/jpeg");
+        
+        //生成随机字串 
+        String verifyCode = VerifyCodeUtil.generateVerifyCode(4);
+        String captchaString = Md5Util.md5(verifyCode.toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT);
+        WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, captchaString, 0);
+        //生成图片
+        int w = 150, h = 40;
+        VerifyCodeUtil.outputImage(w, h, response.getOutputStream(), verifyCode);
 	}
 }

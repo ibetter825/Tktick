@@ -69,7 +69,7 @@ public class CaptchaUtil {
         BufferedImage bi = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
         g.setColor(color);
         g.fillRect(0, 0, width, height);
         g.setColor(reverse);
@@ -98,13 +98,12 @@ public class CaptchaUtil {
         BufferedImage bi = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
         g.setColor(color);
         g.fillRect(0, 0, width, height);
         g.setColor(reverse);
         g.drawString(randomString, 18, 20);
-        for (int i = 0, n = random.nextInt(100); i < n; i++) 
-        {
+        for (int i = 0, n = random.nextInt(100); i < n; i++) {
             g.drawRect(random.nextInt(width), random.nextInt(height), 1, 1);
         }
 
