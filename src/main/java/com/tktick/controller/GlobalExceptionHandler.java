@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     	if(WebUtil.isAjax(req)){
 			PrintWriter writer = null;
 			try {
-				//resp.reset();
+				resp.reset();
 				writer = resp.getWriter();
 				resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 				resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
