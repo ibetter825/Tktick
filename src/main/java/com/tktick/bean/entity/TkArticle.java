@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 文章表
@@ -18,6 +19,7 @@ public class TkArticle extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long artId;
+	@NotBlank
 	private String artTitle;
 	private String artDesc;
 	private Long userId;
@@ -25,6 +27,7 @@ public class TkArticle extends BaseEntity {
 	private Long editTime;
 	private Short artState;
 	private Short artAuth;
+	@NotBlank
 	private String artCont;
 	private String artImgs;
 	

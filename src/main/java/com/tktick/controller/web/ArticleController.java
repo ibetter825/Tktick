@@ -1,11 +1,18 @@
 package com.tktick.controller.web;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.tktick.annotation.Permission;
+import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.model.ResultModel;
+import com.tktick.service.TkArticleService;
+import com.tktick.utils.DateUtil;
 
 /**
  * 文章类
@@ -15,6 +22,9 @@ import com.tktick.annotation.Permission;
 @RestController
 @RequestMapping("/art")
 public class ArticleController extends WebBaseController {
+	
+	@Autowired
+	private TkArticleService articleService;
 	
 	@RequestMapping("/{id}.html")
 	public ModelAndView index(@PathVariable("id") Long artId){
@@ -29,5 +39,25 @@ public class ArticleController extends WebBaseController {
 	@Permission
 	public ModelAndView write(){
 		return new ModelAndView("web/write");
+	}
+	
+	/**
+	 * 保存新的文章
+	 * @return
+	 */
+	@RequestMapping("/save.json")
+	@Permission
+	public ResultModel save(@Valid TkArticle article, BindingResult br){
+		ResultModel model = resultErrors(br);
+		if(model != null) return model;
+		
+		long time = DateUtil.getDateByTime();
+		article.setAddTime(time);
+		long userId = getCurrentUser().getUserId();
+		article.setUserId(userId);
+		articleService.saveArticle(article);
+		System.err.println(article.getArtId());
+		model = new ResultModel();
+		return model;
 	}
 }

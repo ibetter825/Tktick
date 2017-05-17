@@ -10,6 +10,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Maps;
+import com.tktick.bean.constant.AuthConstant;
+import com.tktick.bean.entity.TkUser;
+import com.tktick.bean.model.ResultModel;
+import com.tktick.context.SessionContextHolder;
 
 @RestController
 public class BaseController {
@@ -22,7 +26,7 @@ public class BaseController {
 	 * @param error
 	 * @return
 	 */
-	public Map<String, String> resultErrors(BindingResult error){
+	public ResultModel resultErrors(BindingResult error){
 		Map<String, String> res = null;
 		if(error.hasErrors()){
 			res = Maps.newHashMap();//验证错误结果  failed:message
@@ -32,9 +36,20 @@ public class BaseController {
 					res.put(((FieldError) e).getField(), e.getDefaultMessage());
 			}
 		}
-		return res;
+		ResultModel model = null;
+		if(res != null){
+			model = new ResultModel(AuthConstant.FORM_VALI_FAIL_MSG);
+			model.getData().put(AuthConstant.FORM_VALI_FAIL_NAME, res);
+		}
+		return model;
 	}
-	
+	/**
+	 * 获取当前登录的用户
+	 * @return
+	 */
+	public TkUser getCurrentUser(){
+		return SessionContextHolder.getCurrentUser();
+	}
 	/**
 	 * 获取系统根目录
 	 * @return

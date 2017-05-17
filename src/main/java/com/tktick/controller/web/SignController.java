@@ -1,7 +1,6 @@
 package com.tktick.controller.web;
 
 import java.io.IOException;
-import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -48,14 +47,9 @@ public class SignController extends WebBaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/session.json", method = RequestMethod.POST)
-	public ResultModel session(@Valid LoginForm form, BindingResult vali){
-		ResultModel model = null;
-		Map<String, String> errors = resultErrors(vali);
-		if(errors != null){
-			model = new ResultModel(AuthConstant.LOGIN_FORM_VALUE_ERROR);
-			model.getData().put("errors", errors);
-			return model;
-		}
+	public ResultModel session(@Valid LoginForm form, BindingResult br){
+		ResultModel model = resultErrors(br);
+		if(model != null) return model;
 		String res = userService.valiLoginUser(request, response, form);
 		if(res == null){
 			System.err.println("登录成功");

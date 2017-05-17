@@ -25,11 +25,11 @@
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <!-- junit test 依赖 -->
-    <!-- <dependency>
+    <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
-	</dependency> -->
+	</dependency>
 	<!-- 添加spring aop支持 -->
 	<dependency>  
 	    <groupId>org.springframework.boot</groupId>  

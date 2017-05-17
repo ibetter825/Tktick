@@ -72,7 +72,11 @@ public class AuthConstant {
 	/**
 	 * 登录表单出错
 	 */
-	public final static String LOGIN_FORM_VALUE_ERROR = "登录信息验证失败";
+	public final static String FORM_VALI_FAIL_MSG = "表单验证失败";
+	/**
+	 * 表单验证失败返回给前端的字段名
+	 */
+	public final static String FORM_VALI_FAIL_NAME = "errors";
 	/**
 	 * 登录账号出错
 	 */
