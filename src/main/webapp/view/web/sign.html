@@ -143,6 +143,7 @@
 <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/static/layer/layer.js"></script>
 <script type="text/javascript" src="/static/js/jquery.validation.js"></script>
+<script type="text/javascript" src="/static/js/tktick.js"></script>
 <script type="text/javascript">
 var type = 'login';
 $(function(){
@@ -262,7 +263,7 @@ $(function(){
 		      onAjaxFormError: function(data, transport){
 		    	  $('#submit').removeAttr('disabled');
 		    	  layer.closeAll('loading');
-		    	  var status = data.status; 
+		    	  var status = data.status;
 		      	  if(status){
 			      		switch (status) {
 			      		case 403:

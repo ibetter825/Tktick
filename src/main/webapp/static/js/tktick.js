@@ -1,6 +1,47 @@
 var tktick = {};
-!(function(app, $){
-	$.ER = function(xhr, textStatus, exception){
+!(function(app, jQuery){
+	jQuery.cookie = function(name, value, options) {
+	    if (typeof value != 'undefined') { // name and value given, set cookie
+	        options = options || {};
+	        if (value === null) {
+	            value = '';
+	            options.expires = -1;
+	        }
+	        var expires = '';
+	        if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
+	            var date;
+	            if (typeof options.expires == 'number') {
+	                date = new Date();
+	                date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
+	            } else {
+	                date = options.expires;
+	            }
+	            expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
+	        }
+	        var path = options.path ? '; path=' + options.path : '';
+	        var domain = options.domain ? '; domain=' + options.domain : '';
+	        var secure = options.secure ? '; secure' : '';
+	        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+	    } else { // only name given, get cookie
+	        var cookieValue = null;
+	        if (document.cookie && document.cookie != '') {
+	            var cookies = document.cookie.split(';');
+	            for (var i = 0; i < cookies.length; i++) {
+	                var cookie = jQuery.trim(cookies[i]);
+	                // Does this cookie string begin with the name we want?
+	                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                    break;
+	                }
+	            }
+	        }
+	        return cookieValue;
+	    }
+	}
+	/**
+	 * ajax错误处理
+	 */
+	jQuery.ER = function(xhr, textStatus, exception){
     	var status = xhr.status; 
     	if(status){
     		switch (status) {
@@ -25,51 +66,65 @@ var tktick = {};
     		}
     	}
     }
-	app.write = {
-		/**
-		 * 添加控件
-		 */
-		etadd: function(dom, tp){
-			switch (tp) {
-				case 0:
-					//添加文字
-					var $editors = $('.write_editor');
-					var id = 'editor_' + ($editors.length + 1);
-					$(dom).parent().before('<div class="write_editor" id="'+ id +'" style="height: 150px;"></div>');
-					createEditor(id);
-					function createEditor(id){
-						var editor = new wangEditor(id);
-						 // 关闭菜单栏fixed
-				    	editor.config.menuFixed = false;
-						// 上传图片
-				    	editor.config.uploadImgUrl = '/upload/editor?upload_type=image';
-				    	editor.config.uploadImgFileName = 'upload';
-						// 普通的自定义菜单
-					    editor.config.menus = [
-					        'bold',
-					        'underline',
-					        'italic',
-					        'strikethrough',
-					        'head',
-					        'quote',
-					        'fontfamily',
-					        'link',
-				        	'unlink',
-					        '|',
-					        'img',
-					        'video',
-					        '|',
-					        'undo',
-				        	'redo',
-				        	'|',
-				        	'fullscreen'
-					     ];
-				    	 editor.create();
-					}
-					break;
-				default:
-					break;
-			}
-		}
+	/**
+	 * localStorage
+	 */
+	jQuery.LS = {
+	    get:function(dataKey){
+	        if(window.localStorage)
+	            return localStorage.getItem(dataKey);
+	        else
+	            return $.cookie(dataKey);  
+	    },
+	    set:function(key,value){            
+	        if(window.localStorage)
+	            localStorage[key]=value;
+	        else
+	            $.cookie(key,value);
+	    },
+	    remove:function(key){
+	        if(window.localStorage)
+	            localStorage.removeItem(key);
+	        else
+	            $.cookie(key,undefined);
+	    }
 	}
+	/**
+	 * sessionStorage
+	 */
+	jQuery.SS = {
+	    get:function(dataKey){
+	        if(window.sessionStorage)
+	            return sessionStorage.getItem(dataKey);
+	        else
+	            return $.cookie(dataKey);  
+	    },
+	    set:function(key,value){            
+	        if(window.sessionStorage)
+	        	sessionStorage[key]=value;
+	        else
+	            $.cookie(key,value);
+	    },
+	    remove:function(key){
+	        if(window.sessionStorage)
+	        	sessionStorage.removeItem(key);
+	        else
+	            $.cookie(key,undefined);
+	    }
+	}
+	/**
+	 * cookie
+	 */
+	jQuery.CK = {
+	    get:function(dataKey){
+	        return jQuery.cookie(dataKey);  
+	    },
+	    set:function(key,value){            
+	    	jQuery.cookie(key, value);
+	    },
+	    remove:function(key){
+	    	jQuery.cookie(key, undefined);
+	    }
+	}
+	app.write = {}
 })(tktick, $);
