@@ -21,8 +21,10 @@ public interface TkUserService {
 	public TkUser getTkUserById(Long userId);
 	/**
 	 * 登录认证
+	 * 返回错误信息
+	 * 返回空表示登录成功
 	 * @param form
 	 * @return
 	 */
-	public boolean valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form);
+	public String valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form);
 }

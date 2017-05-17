@@ -37,14 +37,14 @@ public class TkUserServiceImpl implements TkUserService {
 	}
 	
 	@Override
-	public boolean valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form) {
-		TkUser user = null;
+	public String valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form) {
 		//判断验证码是否出错
 		String captchaString = WebUtil.getCookieValueByName(request, AuthConstant.COOKIE_CAPTCHA_NAME);
 		if(!Md5Util.md5(form.getCaptcha().toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT).equals(captchaString))
-			return false;//验证码不对
+			return AuthConstant.WRONG_CAPTCHA_MSG;//验证码不对
 		WebUtil.addCookie(response, null, AuthConstant.COOKIE_CAPTCHA_PATH, true, AuthConstant.COOKIE_CAPTCHA_NAME, null, 0);
-		boolean res = false;
+		String res = null;
+		TkUser user = null;
 		switch (form.getType()) {
 			case LoginForm.LOGIN_TYPE_EMAIL:
 				user = userDao.selectUserByEmail(form.getEmail());
@@ -53,6 +53,7 @@ public class TkUserServiceImpl implements TkUserService {
 				user = userDao.selectUserByPhone(form.getPhonenum());
 				break;
 			default:
+				res = AuthConstant.WRONG_USER_ACCOUNT_MSG;
 				break;
 		}
 		if(user != null){
@@ -70,9 +71,10 @@ public class TkUserServiceImpl implements TkUserService {
 				//将sessionId存放在缓存中
 				Cache cache = CacheManager.getInstance().getCache(CacheConstant.LOGIN_USER_INFO_CACHE_NAME);
 				cache.put(new Element(userId, user));
-				res = true;
-			}
-		}
+			}else
+				res = AuthConstant.WRONG_LOGIN_MSG;
+		}else
+			res = res == null ? AuthConstant.USER_NOT_FOUND_MSG : res;
 		return res;
 	}
 }

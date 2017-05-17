@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<link rel="shortcut icon" href="/static/images/favicon.ico">
-	<title>云间叙 - 登录</title>
-	<link rel='stylesheet' id='main-css'  href='/static/css/sign.css?ver=1.0' type='text/css' media='all' />
+	<title>登录</title>
+	<link rel='stylesheet' href='/static/layer/skin/default/layer.css?ver=1.0' type='text/css' media='all'/>
+	<link rel='stylesheet' href='/static/css/validationEngine.jquery.css?ver=1.0' type='text/css' media='all'/>
+	<link rel='stylesheet' href='/static/css/sign.css?ver=1.0' type='text/css' media='all' />
 </head>
 <body>
 	<div class="login-banner"><a href="/"></a></div>
@@ -19,20 +21,20 @@
 	</ul>
 	<div class="login-box">
 		<div class="box-con tran">
-			<form id="login-form" autocomplete="off" method="post" action="/sign/session.html">
+			<form id="login-form" autocomplete="off">
 				<div class="login-con f-l">
 					<div class="form-group">
-						<input type="text" id="acc_str" name="account" class="validate[required,maxSize[10],funcCall[checkAccount]]" placeholder="手机或邮箱"/>
+						<input type="text" id="acc_str" name="account" value="13408458790" class="validate[required]" placeholder="手机或邮箱"/>
 					</div>
 					<div class="form-group">
-						<input type="text" id="acc_pwd" name="password" class="validate[required,minSize[6],maxSize[18],funcCall[checkAccNo]]" placeholder="登录密码">
+						<input type="text" id="acc_pwd" name="password" value="000000" class="validate[required,minSize[6],maxSize[18],funcCall[checkPassword]]" placeholder="登录密码">
 					</div>
 					<div class="form-group" style="display:none">
 						<input type="text" id="captcha" name="captcha" class="validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="验证码" data-prompt-position="centerRight:150,2">
-						<img title="点击切换验证码" id="captcha_img" src="" align="middle"/>
+						<img title="点击切换验证码" id="captcha-img" src="" align="middle"/>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="tran pr">
+						<button id="submit" type="submit" class="tran pr">
 							<span class="tran">登&emsp;录</span>
 							<!-- <img class="loading" src="/static/f/images/loading.gif"> -->
 						</button>
@@ -135,10 +137,12 @@
 		</div>
 	</div>
 	<div class="login-footer">
-		 &copy; 2016 <a href="/">TKTICK</a> &nbsp; <a href="#">网站地图</a> 
+		 &copy; 2016 <a href="/">TKTICK</a> &nbsp; <a href="#">网站地图</a>
 	</div>
 </body>
 <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/layer/layer.js"></script>
+<script type="text/javascript" src="/static/js/jquery.validation.js"></script>
 <script type="text/javascript">
 var type = 'login';
 $(function(){
@@ -149,11 +153,11 @@ $(function(){
 		var type = ipt.attr('type');
 		if(type !== 'password')
 			ipt.attr('type', 'password');
-		var src = $('#captcha_img').attr('src');
+		var src = $('#captcha-img').attr('src');
 		if(src.indexOf('/sign/captcha.jpg') === -1)
-			$('#captcha_img').attr('src', '/sign/captcha.jpg?'+new Date().getTime()).parent().slideDown();
+			$('#captcha-img').attr('src', '/sign/captcha.jpg?'+new Date().getTime()).parent().slideDown();
 	});
-	$('#captcha_img').on('click', function(){
+	$('#captcha-img').on('click', function(){
 		$(this).attr('src', '/sign/captcha.jpg?'+new Date().getTime());
 	});
 	$(".signup-form input").on("focus",function(){
@@ -218,6 +222,72 @@ $(function(){
 		});
 	}();
 	
+	var valiObj = {
+			  promptPosition: 'centerRight:0, 2',
+			  onSuccess: false,
+			  scroll: false,
+			  ajaxFormValidation: true,
+			  maxErrorsPerField: 1,
+			  showOneMessage: true,
+			  ajaxFormValidationURL: '/sign/session.json',
+			  ajaxFormValidationMethod: 'post',
+			  onBeforeAjaxFormValidation: function(form, options){
+				  var src = $('#captcha-img').attr('src');
+				  if(src.indexOf('/sign/captcha.jpg') === -1){
+					 $('#captcha-img').attr('src', '/sign/captcha.jpg?'+new Date().getTime()).parent().slideDown();
+					 return false;
+				  }
+				  $('#submit').attr('disabled', 'disabled');
+				  layer.load();
+			  },
+			  onAjaxFormComplete: function(status, form, json, options){
+				   $('#submit').removeAttr('disabled');
+				  	layer.closeAll('loading');
+				  	$('#captcha').val('');
+					if(json.success)
+						location.href = "/";
+					else{
+						$('#captcha-img').attr('src', '/sign/captcha.jpg?'+new Date().getTime());
+						var errs = json.data['errors'];
+						if(!errs)
+							layer.msg(json.msg, {time:1000, icon:5, offset: '124px'});
+						else{
+							for(var e in errs){
+								$('#'+e).validationEngine('showPrompt',errs[e],'error');
+							}
+						}
+							
+					}
+		      },
+		      onAjaxFormError: function(data, transport){
+		    	  $('#submit').removeAttr('disabled');
+		    	  layer.closeAll('loading');
+		    	  var status = data.status; 
+		      	  if(status){
+			      		switch (status) {
+			      		case 403:
+			      			layer.msg("访问被拒绝", {icon:5, offset: '124px'});
+			      			break;
+			      		case 404:
+			      			layer.msg("访问地址不存在或已删除", {icon:5, offset: '124px'});
+			      			break;
+			      		case 500:
+			      			layer.msg("操作出错", {icon:5, offset: '124px'});
+			      			break;
+			      		case 504:
+			      			layer.msg("请求超时", {icon:5, offset: '124px'});
+			      			break;
+			      		case 0:
+			      			layer.msg("网络异常", {icon:5, offset: '124px'});
+			      			break;
+			      		default:
+			      			layer.msg("错误代码["+status+"]", {icon:5, offset: '124px'});
+			      			break;
+			      		}
+		      	  }
+		      }
+		};
+	    $("#login-form").validationEngine('attach', valiObj);
 });
 </script>
 </html>

@@ -38,7 +38,7 @@ public class AuthConstant {
 	 */
 	public final static String LOGOUT_PAGE_URL = "/sign/out.html";
 	/**
-	 * 用户名不存在
+	 * 用户不存在
 	 */
 	public final static String USER_NOT_FOUND_MSG = "用户不存在";
 	/**
@@ -46,9 +46,9 @@ public class AuthConstant {
 	 */
 	public final static String USER_NOT_LOGIN = "请先登录";
 	/**
-	 * 密码错误
+	 * 用户名或者密码错误
 	 */
-	public final static String WRONG_PASSWORD_MSG = "用户名或者密码错误";
+	public final static String WRONG_LOGIN_MSG = "用户名或者密码错误";
 	/**
 	 * 账户被锁
 	 */
@@ -69,4 +69,12 @@ public class AuthConstant {
 	 * 验证码错误
 	 */
 	public final static String WRONG_CAPTCHA_MSG = "验证码错误";
+	/**
+	 * 登录表单出错
+	 */
+	public final static String LOGIN_FORM_VALUE_ERROR = "登录信息验证失败";
+	/**
+	 * 登录账号出错
+	 */
+	public final static String WRONG_USER_ACCOUNT_MSG = "只能使用手机或者邮箱登录";
 }

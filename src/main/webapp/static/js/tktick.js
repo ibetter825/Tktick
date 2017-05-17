@@ -1,5 +1,30 @@
 var tktick = {};
-!(function(app){
+!(function(app, $){
+	$.ER = function(xhr, textStatus, exception){
+    	var status = xhr.status; 
+    	if(status){
+    		switch (status) {
+    		case 403:
+    			layer.msg("访问被拒绝", {icon:5});
+    			break;
+    		case 404:
+    			layer.msg("访问地址不存在或已删除", {icon:5});
+    			break;
+    		case 500:
+    			layer.msg("操作出错", {icon:5});
+    			break;
+    		case 504:
+    			layer.msg("请求超时", {icon:5});
+    			break;
+    		case 0:
+    			layer.msg("网络异常", {icon:5});
+    			break;
+    		default:
+    			layer.msg("错误代码["+status+"]", {icon:5});
+    			break;
+    		}
+    	}
+    }
 	app.write = {
 		/**
 		 * 添加控件
@@ -47,4 +72,4 @@ var tktick = {};
 			}
 		}
 	}
-})(tktick);
+})(tktick, $);

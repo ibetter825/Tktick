@@ -6,10 +6,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.form.LoginForm;
+import com.tktick.bean.model.ResultModel;
 import com.tktick.service.TkUserService;
 import com.tktick.utils.Md5Util;
 import com.tktick.utils.VerifyCodeUtil;
@@ -45,18 +47,25 @@ public class SignController extends WebBaseController {
 	 * 登录
 	 * @return
 	 */
-	@RequestMapping("/session.html")
-	public ModelAndView session(@Valid LoginForm form, BindingResult vali){
+	@RequestMapping(value = "/session.json", method = RequestMethod.POST)
+	public ResultModel session(@Valid LoginForm form, BindingResult vali){
+		ResultModel model = null;
 		Map<String, String> errors = resultErrors(vali);
-		if(errors != null) return new ModelAndView("redirect:/sign/in.html", errors);
-		boolean res = userService.valiLoginUser(request, response, form);
-		if(res){
+		if(errors != null){
+			model = new ResultModel(AuthConstant.LOGIN_FORM_VALUE_ERROR);
+			model.getData().put("errors", errors);
+			return model;
+		}
+		String res = userService.valiLoginUser(request, response, form);
+		if(res == null){
 			System.err.println("登录成功");
-			return new ModelAndView("redirect:/");
+			model = new ResultModel();
+			return model;
 		}
 		
 		System.err.println("登录失败");
-		return new ModelAndView("redirect:/sign/in.html");
+		model = new ResultModel(res);
+		return model;
 	}
 	
 	/**

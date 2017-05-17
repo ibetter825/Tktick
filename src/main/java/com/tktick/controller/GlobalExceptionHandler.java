@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.tktick.bean.constant.WebConstant;
+import com.tktick.bean.enums.ResultMessageEnum;
+import com.tktick.bean.model.ResultModel;
 import com.tktick.utils.WebUtil;
 
 /**
@@ -38,7 +41,7 @@ public class GlobalExceptionHandler {
 				resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
 				resp.setCharacterEncoding(WebConstant.DEFAULT_ENCODING); //避免乱码
 				resp.setHeader("Cache-Control", "no-cache, must-revalidate");
-				writer.print("chucuo");
+				writer.print(JSONUtils.toJSONString(new ResultModel(ResultMessageEnum.SYSTEM_EXCEPTION)));
 				writer.flush();
 			} catch (IOException ex) {
 				ex.printStackTrace();
