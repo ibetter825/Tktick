@@ -20,7 +20,7 @@ public class TkComment extends BaseEntity {
 	private Long comtId;
 	private Long comtTime;
 	private String comtCont;
-	private Long userId;
+	private Integer userId;
 	private Long artId;
 	private Short comtState;
 	
@@ -42,10 +42,10 @@ public class TkComment extends BaseEntity {
 	public void setComtCont(String comtCont) {
 		this.comtCont = comtCont;
 	}
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public Long getArtId() {

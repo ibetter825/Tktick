@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.constant.CacheConstant;
 import com.tktick.bean.entity.TkUser;
+import com.tktick.bean.entity.TkUserInfo;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.dao.TkUserDao;
 import com.tktick.service.TkUserService;
@@ -31,7 +32,7 @@ public class TkUserServiceImpl implements TkUserService {
 
 	@Override
 	@Cacheable(value = CacheConstant.LOGIN_USER_INFO_CACHE_NAME, key="#userId")
-	public TkUser getTkUserById(Long userId) {
+	public TkUser getTkUserById(Integer userId) {
 		System.err.println("without cache");
 		return userDao.findOne(userId);
 	}
@@ -62,7 +63,12 @@ public class TkUserServiceImpl implements TkUserService {
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
 				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : -1;//保存14天 或者 0
 				long time = DateUtil.getDateByTime();
-				Long userId = user.getUserId();
+				Integer userId = user.getUserId();
+				//修改Info信息
+				TkUserInfo info = user.getInfo();
+				info.setLoginIp(WebUtil.getIpAddr(request));
+				info.setLoginTime(time);
+				userDao.save(user);
 				
 				String userLoginInfo = SecretUtil.encrypt(userId + "@" + time + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + pwd + "@" + salt + "@" + time + "@" + maxAge));
 				long expires = DateUtil.getDateByTime() + maxAge * 1000;

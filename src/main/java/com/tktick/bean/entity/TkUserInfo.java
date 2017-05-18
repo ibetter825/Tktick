@@ -2,9 +2,11 @@ package com.tktick.bean.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * 用户
@@ -15,9 +17,8 @@ import javax.persistence.Table;
 @Table(name = "tk_user_info")
 public class TkUserInfo extends BaseEntity {
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	
+	private Integer userId;
 	private String userAvatar;
 	private String userIntro;
 	private String nickName;
@@ -27,11 +28,15 @@ public class TkUserInfo extends BaseEntity {
 	private Long regTime;
 	private Short errCount;
 	private Long stopTime;
+	private TkUser user;
 	
-	public Long getUserId() {
+	@Id
+	@GeneratedValue(generator = "pkGenerator")
+	@GenericGenerator(name = "pkGenerator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public String getUserAvatar() {
@@ -87,5 +92,12 @@ public class TkUserInfo extends BaseEntity {
 	}
 	public void setStopTime(Long stopTime) {
 		this.stopTime = stopTime;
+	}
+	@OneToOne(mappedBy="info", optional=false)
+	public TkUser getUser() {
+		return user;
+	}
+	public void setUser(TkUser user) {
+		this.user = user;
 	}
 }

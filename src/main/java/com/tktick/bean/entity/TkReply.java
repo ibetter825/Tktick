@@ -21,7 +21,7 @@ public class TkReply extends BaseEntity {
 	private Long replyTime;
 	private String replyCont;
 	private Long comtId;
-	private Long userId;
+	private Integer userId;
 	private Short replyState;
 	
 	public Long getReplyId() {
@@ -48,10 +48,10 @@ public class TkReply extends BaseEntity {
 	public void setComtId(Long comtId) {
 		this.comtId = comtId;
 	}
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public Short getReplyState() {

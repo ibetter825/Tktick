@@ -20,7 +20,7 @@ public class TkSetKeeper extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer kprId;
 	private Integer setId;
-	private Long userId;
+	private Integer userId;
 	private Short kprType;
 	public Integer getKprId() {
 		return kprId;
@@ -34,10 +34,10 @@ public class TkSetKeeper extends BaseEntity {
 	public void setSetId(Integer setId) {
 		this.setId = setId;
 	}
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public Short getKprType() {

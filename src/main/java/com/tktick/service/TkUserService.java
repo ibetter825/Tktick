@@ -18,7 +18,7 @@ public interface TkUserService {
 	 * @param userId
 	 * @return
 	 */
-	public TkUser getTkUserById(Long userId);
+	public TkUser getTkUserById(Integer userId);
 	/**
 	 * 登录认证
 	 * 返回错误信息

@@ -1,7 +1,6 @@
 package com.tktick.controller.web;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,8 +53,8 @@ public class ArticleController extends WebBaseController {
 		
 		long time = DateUtil.getDateByTime();
 		article.setAddTime(time);
-		long userId = getCurrentUser().getUserId();
-		article.setUserId(userId);
+		article.setUser(getCurrentUser());
+		
 		articleService.saveArticle(article);
 		System.err.println(article.getArtId());
 		return model;

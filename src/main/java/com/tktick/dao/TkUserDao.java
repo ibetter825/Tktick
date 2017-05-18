@@ -1,8 +1,6 @@
 package com.tktick.dao;
 
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +11,7 @@ import com.tktick.bean.entity.TkUser;
  *
  */
 @Repository
-public interface TkUserDao extends PagingAndSortingRepository<TkUser, Long>, JpaSpecificationExecutor<TkUser> {
+public interface TkUserDao extends BaseDao<TkUser, Integer> {
 	@Query("from TkUser t where userName = :userName and userState <> -1")
 	public TkUser selectUserByUsername(@Param(value = "userName") String userName);
 	

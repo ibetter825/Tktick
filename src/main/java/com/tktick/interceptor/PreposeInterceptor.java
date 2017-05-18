@@ -40,7 +40,7 @@ public class PreposeInterceptor implements HandlerInterceptor {
 			//userId+"@"+time+"@"+maxAge+"@"+Md5Util.md5(userId+"@"+pwd+"@"+salt+"@"+time+"@"+maxAge
 			String[] userValues = userLoginInfo.split("@");
 			if(StringUtils.isNotEmpty(userLoginInfo) && userValues.length > 3){
-				Long userId = Long.valueOf(userValues[0]);
+				Integer userId = Integer.valueOf(userValues[0]);
 				long otime = Long.valueOf(userValues[1]);//如果otime==0的话，不手动判断过期时间，不是0的话，需要重新计算剩余cookie剩余时间
 				int maxAge = Integer.valueOf(userValues[2]);
 				long rtime = DateUtil.getDateByTime();
