@@ -5,6 +5,9 @@ import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,18 +32,23 @@ import com.tktick.utils.WebUtil;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	public static final String DEFAULT_ERROR_PATH = "/web/error";
 	
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse resp, Exception e) throws Exception {
-    	if(WebUtil.isAjax(req))
-    		exceptionHandle(resp, e);
-		else{
-	        ModelAndView mav = new ModelAndView();
-	        mav.addObject("exception", e);
-	        mav.addObject("url", req.getRequestURL());
-	        mav.setViewName(DEFAULT_ERROR_PATH+"/500");
-	        return mav;
+    	try {
+    		if(WebUtil.isAjax(req))
+        		exceptionHandle(resp, e);
+    		else{
+    	        ModelAndView mav = new ModelAndView();
+    	        mav.addObject("exception", e);
+    	        mav.addObject("url", req.getRequestURL());
+    	        mav.setViewName(DEFAULT_ERROR_PATH+"/500");
+    	        return mav;
+    		}
+		} finally {
+			logger.error("GlobalExceptionHandler.class", e);
 		}
         return null;
     }

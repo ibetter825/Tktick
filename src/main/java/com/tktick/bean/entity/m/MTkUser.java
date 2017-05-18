@@ -1,10 +1,12 @@
-package com.tktick.bean.entity;
+package com.tktick.bean.entity.m;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.tktick.bean.entity.BaseEntity;
 
 /**
  *
@@ -13,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tk_user")
-public class TkMUser extends BaseEntity {
+public class MTkUser extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
