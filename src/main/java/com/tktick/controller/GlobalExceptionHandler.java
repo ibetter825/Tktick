@@ -1,7 +1,8 @@
 package com.tktick.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -9,11 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
+import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.constant.WebConstant;
 import com.tktick.bean.enums.ResultMessageEnum;
 import com.tktick.bean.model.ResultModel;
+import com.tktick.exception.TkValidationException;
 import com.tktick.utils.WebUtil;
 
 /**
@@ -31,24 +33,9 @@ public class GlobalExceptionHandler {
 	
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse resp, Exception e) throws Exception {
-    	e.printStackTrace();
-    	if(WebUtil.isAjax(req)){
-			PrintWriter writer = null;
-			try {
-				resp.reset();
-				writer = resp.getWriter();
-				resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-				resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
-				resp.setCharacterEncoding(WebConstant.DEFAULT_ENCODING); //避免乱码
-				resp.setHeader("Cache-Control", "no-cache, must-revalidate");
-				writer.print(JSONUtils.toJSONString(new ResultModel(ResultMessageEnum.SYSTEM_EXCEPTION)));
-				writer.flush();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			} finally {
-				if(writer != null) writer.close();
-			}
-		}else{
+    	if(WebUtil.isAjax(req))
+    		exceptionHandle(resp, e);
+		else{
 	        ModelAndView mav = new ModelAndView();
 	        mav.addObject("exception", e);
 	        mav.addObject("url", req.getRequestURL());
@@ -56,5 +43,31 @@ public class GlobalExceptionHandler {
 	        return mav;
 		}
         return null;
+    }
+    
+    public void exceptionHandle(HttpServletResponse resp, Exception e) throws IOException{
+    	ServletOutputStream outer = null;
+    	boolean isTkValiEx = e instanceof TkValidationException;//是否是表单验证错误
+		try {
+			ResultModel model = null;
+			resp.reset();
+			outer = resp.getOutputStream();
+			if(isTkValiEx){
+				resp.setStatus(HttpStatus.OK.value());
+				model = new ResultModel(e.getMessage());
+				model.getData().put(AuthConstant.FORM_VALI_FAIL_NAME, ((TkValidationException) e).getError());
+			}else{
+				resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+				model = new ResultModel(ResultMessageEnum.SYSTEM_EXCEPTION);
+			}
+			resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			resp.setCharacterEncoding(WebConstant.DEFAULT_ENCODING); //避免乱码
+			resp.setHeader("Cache-Control", "no-cache, must-revalidate");
+			String res = JSON.toJSONString(model);
+			outer.write(res.getBytes(WebConstant.DEFAULT_ENCODING));
+			outer.flush();
+		} finally {
+			if(outer != null) outer.close();
+		}
     }
 }

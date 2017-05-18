@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.tktick.annotation.Permission;
+import com.tktick.annotation.Validator;
 import com.tktick.bean.entity.TkArticle;
 import com.tktick.bean.model.ResultModel;
 import com.tktick.service.TkArticleService;
@@ -47,9 +48,9 @@ public class ArticleController extends WebBaseController {
 	 */
 	@RequestMapping("/save.json")
 	@Permission
-	public ResultModel save(@Valid TkArticle article, BindingResult br){
-		ResultModel model = resultErrors(br);
-		if(model != null) return model;
+	@Validator
+	public ResultModel save(@Valid TkArticle article, BindingResult binding){
+		ResultModel model = new ResultModel();
 		
 		long time = DateUtil.getDateByTime();
 		article.setAddTime(time);
@@ -57,7 +58,6 @@ public class ArticleController extends WebBaseController {
 		article.setUserId(userId);
 		articleService.saveArticle(article);
 		System.err.println(article.getArtId());
-		model = new ResultModel();
 		return model;
 	}
 }

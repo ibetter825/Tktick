@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.tktick.annotation.Validator;
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.form.LoginForm;
 import com.tktick.bean.model.ResultModel;
@@ -47,9 +49,9 @@ public class SignController extends WebBaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/session.json", method = RequestMethod.POST)
-	public ResultModel session(@Valid LoginForm form, BindingResult br){
-		ResultModel model = resultErrors(br);
-		if(model != null) return model;
+	@Validator
+	public ResultModel session(@Valid LoginForm form, BindingResult binding){
+		ResultModel model = null;
 		String res = userService.valiLoginUser(request, response, form);
 		if(res == null){
 			System.err.println("登录成功");
