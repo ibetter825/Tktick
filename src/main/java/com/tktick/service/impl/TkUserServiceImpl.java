@@ -10,10 +10,12 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.constant.CacheConstant;
+import com.tktick.bean.entity.TkSet;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.entity.TkUserInfo;
 import com.tktick.bean.form.LoginForm;
-import com.tktick.dao.TkUserDao;
+import com.tktick.dao.mapper.TkSetMapper;
+import com.tktick.dao.repository.TkUserRepository;
 import com.tktick.service.TkUserService;
 import com.tktick.utils.DateUtil;
 import com.tktick.utils.Md5Util;
@@ -24,7 +26,9 @@ import com.tktick.utils.WebUtil;
 public class TkUserServiceImpl implements TkUserService {
 
 	@Autowired
-	private TkUserDao userDao;
+	private TkUserRepository userDao;
+	@Autowired
+	private TkSetMapper userMapper;
 	
 	public TkUser getTkUserByUsername(String username) {
 		return userDao.selectUserByUsername(username);
@@ -39,6 +43,8 @@ public class TkUserServiceImpl implements TkUserService {
 	
 	@Override
 	public String valiLoginUser(HttpServletRequest request, HttpServletResponse response, LoginForm form) {
+		TkSet u = userMapper.selectByPrimaryKey(1);
+		System.err.println("MyBatis电话号码："+u.getSetDesc());
 		//判断验证码是否出错
 		String captchaString = WebUtil.getCookieValueByName(request, AuthConstant.COOKIE_CAPTCHA_NAME);
 		if(!Md5Util.md5(form.getCaptcha().toUpperCase() + AuthConstant.COOKIE_CAPTCHA_SALT).equals(captchaString))

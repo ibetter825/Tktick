@@ -98,7 +98,40 @@
 	    <groupId>commons-collections</groupId>
 	    <artifactId>commons-collections</artifactId>
 	</dependency>
-		
+	
+	<!-- mybatis start -->
+    <!-- 加入mybatis基础依赖  https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.4.0</version>
+        <exclusions>
+               <!--解决jar包冲突-->
+               <exclusion>
+                   <groupId>javax.persistence</groupId>
+                   <artifactId>persistence-api</artifactId>
+               </exclusion>
+           </exclusions>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+    <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+    <!-- 引入mybatis分页插件 -->
+    <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>4.1.1</version>
+    </dependency>
+    <!-- 引入通用Mapper -->
+	<dependency>
+	    <groupId>tk.mybatis</groupId>
+	    <artifactId>mapper</artifactId>
+	    <version>3.3.7</version>
+	</dependency>
+	<!-- mybatis end -->
     <!-- 加入mysql依赖 https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>
         <groupId>mysql</groupId>

@@ -1,26 +1,19 @@
 package com.tktick.bean.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
- * 用户
- * onetoone共享主键
- * http://blog.csdn.net/cao_j/article/details/18217147
- * 配置了JPA的多对多等注解，不能用来创建MyBatis Mapper
+ *
  * @author user
  *
  */
 @Entity
 @Table(name = "tk_user")
-public class TkUser extends BaseEntity {
+public class TkMUser extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
@@ -30,7 +23,6 @@ public class TkUser extends BaseEntity {
 	private Long userPhone;
 	private String userEmail;
 	private Short userState;
-	private TkUserInfo info;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,13 +67,5 @@ public class TkUser extends BaseEntity {
 	}
 	public void setUserState(Short userState) {
 		this.userState = userState;
-	}
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @PrimaryKeyJoinColumn
-	public TkUserInfo getInfo() {
-		return info;
-	}
-	public void setInfo(TkUserInfo info) {
-		this.info = info;
 	}
 }
