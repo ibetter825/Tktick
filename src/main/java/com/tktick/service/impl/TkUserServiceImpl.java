@@ -60,14 +60,15 @@ public class TkUserServiceImpl implements TkUserService {
 		if(user != null){
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
+			TkUserInfo info = user.getInfo();
+			long time = DateUtil.getDateByTime();
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
 				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : -1;//保存14天 或者 0
-				long time = DateUtil.getDateByTime();
 				Integer userId = user.getUserId();
 				//修改Info信息
-				TkUserInfo info = user.getInfo();
 				info.setLoginIp(WebUtil.getIpAddr(request));
 				info.setLoginTime(time);
+				info.setErrCount((short) 0);
 				userDao.save(user);
 				
 				String userLoginInfo = SecretUtil.encrypt(userId + "@" + time + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + pwd + "@" + salt + "@" + time + "@" + maxAge));
@@ -77,8 +78,16 @@ public class TkUserServiceImpl implements TkUserService {
 				//将sessionId存放在缓存中
 				Cache cache = CacheManager.getInstance().getCache(CacheConstant.LOGIN_USER_INFO_CACHE_NAME);
 				cache.put(new Element(userId, user));
-			}else
+			}else{
 				res = AuthConstant.WRONG_LOGIN_MSG;
+				short ec = info.getErrCount();//登录错误次数
+				ec++;
+				if(ec >= 3)//登录出错
+					info.setStopTime(time);//限制登录开始时间
+				else
+					info.setErrCount(ec);
+				userDao.save(user);
+			}
 		}else
 			res = res == null ? AuthConstant.USER_NOT_FOUND_MSG : res;
 		return res;
