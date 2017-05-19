@@ -251,7 +251,7 @@ $(function(){
 						$('#captcha-img').attr('src', '/sign/captcha.jpg?'+new Date().getTime());
 						var errs = json.data['errors'];
 						if(!errs)
-							layer.msg(json.msg, {time:1000, icon:5, offset: '124px'});
+							layer.msg(json.msg, {time:2000, icon:5, offset: '124px'});
 						else{
 							for(var e in errs){
 								$('#'+e).validationEngine('showPrompt', '* ' + errs[e], 'error');
@@ -267,22 +267,22 @@ $(function(){
 		      	  if(status){
 			      		switch (status) {
 			      		case 403:
-			      			layer.msg("访问被拒绝", {icon:5, offset: '124px'});
+			      			layer.msg("访问被拒绝", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		case 404:
-			      			layer.msg("访问地址不存在或已删除", {icon:5, offset: '124px'});
+			      			layer.msg("访问地址不存在或已删除", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		case 500:
-			      			layer.msg("操作出错", {icon:5, offset: '124px'});
+			      			layer.msg("操作出错", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		case 504:
-			      			layer.msg("请求超时", {icon:5, offset: '124px'});
+			      			layer.msg("请求超时", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		case 0:
-			      			layer.msg("网络异常", {icon:5, offset: '124px'});
+			      			layer.msg("网络异常", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		default:
-			      			layer.msg("错误代码["+status+"]", {icon:5, offset: '124px'});
+			      			layer.msg("错误代码["+status+"]", {icon:5, time:2000, offset: '124px'});
 			      			break;
 			      		}
 		      	  }

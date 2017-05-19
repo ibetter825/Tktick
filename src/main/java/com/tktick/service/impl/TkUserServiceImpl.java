@@ -58,10 +58,22 @@ public class TkUserServiceImpl implements TkUserService {
 				break;
 		}
 		if(user != null){
+			long time = DateUtil.getDateByTime();
+			TkUserInfo info = user.getInfo();
+			short ec = info.getErrCount();//登录错误次数
+			if(ec >= 3){//登录出错的次数超过三次，限制登录24小时
+				long stopTime = info.getStopTime();
+				int stopExpires = AuthConstant.LOGIN_ERR_STOP_EXPIRES;
+				long stop = stopTime + stopExpires;
+				
+				if(stop > time){
+					res = AuthConstant.USER_LOCKED_MSG + "[" + ((stop - time) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) + "]小时后解锁";//账户被锁定，12小时，
+					return res;
+				}
+			}
 			String salt = user.getUserSalt();
 			String pwd = user.getUserPwd();
-			TkUserInfo info = user.getInfo();
-			long time = DateUtil.getDateByTime();
+			
 			if(Md5Util.md5(form.getPassword() + salt).equals(pwd)){
 				int maxAge = new Short((short) 1).equals(form.getRemember()) ? 	AuthConstant.COOKIE_VALIDITY_SECONDS : -1;//保存14天 或者 0
 				Integer userId = user.getUserId();
@@ -80,9 +92,8 @@ public class TkUserServiceImpl implements TkUserService {
 				cache.put(new Element(userId, user));
 			}else{
 				res = AuthConstant.WRONG_LOGIN_MSG;
-				short ec = info.getErrCount();//登录错误次数
 				ec++;
-				if(ec >= 3)//登录出错
+				if(ec > 3)//登录出错次数
 					info.setStopTime(time);//限制登录开始时间
 				else
 					info.setErrCount(ec);

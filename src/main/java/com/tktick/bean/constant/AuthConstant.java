@@ -10,6 +10,11 @@ public class AuthConstant {
 	 */
 	public final static String COOKIE_CAPTCHA_NAME = "TKSIGNTOKEN";
 	/**
+	 * 登录限制过期时间
+	 * 12小时
+	 */
+	public final static int LOGIN_ERR_STOP_EXPIRES = 1000 * 60 * 60 * 12; 
+	/**
 	 * 验证码cookie path
 	 */
 	public final static String COOKIE_CAPTCHA_PATH = "/sign";
