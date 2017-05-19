@@ -13,12 +13,12 @@ import com.tktick.dao.BaseRepository;
  */
 @Repository
 public interface TkUserRepository extends BaseRepository<TkUser, Integer> {
-	@Query("from TkUser t where userName = :userName and userState <> -1")
+	@Query("from TkUser u, TkUserInfo i where u.userId = i.userId and u.userName = :userName and userState <> -1")
 	public TkUser selectUserByUsername(@Param(value = "userName") String userName);
 	
-	@Query("from TkUser t where userPhone = :userPhone and userState <> -1")
+	@Query("from TkUser u, TkUserInfo i where u.userId = i.userId and u.userPhone = :userPhone and u.userState <> -1")
 	public TkUser selectUserByPhone(@Param(value = "userPhone") Long userPhone);
 	
-	@Query("from TkUser t where userEmail = :userEmail and userState <> -1")
+	@Query("from TkUser u, TkUserInfo i where u.userId = i.userId and u.userEmail = :userEmail and userState <> -1")
 	public TkUser selectUserByEmail(@Param(value = "userEmail") String userEmail);
 }
