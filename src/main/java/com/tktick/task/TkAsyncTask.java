@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.hankcs.hanlp.HanLP;
 import com.tktick.bean.entity.TkArticle;
 import com.tktick.bean.entity.TkTag;
-import com.tktick.dao.repository.TkTagArtRepository;
 import com.tktick.dao.repository.TkTagRepository;
 import com.tktick.utils.StringUtil;
 
@@ -32,6 +31,7 @@ public class TkAsyncTask {
         for (String key : keywordList) {
         	tag = new TkTag();
         	tag.setTagNm(key);
+        	tag.setArtNum(0);
 			tags.add(tag);
 		}
         //保存或者修改tag
