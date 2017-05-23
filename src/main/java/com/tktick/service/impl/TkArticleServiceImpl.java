@@ -14,6 +14,7 @@ public class TkArticleServiceImpl implements TkArticleService {
 	
 	@Override
 	public TkArticle saveArticle(TkArticle article) {
+		//自动提取关键词
 		return articleDao.save(article);
 	}
 }

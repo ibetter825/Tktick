@@ -28,6 +28,7 @@ public class TestArticleService{
 	@Test
 	public void saveArticle() {
 		TkArticle article = null;
+		System.err.println("test service");
 		articleDao.save(article);
 	}
 }

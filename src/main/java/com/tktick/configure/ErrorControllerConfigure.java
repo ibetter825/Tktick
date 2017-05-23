@@ -1,10 +1,7 @@
 package com.tktick.configure;
 
 import java.util.List;
-
 import javax.servlet.Servlet;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -33,7 +30,7 @@ import com.tktick.controller.MyBasicErrorController;
 @AutoConfigureBefore(WebMvcAutoConfiguration.class)
 @EnableConfigurationProperties(ResourceProperties.class)
 public class ErrorControllerConfigure {
-	@Autowired(required = false)
+	//@Autowired(required = false)//加上这个junit会报错
     private List<ErrorViewResolver> errorViewResolvers;
     private final ServerProperties serverProperties;
 
