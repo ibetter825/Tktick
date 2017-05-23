@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import com.tktick.Application;
 import com.tktick.bean.entity.TkArticle;
-import com.tktick.dao.repository.TkArticleRepository;
+import com.tktick.dao.mapper.TkArticleMapper;
 
 /**
  * 文章类
@@ -23,12 +23,11 @@ import com.tktick.dao.repository.TkArticleRepository;
 public class TestArticleService{
 	
 	@Autowired
-	private TkArticleRepository articleDao;
+	private TkArticleMapper articleDao;
 	
 	@Test
 	public void saveArticle() {
 		TkArticle article = null;
 		System.err.println("test service");
-		articleDao.save(article);
 	}
 }

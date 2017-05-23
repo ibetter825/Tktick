@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     	        return mav;
     		}
 		} finally {
-			logger.error("GlobalExceptionHandler.class", e.getMessage());
+			logger.error("GlobalExceptionHandler.class", e);
 		}
         return null;
     }

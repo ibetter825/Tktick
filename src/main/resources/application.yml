@@ -26,6 +26,12 @@ spring:
         encoding.charset: UTF-8
         encoding.enable: true
         encoding.force: true
+    task:
+        pool:
+            corePoolSize: 10
+            maxPoolSize: 200
+            keepAliveSeconds: 60
+            queueCapacity: 10
     #配置freemarker
     freemarker:
         allowRequestOverride: false

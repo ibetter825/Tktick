@@ -853,7 +853,7 @@ public class StringUtil {
      * @return
      ************************************************************************* 
      */
-    public static String removeHTMLLableExe(String str) {
+    public static String removeHTMLLabelExe(String str) {
         str = stringReplace(str, ">\\s*<", "><");
         str = stringReplace(str, "&nbsp;", " ");// 替换空格
         str = stringReplace(str, "<br ?/?>", "\n");// 去<br><br />
@@ -872,7 +872,7 @@ public class StringUtil {
      *            源字符串
      * @return 目标字符串
      */
-    public static String removeHTMLLable(String str) {
+    public static String removeHTMLLabel(String str) {
         str = stringReplace(str, "\\s", "");// 去掉页面上看不到的字符
         str = stringReplace(str, "<br ?/?>", "\n");// 去<br><br />
         str = stringReplace(str, "<([^<>]+)>", "");// 去掉<>内的字符
@@ -888,7 +888,7 @@ public class StringUtil {
      *            源字符串
      * @return 目标字符串
      */
-    public static String removeOutHTMLLable(String str) {
+    public static String removeOutHTMLLabel(String str) {
         str = stringReplace(str, ">([^<>]+)<", "><");
         str = stringReplace(str, "^([^<>]+)<", "<");
         str = stringReplace(str, ">([^<>]+)$", ">");

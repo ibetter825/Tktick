@@ -6,11 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.dao.BaseRepository;
 
-/**
- * JpaSpecificationExecutor 方便分页
- * @author user
- *
- */
 @Repository
 public interface TkUserRepository extends BaseRepository<TkUser, Integer> {
 	@Query("from TkUser u, TkUserInfo i where u.userId = i.userId and u.userName = :userName and userState <> -1")

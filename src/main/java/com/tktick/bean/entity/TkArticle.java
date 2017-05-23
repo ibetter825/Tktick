@@ -1,15 +1,10 @@
 package com.tktick.bean.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 文章表
@@ -21,16 +16,16 @@ import org.hibernate.validator.constraints.NotBlank;
 public class TkArticle extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private Long artId;
-	@NotBlank
+	//@NotBlank
 	private String artTitle;
 	private String artDesc;
-	private TkArticleClz clz;
-	private TkUser user;
+	private Integer clzId;
+	private Integer userId;
 	private Long addTime;
 	private Long editTime;
 	private Short artState;
 	private Short artAuth;
-	@NotBlank
+	//@NotBlank
 	private String artCont;
 	private String artImgs;
 	
@@ -54,21 +49,17 @@ public class TkArticle extends BaseEntity {
 	public void setArtDesc(String artDesc) {
 		this.artDesc = artDesc;
 	}
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="clz_id")
-	public TkArticleClz getClz() {
-		return clz;
+	public Integer getClzId() {
+		return clzId;
 	}
-	public void setClz(TkArticleClz clz) {
-		this.clz = clz;
+	public void setClzId(Integer clzId) {
+		this.clzId = clzId;
 	}
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
-	public TkUser getUser() {
-		return user;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUser(TkUser user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public Long getAddTime() {
 		return addTime;
