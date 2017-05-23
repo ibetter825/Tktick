@@ -18,6 +18,7 @@ import com.tktick.bean.constant.AuthConstant;
 import com.tktick.bean.constant.WebConstant;
 import com.tktick.bean.enums.ResultMessageEnum;
 import com.tktick.bean.model.ResultModel;
+import com.tktick.exception.TkAuthenticationException;
 import com.tktick.exception.TkValidationException;
 import com.tktick.utils.WebUtil;
 
@@ -42,13 +43,17 @@ public class GlobalExceptionHandler {
         		exceptionHandle(resp, e);
     		else{
     	        ModelAndView mav = new ModelAndView();
-    	        mav.addObject("exception", e);
-    	        mav.addObject("url", req.getRequestURL());
-    	        mav.setViewName(DEFAULT_ERROR_PATH+"/500");
+    	        if(e instanceof TkAuthenticationException){
+    	        	mav.setViewName("/web/sign");
+    	        }else{
+	    	        mav.addObject("exception", e);
+	    	        mav.addObject("url", req.getRequestURL());
+	    	        mav.setViewName(DEFAULT_ERROR_PATH+"/500");
+    	        }
     	        return mav;
     		}
 		} finally {
-			logger.error("GlobalExceptionHandler.class", e);
+			logger.error("GlobalExceptionHandler.class", e.getMessage());
 		}
         return null;
     }

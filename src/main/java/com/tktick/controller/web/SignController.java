@@ -40,8 +40,10 @@ public class SignController extends WebBaseController {
 	 * @return
 	 */
 	@RequestMapping("/out.html")
-	public String out(){
-		return "退出成功";
+	public ModelAndView out(){
+		//清空cookie
+		WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, null, 0);
+		return new ModelAndView("redirect:/");
 	}
 	
 	/**
@@ -70,6 +72,7 @@ public class SignController extends WebBaseController {
 	 */
 	@RequestMapping("/captcha.jpg")
 	public void captcha() throws IOException{
+		//需要限制客户端的请求次数，不能无休止的请求
 		response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
