@@ -33,7 +33,7 @@ public class TkArticleServiceImpl implements TkArticleService {
 		//articleMapper.insertUseGeneratedKeys(article);//主键名必须为id保存后才能获取自增的id值
 		articleMapper.insertSelectiveUseGeneratedKeys(article);
 		System.err.println("生成的文章ID:" + article.getId());
-		task.doTaskArtTag(article);
+		task.doTaskArtTag(article);//自动提取关键词比较耗时，所以另开线程去做，然后update
 		return article;
 	}
 	

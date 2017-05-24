@@ -17,15 +17,15 @@ public class TkTag extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer tagId;
+	private Integer id;
 	private String tagNm;
 	private Integer artNum;
 	
 	public Integer getTagId() {
-		return tagId;
+		return id;
 	}
-	public void setTagId(Integer tagId) {
-		this.tagId = tagId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getTagNm() {
 		return tagNm;

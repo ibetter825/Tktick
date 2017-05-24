@@ -29,7 +29,8 @@ public class TkArticle extends BaseEntity {
 	private Short artAuth;
 	//@NotBlank
 	private String artCont;
-	private String artTags;
+	private String artTagNms;
+	private String artTagIds;
 	private String artImgs;
 	
 	public Long getId() {
@@ -92,11 +93,17 @@ public class TkArticle extends BaseEntity {
 	public void setArtCont(String artCont) {
 		this.artCont = artCont;
 	}
-	public String getArtTags() {
-		return artTags;
+	public String getArtTagNms() {
+		return artTagNms;
 	}
-	public void setArtTags(String artTags) {
-		this.artTags = artTags;
+	public void setArtTagNms(String artTagNms) {
+		this.artTagNms = artTagNms;
+	}
+	public String getArtTagIds() {
+		return artTagIds;
+	}
+	public void setArtTagIds(String artTagIds) {
+		this.artTagIds = artTagIds;
 	}
 	public String getArtImgs() {
 		return artImgs;
