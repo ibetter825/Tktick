@@ -33,7 +33,7 @@ public class TkAsyncTask {
     	if(isEmpty){//新增文章时，没有填入标签
         	String text = StringUtil.removeHTMLLabelExe(article.getArtCont());
 	        int lth = text.length();
-	        int size = lth > 5000 ? 5 : (lth > 3000 ? 3 : lth > 2000 ? 2 : 2);
+	        int size = lth > 5000 ? 5 : (lth > 3000 ? 4 : lth > 2000 ? 3 : 2);
     		//如果没有填入标签，自动筛选出关键词
 	        tagNmList = HanLP.extractKeyword(text, size);
 	        tagIdList = new ArrayList<String>();
@@ -46,10 +46,10 @@ public class TkAsyncTask {
     	//至于该标签的引用数量，通过触发器完成
     	//还需要将将tag与art关联tk_tag_art中
     	TkTag tag = null;
-    	if(isEmpty){
-    		for (int i = 0, l = tagNmList.size(); i < l; i++) {
-    			//需要存入数据库
-    			tag = tagMapper.selectByName(tagNmList.get(i));
+		for (int i = 0, l = tagNmList.size(); i < l; i++) {
+			//需要存入数据库
+			if(isEmpty || (!isEmpty && "0".equals(tagIdList.get(0)))){
+				tag = tagMapper.selectByName(tagNmList.get(i));
     			if(tag == null){
     				tag = new TkTag();
     				tag.setTagNm(tagNmList.get(i));
@@ -57,19 +57,7 @@ public class TkAsyncTask {
     			}
     			tagIdList.add(tag.getTagId().toString());
 			}
-    	} else {
-	    	for (int i = 0, l = tagNmList.size(); i < l; i++) {
-	    		if("0".equals(tagIdList.get(0))){//需要存入数据库
-	    			tag = tagMapper.selectByName(tagNmList.get(i));
-	    			if(tag == null){
-	    				tag = new TkTag();
-	    				tag.setTagNm(tagNmList.get(i));
-	    				tagMapper.insertSelectiveUseGeneratedKeys(tag);
-	    			}
-	    			tagIdList.set(i, tag.getTagId().toString());
-	    		}
-			}
-    	}
+		}
     	
     	if(isEmpty){
     		art = new TkArticle();
