@@ -44,11 +44,12 @@ public class ArticleController extends WebBaseController {
 	/**
 	 * 保存新的文章
 	 * @return
+	 * @throws InterruptedException 
 	 */
 	@RequestMapping("/save.json")
 	@Permission
 	@Validator
-	public ResultModel save(@Valid TkArticle article, BindingResult binding){
+	public ResultModel save(@Valid TkArticle article, BindingResult binding) throws InterruptedException{
 		ResultModel model = new ResultModel();
 		
 		article.setArtTitle("张掖");
@@ -61,7 +62,7 @@ public class ArticleController extends WebBaseController {
 		article.setEditTime(time);
 		
 		articleService.saveArticle(article);
-		System.err.println(article.getArtId());
+		System.err.println(article.getId());
 		return model;
 	}
 }

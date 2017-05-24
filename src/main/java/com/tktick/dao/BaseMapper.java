@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.tktick.configure.mybatis.mapper.MyBaseMapper;
+
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
 
@@ -16,7 +18,7 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * @author user
  * @param <T>
  */
-public interface BaseMapper<T> extends Mapper<T>,MySqlMapper<T> {
+public interface BaseMapper<T> extends Mapper<T>,MySqlMapper<T>,MyBaseMapper<T> {
 	/**
 	 * 传入sql查询结果 - mine
 	 * @param sql

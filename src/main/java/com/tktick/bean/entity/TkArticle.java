@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Table(name = "tk_article")
 public class TkArticle extends BaseEntity {
 	private static final long serialVersionUID = 1L;
-	private Long artId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	//@NotBlank
 	private String artTitle;
 	private String artDesc;
@@ -27,15 +29,14 @@ public class TkArticle extends BaseEntity {
 	private Short artAuth;
 	//@NotBlank
 	private String artCont;
+	private String artTags;
 	private String artImgs;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getArtId() {
-		return artId;
+	public Long getId() {
+		return id;
 	}
-	public void setArtId(Long artId) {
-		this.artId = artId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getArtTitle() {
 		return artTitle;
@@ -90,6 +91,12 @@ public class TkArticle extends BaseEntity {
 	}
 	public void setArtCont(String artCont) {
 		this.artCont = artCont;
+	}
+	public String getArtTags() {
+		return artTags;
+	}
+	public void setArtTags(String artTags) {
+		this.artTags = artTags;
 	}
 	public String getArtImgs() {
 		return artImgs;

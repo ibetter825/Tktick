@@ -1,37 +1,39 @@
 package com.tktick.service.impl;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hankcs.hanlp.HanLP;
 import com.tktick.bean.entity.TkArticle;
-import com.tktick.dao.repository.TkArticleRepository;
+import com.tktick.dao.mapper.TkArticleMapper;
 import com.tktick.service.TkArticleService;
 import com.tktick.task.TkAsyncTask;
 
 @Service
 public class TkArticleServiceImpl implements TkArticleService {
-
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(TkArticleServiceImpl.class);
 	@Autowired
 	private TkAsyncTask task;
 	@Autowired
-	private TkArticleRepository articleRepository;
+	private TkArticleMapper articleMapper;
 	
 	@Override
-	public TkArticle saveArticle(TkArticle article) {
+	public TkArticle saveArticle(TkArticle article) throws InterruptedException {
 		//自动提取摘要,看是通过这种方法提取还是直接截取还是直接截取前200个字符，这种比较费时间
 		//if(StringUtils.isEmpty(article.getArtDesc()))
 			//article.setArtDesc(StringUtils.join(HanLP.extractSummary(article.getArtText(), 5), ","));
 		//自动提取关键词
 		//提取的关键词需要存入到另外一张表中，另开线程工作，工作完成以后，修改文章与关键词的关联表
 		//根据文章的长度来确定应该提取的关键词的数量
-		articleRepository.save(article);
-		System.err.println("生成的文章ID:" + article.getArtId());
-		try {
-			task.doTaskArtTag(article);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		//articleRepository.save(article);
+		//articleMapper.insertUseGeneratedKeys(article);//主键名必须为id保存后才能获取自增的id值
+		articleMapper.insertSelectiveUseGeneratedKeys(article);
+		System.err.println("生成的文章ID:" + article.getId());
+		task.doTaskArtTag(article);
 		return article;
 	}
 	
