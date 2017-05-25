@@ -84,8 +84,12 @@ public class TkUserServiceImpl implements TkUserService {
 				userDao.save(user);
 				
 				String userLoginInfo = SecretUtil.encrypt(userId + "@" + time + "@" + maxAge + "@" + Md5Util.md5(userId + "@" + pwd + "@" + salt + "@" + time + "@" + maxAge));
-				long expires = DateUtil.getDateByTime() + maxAge * 1000;
-				WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, expires, maxAge);
+				if(WebUtil.getBrowserName(request).equals("webkit"))
+					WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, maxAge);
+				else{
+					long expires = DateUtil.getDateByTime() + maxAge * 1000;
+					WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, expires, maxAge);
+				}
 				//登录成功
 				//将sessionId存放在缓存中
 				Cache cache = CacheManager.getInstance().getCache(CacheConstant.LOGIN_USER_INFO_CACHE_NAME);
