@@ -53,7 +53,8 @@ public class GlobalExceptionHandler {
     	        return mav;
     		}
 		} finally {
-			logger.error("GlobalExceptionHandler.class", e);
+			if(!(e instanceof TkAuthenticationException))
+				logger.error("GlobalExceptionHandler.class", e);
 		}
         return null;
     }
