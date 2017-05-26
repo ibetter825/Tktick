@@ -57,7 +57,7 @@ public class PreposeInterceptor implements HandlerInterceptor {
 						if(maxAge != -1)
 							maxAge = (int) (maxAge - (rtime - otime) / 1000);//maxAge-(当前时间戳-老时间戳)/1000得到秒数
 						if(WebUtil.getBrowserName(request).equals("webkit"))
-							WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, userLoginInfo, maxAge);
+							WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, newCookieUserInfo, maxAge);
 						else{
 							long expires = DateUtil.getDateByTime() + maxAge;
 							WebUtil.addCookie(response, null, null, true, AuthConstant.COOKIE_USER_INFO, newCookieUserInfo, expires, maxAge);
