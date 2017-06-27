@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import com.hankcs.hanlp.HanLP;
 import com.tktick.bean.entity.TkArticle;
 import com.tktick.bean.entity.TkTag;
 import com.tktick.dao.mapper.TkArticleMapper;
@@ -37,7 +36,7 @@ public class TkAsyncTask {
 	        int lth = text.length();
 	        int size = lth > 5000 ? 5 : (lth > 3000 ? 4 : lth > 2000 ? 3 : 2);
     		//如果没有填入标签，自动筛选出关键词
-	        tagNmList = HanLP.extractKeyword(text, size);
+	        tagNmList = null;//HanLP.extractKeyword(text, size);
 	        tagIdList = new ArrayList<String>();
     	}else{
 			tagNmList = Arrays.asList(artTagNms.split(","));
