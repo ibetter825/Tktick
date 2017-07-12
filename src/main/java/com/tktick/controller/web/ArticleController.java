@@ -1,5 +1,7 @@
 package com.tktick.controller.web;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -7,10 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.tktick.annotation.Permission;
 import com.tktick.annotation.Validator;
 import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.model.PageModel;
 import com.tktick.bean.model.ResultModel;
+import com.tktick.bean.rq.PagerRq;
+import com.tktick.bean.rq.QueryRq;
 import com.tktick.service.TkArticleService;
 import com.tktick.utils.DateUtil;
 
@@ -64,5 +72,24 @@ public class ArticleController extends WebBaseController {
 		articleService.saveArticle(article);
 		System.err.println(article.getId());
 		return model;
+	}
+	
+	/**
+	 * 分页查询文章
+	 * @param page
+	 * @param query
+	 * @return
+	 */
+	@RequestMapping("/list.json")
+	public PageModel list(PagerRq page, QueryRq query){
+		/*
+		 * 查询排序提供两种方法
+		 * 1, grid插件使用page中的sort, order字段排序
+		 * 2, 自定义查询使用query对象中的方法
+		*/
+		Page<Map<?, ?>> pager = PageHelper.startPage(page.getPage(), page.getSize());//分页插件
+		PageHelper.orderBy(page.getOrder());
+		articleService.queryArticleList(query);
+		return new PageModel(pager);
 	}
 }

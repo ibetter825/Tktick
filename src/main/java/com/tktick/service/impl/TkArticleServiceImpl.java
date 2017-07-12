@@ -1,12 +1,14 @@
 package com.tktick.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.rq.QueryRq;
 import com.tktick.dao.mapper.TkArticleMapper;
 import com.tktick.service.TkArticleService;
 import com.tktick.task.TkAsyncTask;
@@ -34,6 +36,11 @@ public class TkArticleServiceImpl implements TkArticleService {
 		System.err.println("生成的文章ID:" + article.getId());
 		//task.doTaskArtTag(article);//自动提取关键词比较耗时，所以另开线程去做，然后update
 		return article;
+	}
+	
+	@Override
+	public List<Map<?, ?>> queryArticleList(QueryRq rq) {
+		return articleMapper.selectWithParams(rq.getQrq());
 	}
 	
 	public static void main(String[] args) {

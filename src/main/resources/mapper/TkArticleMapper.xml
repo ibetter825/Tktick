@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.tktick.dao.mapper.TkArticleMapper" >
+	<sql id="baseColumnList">
+		id, art_title, art_desc, clz_id, user_id, add_time, edit_time, art_state, art_auth, art_cont, art_tag_nms, art_tag_ids, art_imgs
+	</sql>
+    <select id="selectWithParams" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="baseColumnList"/> from tk_article 
+    	<trim prefix="WHERE" prefixOverrides="AND|OR">
+    		<if test="id != null and id != ''">
+	    		id = #{id, jdbcType=BIGINT}
+	    	</if>
+	    	<if test="art_title != null and art_title != ''">
+	    		art_title like concat('%', #{art_title, jdbcType=VARCHAR}, '%')
+	    	</if>
+	    	<if test="clz_id != null and clz_id != ''">
+	    		clz_id = #{clz_id, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="user_id != null and user_id != ''">
+	    		and user_id = #{user_id, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="art_state != null and art_state != ''">
+	    		and art_state = #{art_state, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="art_state == null or art_state == ''">
+	    		and art_state <![CDATA[<>]]> -1
+	    	</if>
+    	</trim>
+    </select>
+</mapper>  
