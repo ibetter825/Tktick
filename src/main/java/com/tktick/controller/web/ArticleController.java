@@ -87,7 +87,7 @@ public class ArticleController extends WebBaseController {
 		 * 1, grid插件使用page中的sort, order字段排序
 		 * 2, 自定义查询使用query对象中的方法
 		*/
-		Page<Map<?, ?>> pager = PageHelper.startPage(page.getPage(), page.getSize());//分页插件
+		Page<Map<?, ?>> pager = PageHelper.startPage(page.getPage(), page.getSize(), false);//分页插件
 		PageHelper.orderBy(page.getOrder());
 		articleService.queryArticleList(query);
 		return new PageModel(pager);
