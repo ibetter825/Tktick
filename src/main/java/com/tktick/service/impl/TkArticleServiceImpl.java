@@ -55,7 +55,12 @@ public class TkArticleServiceImpl implements TkArticleService {
 		else
 			return articleMapper.selectOneById(id);
 	}
-
+	
+	@Override
+	public List<Map<?, ?>> queryComtsAndReplies(Map<?, ?> params) {
+		return articleMapper.selectComtsAndReplies(params);
+	}
+	
 	@Override
 	public boolean removeArticle(Long id) {
 		return articleMapper.deleteByPrimaryKey(id) == 1;

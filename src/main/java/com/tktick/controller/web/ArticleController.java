@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.Maps;
 import com.tktick.annotation.Permission;
 import com.tktick.annotation.Validator;
 import com.tktick.bean.entity.TkArticle;
@@ -99,7 +100,7 @@ public class ArticleController extends WebBaseController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(path = "/del/{id}.json")
+	@RequestMapping(path = "/del/{id}.json", method = RequestMethod.POST)
 	@Permission
 	public ResultModel del(@PathVariable("id") Long id){
 		//只能文章的作者才能删除
@@ -117,5 +118,26 @@ public class ArticleController extends WebBaseController {
 			return new ResultModel();
 		else
 			return new ResultModel(ResultMessageEnum.OPTION_EXCEPTION);
+	}
+	
+	/**
+	 * 根据id分页查询评论以及恢复
+	 * @param id 文章id
+	 * @param page 页码
+	 * @param size 每页大小
+	 * @return
+	 */
+	@RequestMapping("/comts/{id}-{page}-{size}.json")
+	public ResultModel comts(@PathVariable("id") Long id,
+							 @PathVariable("page") Integer page,
+							 @PathVariable("size") Integer size){
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("id", id);
+		params.put("page", page == null ? 0 : page);
+		params.put("size", size == null ? 0 : size);
+		params.put("start", (page - 1) * size);
+		ResultModel model = new ResultModel();
+		model.getData().put("records", articleService.queryComtsAndReplies(params));
+		return model;
 	}
 }

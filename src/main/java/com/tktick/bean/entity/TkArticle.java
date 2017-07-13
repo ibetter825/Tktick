@@ -17,7 +17,7 @@ public class TkArticle extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id;//主键必须为"id"才能在dao中调用insertSelectiveUseGeneratedKeys获取自增值
 	//@NotBlank
 	private String artTitle;
 	private String artDesc;

@@ -33,4 +33,11 @@ public interface TkArticleMapper extends BaseMapper<TkArticle> {
 	 * @return
 	 */
 	public Map<?, ?> selectOneByIdForMap(Long id);
+	/**
+	 * 查询文章的前n条评论，以及每条评论的前五条回复
+	 * 参数包括: id文章id page页码  size每页数据大小 start: (page-1)*size
+	 * @param params
+	 * @return
+	 */
+	public List<Map<?, ?>> selectComtsAndReplies(Map<?, ?> params);
 }

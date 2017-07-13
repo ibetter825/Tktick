@@ -30,4 +30,53 @@
     <select id="selectOneByIdForMap" parameterType="java.util.Map" resultType="java.lang.Long">
     	select <include refid="baseColumnList"/> from tk_article where id = #{id, jdbcType=BIGINT}
     </select>
+    <select id="selectComtsAndReplies" parameterType="java.util.Map" resultType="java.util.Map">
+    	(
+			SELECT
+				r.reply_id id,
+				r.reply_time time,
+				r.reply_cont cont,
+				r.comt_id cid,
+				'' aid,
+				r.user_id uid,
+				2 type
+			FROM
+				tk_reply r
+			WHERE
+				r.comt_id IN (
+					SELECT
+						foo.comt_id
+					FROM
+						(
+							SELECT
+								c.comt_id
+							FROM
+								tk_comment c
+							WHERE
+								c.art_id = #{id, jdbcType=BIGINT}
+							LIMIT #{start, jdbcType=INTEGER},
+							#{size, jdbcType=INTEGER}
+						) AS foo
+				)
+			LIMIT 0,
+			5
+		)
+		UNION ALL
+			(
+				SELECT
+					c.comt_id id,
+					c.comt_time time,
+					c.comt_cont cont,
+					'' cid,
+					c.art_id aid,
+					c.user_id uid,
+					1 type
+				FROM
+					tk_comment c
+				WHERE
+					c.art_id = #{id, jdbcType=BIGINT}
+				LIMIT #{start, jdbcType=INTEGER},
+				#{size, jdbcType=INTEGER}
+			)
+    </select>
 </mapper>  

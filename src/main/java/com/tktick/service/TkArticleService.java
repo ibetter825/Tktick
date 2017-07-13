@@ -34,6 +34,12 @@ public interface TkArticleService {
 	 */
 	public TkArticle queryArticle(Long id, boolean state);
 	/**
+	 * 查询文章的评论以及每条评论的前5条回复
+	 * @param params
+	 * @return
+	 */
+	public List<Map<?, ?>> queryComtsAndReplies(Map<?, ?> params);
+	/**
 	 * 物理删除文章
 	 * @param id
 	 * @return
