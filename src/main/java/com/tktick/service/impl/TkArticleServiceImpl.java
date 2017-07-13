@@ -40,11 +40,30 @@ public class TkArticleServiceImpl implements TkArticleService {
 	
 	@Override
 	public List<Map<?, ?>> queryArticleList(QueryRq rq) {
-		return articleMapper.selectListWithRq(rq.getQrq());
+		return articleMapper.selectListByRq(rq.getQrq());
 	}
 	
 	@Override
-	public Map<?, ?> queryArticle(Long id) {
-		return null;
+	public Map<?, ?> queryArticleForMap(Long id) {
+		return articleMapper.selectOneByIdForMap(id);
 	}
+	
+	@Override
+	public TkArticle queryArticle(Long id, boolean state) {
+		if(!state)
+			return articleMapper.selectByPrimaryKey(id);
+		else
+			return articleMapper.selectOneById(id);
+	}
+
+	@Override
+	public boolean removeArticle(Long id) {
+		return articleMapper.deleteByPrimaryKey(id) == 1;
+	}
+
+	@Override
+	public boolean modifyArticle(TkArticle article) {
+		return articleMapper.updateByPrimaryKeySelective(article) == 1;
+	}
+	
 }

@@ -4,7 +4,7 @@
 	<sql id="baseColumnList">
 		id, art_title, art_desc, clz_id, user_id, add_time, edit_time, art_state, art_auth, art_cont, art_tag_nms, art_tag_ids, art_imgs
 	</sql>
-    <select id="selectListWithRq" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="selectListByRq" parameterType="java.util.Map" resultType="java.util.Map">
     	select id, art_title, art_desc, clz_id, user_id, add_time, art_tag_nms, art_tag_ids, art_imgs from tk_article 
     	<trim prefix="WHERE" prefixOverrides="AND|OR">
     		<if test="id != null and id != ''">
@@ -26,5 +26,8 @@
 	    		and art_state <![CDATA[<>]]> -1
 	    	</if>
     	</trim>
+    </select>
+    <select id="selectOneByIdForMap" parameterType="java.util.Map" resultType="java.lang.Long">
+    	select <include refid="baseColumnList"/> from tk_article where id = #{id, jdbcType=BIGINT}
     </select>
 </mapper>  

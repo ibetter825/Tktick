@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.tktick.annotation.Permission;
 import com.tktick.annotation.Validator;
 import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.enums.ResultMessageEnum;
 import com.tktick.bean.model.PageModel;
 import com.tktick.bean.model.ResultModel;
 import com.tktick.bean.rq.PagerRq;
@@ -35,7 +36,7 @@ public class ArticleController extends WebBaseController {
 	private TkArticleService articleService;
 	
 	@RequestMapping("/{id}.html")
-	public ModelAndView index(@PathVariable("id") Long artId){
+	public ModelAndView index(@PathVariable("id") Long id){
 		return new ModelAndView("web/article");
 	}
 	
@@ -91,5 +92,30 @@ public class ArticleController extends WebBaseController {
 		PageHelper.orderBy(page.getOrder());
 		articleService.queryArticleList(query);
 		return new PageModel(pager);
+	}
+	
+	/**
+	 * 软删除文章
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(path = "/del/{id}.json")
+	@Permission
+	public ResultModel del(@PathVariable("id") Long id){
+		//只能文章的作者才能删除
+		TkArticle article = articleService.queryArticle(id, true);
+		if(article == null)
+			return new ResultModel(ResultMessageEnum.DATA_NOT_EXISTS);
+		Integer uid = getCurrentUser().getUserId();
+		Integer aid = article.getUserId();
+		if(!uid.equals(aid))//不是文章作者
+			return new ResultModel(ResultMessageEnum.OPTION_FORBIDDEN);
+		article.setUserId(null);
+		article.setArtState((short) -1);
+		boolean res = articleService.modifyArticle(article);
+		if(res)
+			return new ResultModel();
+		else
+			return new ResultModel(ResultMessageEnum.OPTION_EXCEPTION);
 	}
 }

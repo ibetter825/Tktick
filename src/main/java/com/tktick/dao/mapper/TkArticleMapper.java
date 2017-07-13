@@ -2,6 +2,9 @@ package com.tktick.dao.mapper;
 
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import com.tktick.bean.entity.TkArticle;
 import com.tktick.dao.BaseMapper;
 
@@ -11,5 +14,23 @@ public interface TkArticleMapper extends BaseMapper<TkArticle> {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<?, ?>> selectListWithRq(Map<String, Object> rq);
+	public List<Map<?, ?>> selectListByRq(Map<String, Object> rq);
+	/**
+	 * 根据id查询状态不为-1的文章
+	 * @param id
+	 * @param state
+	 * @return
+	 */
+	@Select("select id, user_id from tk_article where id = #{id} and art_state <> -1")
+	@Results(id = "articleResultMap", value = {
+			  @Result(property = "id", column = "id", id = true),
+			  @Result(property = "userId", column = "user_id")
+	})
+	public TkArticle selectOneById(Long id);
+	/**
+	 * 根据ID查询map
+	 * @param id
+	 * @return
+	 */
+	public Map<?, ?> selectOneByIdForMap(Long id);
 }
