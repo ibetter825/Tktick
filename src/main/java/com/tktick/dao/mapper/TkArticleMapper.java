@@ -11,5 +11,5 @@ public interface TkArticleMapper extends BaseMapper<TkArticle> {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<?, ?>> selectWithParams(Map<String, Object> map);
+	public List<Map<?, ?>> selectListWithRq(Map<String, Object> rq);
 }
