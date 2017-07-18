@@ -23,7 +23,7 @@ public class TkArticleServiceImpl implements TkArticleService {
 	private TkArticleMapper articleMapper;
 	
 	@Override
-	public TkArticle saveArticle(TkArticle article) throws InterruptedException {
+	public TkArticle saveArticle(TkArticle article) {
 		//自动提取摘要,看是通过这种方法提取还是直接截取还是直接截取前200个字符，这种比较费时间
 		//if(StringUtils.isEmpty(article.getArtDesc()))
 			//article.setArtDesc(StringUtils.join(HanLP.extractSummary(article.getArtText(), 5), ","));
@@ -39,7 +39,7 @@ public class TkArticleServiceImpl implements TkArticleService {
 	}
 	
 	@Override
-	public List<Map<?, ?>> queryArticleList(QueryRq rq) {
+	public List<Map<?, ?>> queryArticleForMapList(QueryRq rq) {
 		return articleMapper.selectListByRq(rq.getQrq());
 	}
 	

@@ -13,13 +13,13 @@ public interface TkArticleService {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public TkArticle saveArticle(TkArticle article) throws InterruptedException;
+	public TkArticle saveArticle(TkArticle article);
 	/**
 	 * 根据条件查询文章集合
 	 * @param rq
 	 * @return
 	 */
-	public List<Map<?, ?>> queryArticleList(QueryRq rq);
+	public List<Map<?, ?>> queryArticleForMapList(QueryRq rq);
 	/**
 	 * 根据主键查询封装为map的数据
 	 * @param id

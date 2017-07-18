@@ -91,7 +91,7 @@ public class ArticleController extends WebBaseController {
 		*/
 		Page<Map<?, ?>> pager = PageHelper.startPage(page.getPage(), page.getSize(), false);//分页插件
 		PageHelper.orderBy(page.getOrder());
-		articleService.queryArticleList(query);
+		articleService.queryArticleForMapList(query);
 		return new PageModel(pager);
 	}
 	

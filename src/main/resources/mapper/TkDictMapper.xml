@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.tktick.dao.mapper.TkDictMapper" >
+	<sql id="baseColumnList">
+		dict_no as dictNo, dict_fno as dictFno, dict_nm as dictNm, dict_desc as dictDesc, dict_state as dictState, dict_seq as dictSeq, dict_icon as dictIcon, dict_par as dictPar
+	</sql>
+    <select id="selectListByRq" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="baseColumnList"/>
+    	<trim prefix="WHERE" prefixOverrides="AND|OR">
+    		<if test="dictNo != null and dictNo != ''">
+	    		dict_no = #{dictNo, jdbcType=VARCHAR}
+	    	</if>
+	    	<if test="dictFno != null and dictFno != ''">
+	    		dict_fno = #{dictFno, jdbcType=VARCHAR}
+	    	</if>
+	    	<if test="dictState != null and dictState != ''">
+	    		and dict_state = #{dictState, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="dictState == null or dictState == ''">
+	    		and dict_state <![CDATA[<>]]> -1
+	    	</if>
+    	</trim>
+    </select>
+</mapper>  
