@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-07-18 21:10:34
+Date: 2017-07-20 23:16:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -147,7 +147,7 @@ CREATE TABLE `tk_set` (
 -- ----------------------------
 -- Records of tk_set
 -- ----------------------------
-INSERT INTO `tk_set` VALUES ('1', '测试', '0', '0', '0', '测试描述');
+INSERT INTO `tk_set` VALUES ('1', '时光旅行', '0', '0', '0', '时光旅行文章合集，欢迎投稿');
 
 -- ----------------------------
 -- Table structure for tk_set_keeper
@@ -159,11 +159,12 @@ CREATE TABLE `tk_set_keeper` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `kpr_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '管理员分类:  1:创建者 0:其他管理员',
   PRIMARY KEY (`kpr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合集管理员表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='合集管理员表';
 
 -- ----------------------------
 -- Records of tk_set_keeper
 -- ----------------------------
+INSERT INTO `tk_set_keeper` VALUES ('1', '1', '10000', '1');
 
 -- ----------------------------
 -- Table structure for tk_tag

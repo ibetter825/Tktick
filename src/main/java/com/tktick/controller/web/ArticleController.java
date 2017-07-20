@@ -16,12 +16,14 @@ import com.google.common.collect.Maps;
 import com.tktick.annotation.Permission;
 import com.tktick.annotation.Validator;
 import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.entity.TkDeliver;
 import com.tktick.bean.enums.ResultMessageEnum;
 import com.tktick.bean.model.PageModel;
 import com.tktick.bean.model.ResultModel;
 import com.tktick.bean.rq.PagerRq;
 import com.tktick.bean.rq.QueryRq;
 import com.tktick.service.TkArticleService;
+import com.tktick.service.TkDeliverService;
 import com.tktick.utils.DateUtil;
 
 /**
@@ -35,6 +37,8 @@ public class ArticleController extends WebBaseController {
 	
 	@Autowired
 	private TkArticleService articleService;
+	@Autowired
+	private TkDeliverService deliverService;
 	
 	@RequestMapping("/{id}.html")
 	public ModelAndView index(@PathVariable("id") Long id){
@@ -138,6 +142,25 @@ public class ArticleController extends WebBaseController {
 		params.put("start", (page - 1) * size);
 		ResultModel model = new ResultModel();
 		model.getData().put("records", articleService.queryComtsAndReplies(params));
+		return model;
+	}
+	
+	/**
+	 * 投递文章
+	 * @param setId 合集id
+	 * @param artId 文章id
+	 * @return
+	 */
+	@RequestMapping("/deli/{setId}/{artId}.json")
+	public ResultModel deliver(@PathVariable("setId") Integer setId, @PathVariable("artId") Long artId){
+		TkDeliver deliver = new TkDeliver();
+		deliver.setArtId(artId);
+		deliver.setSetId(setId);
+		deliver.setDverState((short) 0);
+		deliver.setDverTime(DateUtil.getDateByTime());
+		ResultModel model = new ResultModel();
+		if(!deliverService.saveDeliver(deliver))
+			model = new ResultModel(ResultMessageEnum.OPTION_EXCEPTION);
 		return model;
 	}
 }

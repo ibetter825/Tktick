@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * 投递记录表
@@ -17,10 +18,14 @@ public class TkDeliver extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
 	private Integer dverId;
+	@NotNull
 	private Long artId;
+	@NotNull
 	private Integer setId;
 	private Long dverTime;
+	@NotNull
 	private Short dverState;
 	
 	public Integer getDverId() {
