@@ -46,7 +46,7 @@ spring:
         exposeSpringMacroHelpers: true
         preferFileSystemAccess: true
         suffix: .html
-        templateLoaderPath: /view/
+        templateLoaderPath: classpath:/templates/
         settings.templateUpdateDelay: 0
         settings.defaultEncoding: UTF-8
         settings.classicCompatible: true
