@@ -13,17 +13,17 @@ public interface TkDictService {
 	 * @param dict
 	 * @return
 	 */
-	public boolean saveDict(TkDict dict);
+	public boolean save(TkDict dict);
 	/**
 	 * 查询字典列表
 	 * @param rq
 	 * @return
 	 */
-	public List<Map<?, ?>> queryDictForMapList(QueryRq rq);
+	public List<Map<?, ?>> queryForMapList(QueryRq rq);
 	/**
 	 * 根据父菜单查询字典
 	 * @param fno
 	 * @return
 	 */
-	public List<TreeModel> queryDictForTreeListByFno(String fno);
+	public List<TreeModel> queryForTreeListByFno(String fno);
 }

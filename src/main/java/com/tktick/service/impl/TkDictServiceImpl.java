@@ -25,18 +25,18 @@ public class TkDictServiceImpl implements TkDictService {
 	private TkDictMapper dictMapper;
 	
 	@Override
-	public boolean saveDict(TkDict dict) {
+	public boolean save(TkDict dict) {
 		return dictMapper.insert(dict) == 1;
 	}
 
 	@Override
-	public List<Map<?, ?>> queryDictForMapList(QueryRq rq) {
+	public List<Map<?, ?>> queryForMapList(QueryRq rq) {
 		return dictMapper.selectListByRq(rq.getQrq());
 	}
 
 	@Override
-	@Cacheable(value = CacheConstant.DICT_CACHE_NAME, key = "'FNO_'+#fno")
-	public List<TreeModel> queryDictForTreeListByFno(String fno) {
+	@Cacheable(value = CacheConstant.DICT_DATE_CACHE_NAME, key = "'FNO_'+#fno")
+	public List<TreeModel> queryForTreeListByFno(String fno) {
 		List<TkDict> dicts = dictMapper.selectListByFno(fno);
 		return null;
 	}

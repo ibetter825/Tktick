@@ -20,12 +20,12 @@ public class TkArticleClzServiceImpl implements TkArticleClzService {
 	private TkArticleClzMapper clzMapper;
 
 	@Override
-	public boolean saveClz(TkArticleClz clz) {
+	public boolean save(TkArticleClz clz) {
 		return clzMapper.insert(clz) == 1;
 	}
 
 	@Override
-	public List<Map<?, ?>> queryClzForMapList(QueryRq rq) {
+	public List<Map<?, ?>> queryForMapList(QueryRq rq) {
 		return null;
 	}
 }

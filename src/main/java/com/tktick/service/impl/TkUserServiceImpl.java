@@ -26,13 +26,13 @@ public class TkUserServiceImpl implements TkUserService {
 	@Autowired
 	private TkUserRepository userDao;
 	
-	public TkUser getTkUserByUsername(String username) {
+	public TkUser queryByUsername(String username) {
 		return userDao.selectUserByUsername(username);
 	}
 
 	@Override
 	@Cacheable(value = CacheConstant.LOGIN_USER_INFO_CACHE_NAME, key="#userId")
-	public TkUser getTkUserById(Integer userId) {
+	public TkUser queryById(Integer userId) {
 		System.err.println("without cache");
 		return userDao.findOne(userId);
 	}

@@ -11,11 +11,11 @@ public interface TkArticleClzService {
 	 * @param clz
 	 * @return
 	 */
-	public boolean saveClz(TkArticleClz clz);
+	public boolean save(TkArticleClz clz);
 	/**
 	 * 查询分类集合
 	 * @param rq
 	 * @return
 	 */
-	public List<Map<?, ?>> queryClzForMapList(QueryRq rq);
+	public List<Map<?, ?>> queryForMapList(QueryRq rq);
 }

@@ -12,13 +12,13 @@ public interface TkUserService {
 	 * @param username
 	 * @return
 	 */
-	public TkUser getTkUserByUsername(String username);
+	public TkUser queryByUsername(String username);
 	/**
 	 * 通过id查询用户
 	 * @param userId
 	 * @return
 	 */
-	public TkUser getTkUserById(Integer userId);
+	public TkUser queryById(Integer userId);
 	/**
 	 * 登录认证
 	 * 返回错误信息

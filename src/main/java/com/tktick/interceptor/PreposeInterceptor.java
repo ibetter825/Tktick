@@ -46,7 +46,7 @@ public class PreposeInterceptor implements HandlerInterceptor {
 				long rtime = DateUtil.getDateByTime();
 				String cookieUserinfo = userValues[3];
 				
-				TkUser user = userService.getTkUserById(userId);
+				TkUser user = userService.queryById(userId);
 				if(user != null){
 					String dbPwd = user.getUserPwd();
 					String dbSalt = user.getUserSalt();

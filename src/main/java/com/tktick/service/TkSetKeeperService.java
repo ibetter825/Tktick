@@ -8,11 +8,11 @@ public interface TkSetKeeperService {
 	 * @param username
 	 * @return
 	 */
-	public boolean saveKeeper(TkSetKeeper keeper);
+	public boolean save(TkSetKeeper keeper);
 	/**
 	 * 查询合集管理员
 	 * @param keeper
 	 * @return
 	 */
-	public TkSetKeeper queryKeeper(TkSetKeeper keeper);
+	public TkSetKeeper query(TkSetKeeper keeper);
 }

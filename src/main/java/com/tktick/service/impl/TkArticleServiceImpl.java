@@ -23,7 +23,7 @@ public class TkArticleServiceImpl implements TkArticleService {
 	private TkArticleMapper articleMapper;
 	
 	@Override
-	public TkArticle saveArticle(TkArticle article) {
+	public TkArticle save(TkArticle article) {
 		//自动提取摘要,看是通过这种方法提取还是直接截取还是直接截取前200个字符，这种比较费时间
 		//if(StringUtils.isEmpty(article.getArtDesc()))
 			//article.setArtDesc(StringUtils.join(HanLP.extractSummary(article.getArtText(), 5), ","));
@@ -39,17 +39,17 @@ public class TkArticleServiceImpl implements TkArticleService {
 	}
 	
 	@Override
-	public List<Map<?, ?>> queryArticleForMapList(QueryRq rq) {
+	public List<Map<?, ?>> queryForMapList(QueryRq rq) {
 		return articleMapper.selectListByRq(rq.getQrq());
 	}
 	
 	@Override
-	public Map<?, ?> queryArticleForMap(Long id) {
+	public Map<?, ?> queryForMap(Long id) {
 		return articleMapper.selectOneByIdForMap(id);
 	}
 	
 	@Override
-	public TkArticle queryArticle(Long id, boolean state) {
+	public TkArticle query(Long id, boolean state) {
 		if(!state)
 			return articleMapper.selectByPrimaryKey(id);
 		else
@@ -62,12 +62,12 @@ public class TkArticleServiceImpl implements TkArticleService {
 	}
 	
 	@Override
-	public boolean removeArticle(Long id) {
+	public boolean remove(Long id) {
 		return articleMapper.deleteByPrimaryKey(id) == 1;
 	}
 
 	@Override
-	public boolean modifyArticle(TkArticle article) {
+	public boolean modify(TkArticle article) {
 		return articleMapper.updateByPrimaryKeySelective(article) == 1;
 	}
 	

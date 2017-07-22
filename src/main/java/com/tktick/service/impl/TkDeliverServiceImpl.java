@@ -17,12 +17,12 @@ public class TkDeliverServiceImpl implements TkDeliverService {
 	private TkDeliverMapper deliverMapper;
 
 	@Override
-	public boolean saveDeliver(TkDeliver deliver) {
+	public boolean save(TkDeliver deliver) {
 		return deliverMapper.insert(deliver) == 1;
 	}
 
 	@Override
-	public boolean modifyDeliver(TkDeliver deliver) {
+	public boolean modify(TkDeliver deliver) {
 		return deliverMapper.updateByPrimaryKey(deliver) == 1;
 	}
 }

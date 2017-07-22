@@ -8,5 +8,5 @@ public interface TkSetService {
 	 * @param username
 	 * @return
 	 */
-	public boolean saveSet(TkSet set);
+	public boolean save(TkSet set);
 }

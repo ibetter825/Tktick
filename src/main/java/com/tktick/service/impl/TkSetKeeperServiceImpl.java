@@ -17,12 +17,12 @@ public class TkSetKeeperServiceImpl implements TkSetKeeperService {
 	private TkSetKeeperMapper keeperMapper;
 
 	@Override
-	public boolean saveKeeper(TkSetKeeper keeper) {
+	public boolean save(TkSetKeeper keeper) {
 		return keeperMapper.insert(keeper) == 1;
 	}
 
 	@Override
-	public TkSetKeeper queryKeeper(TkSetKeeper keeper) {
+	public TkSetKeeper query(TkSetKeeper keeper) {
 		return keeperMapper.selectOne(keeper);
 	}
 

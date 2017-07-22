@@ -75,7 +75,7 @@ public class ArticleController extends WebBaseController {
 		article.setArtState((short) 1);
 		article.setEditTime(time);
 		
-		articleService.saveArticle(article);
+		articleService.save(article);
 		System.err.println(article.getId());
 		return model;
 	}
@@ -95,7 +95,7 @@ public class ArticleController extends WebBaseController {
 		*/
 		Page<Map<?, ?>> pager = PageHelper.startPage(page.getPage(), page.getSize(), false);//分页插件
 		PageHelper.orderBy(page.getOrder());
-		articleService.queryArticleForMapList(query);
+		articleService.queryForMapList(query);
 		return new PageModel(pager);
 	}
 	
@@ -108,7 +108,7 @@ public class ArticleController extends WebBaseController {
 	@Permission
 	public ResultModel del(@PathVariable("id") Long id){
 		//只能文章的作者才能删除
-		TkArticle article = articleService.queryArticle(id, true);
+		TkArticle article = articleService.query(id, true);
 		if(article == null)
 			return new ResultModel(ResultMessageEnum.DATA_NOT_EXISTS);
 		Integer uid = getCurrentUser().getUserId();
@@ -117,7 +117,7 @@ public class ArticleController extends WebBaseController {
 			return new ResultModel(ResultMessageEnum.OPTION_FORBIDDEN);
 		article.setUserId(null);
 		article.setArtState((short) -1);
-		boolean res = articleService.modifyArticle(article);
+		boolean res = articleService.modify(article);
 		if(res)
 			return new ResultModel();
 		else
@@ -159,7 +159,7 @@ public class ArticleController extends WebBaseController {
 		deliver.setDverState((short) 0);
 		deliver.setDverTime(DateUtil.getDateByTime());
 		ResultModel model = new ResultModel();
-		if(!deliverService.saveDeliver(deliver))
+		if(!deliverService.save(deliver))
 			model = new ResultModel(ResultMessageEnum.OPTION_EXCEPTION);
 		return model;
 	}

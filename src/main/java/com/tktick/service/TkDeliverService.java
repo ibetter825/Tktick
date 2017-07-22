@@ -13,11 +13,11 @@ public interface TkDeliverService {
 	 * @param username
 	 * @return
 	 */
-	public boolean saveDeliver(TkDeliver deliver);
+	public boolean save(TkDeliver deliver);
 	/**
 	 * 编辑投递记录
 	 * @param deliver
 	 * @return
 	 */
-	public boolean modifyDeliver(TkDeliver deliver);
+	public boolean modify(TkDeliver deliver);
 }

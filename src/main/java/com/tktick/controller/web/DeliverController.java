@@ -44,10 +44,10 @@ public class DeliverController extends WebBaseController {
 		keeper.setSetId(deliver.getSetId());
 		keeper.setUserId(uid);
 		ResultModel model = new ResultModel();
-		if(keeperService.queryKeeper(keeper) == null)//当前用户不是该合集的管理员不能审核
+		if(keeperService.query(keeper) == null)//当前用户不是该合集的管理员不能审核
 			model = new ResultModel(ResultMessageEnum.OPTION_FORBIDDEN);
 		
-		if(!deliverService.modifyDeliver(deliver))//修改失败
+		if(!deliverService.modify(deliver))//修改失败
 			model = new ResultModel(ResultMessageEnum.OPTION_EXCEPTION);
 		return model;
 	}
