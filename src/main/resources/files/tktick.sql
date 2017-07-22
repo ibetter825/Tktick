@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-07-20 23:16:10
+Date: 2017-07-22 16:02:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -101,7 +101,7 @@ CREATE TABLE `tk_dict` (
   `dict_fno` varchar(50) DEFAULT '' COMMENT '父级字典',
   `dict_nm` varchar(100) DEFAULT '' COMMENT '字典名称',
   `dict_desc` varchar(200) DEFAULT '',
-  `dict_state` tinyint(4) DEFAULT '0' COMMENT '状态',
+  `dict_state` tinyint(4) DEFAULT '0' COMMENT '状态:-1软删 0隐藏 1正常',
   `dict_seq` int(11) DEFAULT '0' COMMENT '同级排序',
   `dict_icon` varchar(100) DEFAULT '' COMMENT '图标，或者类',
   `dict_par` varchar(1000) DEFAULT '' COMMENT '字典参数',
@@ -110,6 +110,30 @@ CREATE TABLE `tk_dict` (
 
 -- ----------------------------
 -- Records of tk_dict
+-- ----------------------------
+INSERT INTO `tk_dict` VALUES ('D001', '', '首页导航', '首页导航', '1', '0', '', '');
+INSERT INTO `tk_dict` VALUES ('D00101', 'D001', '首页', '首页', '1', '0', '', '/');
+INSERT INTO `tk_dict` VALUES ('D00102', 'D001', '文集', '文集', '1', '1', '', '/');
+INSERT INTO `tk_dict` VALUES ('D00203', 'D001', '专题', '换题', '1', '2', '', '/');
+
+-- ----------------------------
+-- Table structure for tk_home
+-- ----------------------------
+DROP TABLE IF EXISTS `tk_home`;
+CREATE TABLE `tk_home` (
+  `hm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hm_type` varchar(50) NOT NULL DEFAULT '' COMMENT '数据类别',
+  `hm_title` varchar(500) NOT NULL DEFAULT '' COMMENT '标题',
+  `hm_img` varchar(1000) DEFAULT '' COMMENT '封面图',
+  `hm_url` varchar(1000) DEFAULT '' COMMENT '链接地址',
+  `hm_seq` int(11) DEFAULT '0' COMMENT '排序',
+  `hm_state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '-1 软删 0 不可用 1 正常',
+  `hm_par` varchar(1000) DEFAULT '' COMMENT '其他参数',
+  PRIMARY KEY (`hm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='首页内容';
+
+-- ----------------------------
+-- Records of tk_home
 -- ----------------------------
 
 -- ----------------------------
@@ -141,13 +165,14 @@ CREATE TABLE `tk_set` (
   `add_time` bigint(20) DEFAULT '0' COMMENT '创建时间',
   `edit_time` bigint(20) DEFAULT '0' COMMENT '修改时间',
   `set_desc` varchar(2000) DEFAULT '' COMMENT '合集简介',
+  `set_state` tinyint(4) DEFAULT '1' COMMENT '-1 软删 0 不可用 1正常',
   PRIMARY KEY (`set_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='合集表';
 
 -- ----------------------------
 -- Records of tk_set
 -- ----------------------------
-INSERT INTO `tk_set` VALUES ('1', '时光旅行', '0', '0', '0', '时光旅行文章合集，欢迎投稿');
+INSERT INTO `tk_set` VALUES ('1', '时光旅行', '0', '0', '0', '时光旅行文章合集，欢迎投稿', '1');
 
 -- ----------------------------
 -- Table structure for tk_set_keeper
@@ -158,13 +183,14 @@ CREATE TABLE `tk_set_keeper` (
   `set_id` int(11) NOT NULL COMMENT '合集id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `kpr_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '管理员分类:  1:创建者 0:其他管理员',
+  `kpr_state` tinyint(4) DEFAULT '1' COMMENT '-1 软删  0 被禁用 1 正常',
   PRIMARY KEY (`kpr_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='合集管理员表';
 
 -- ----------------------------
 -- Records of tk_set_keeper
 -- ----------------------------
-INSERT INTO `tk_set_keeper` VALUES ('1', '1', '10000', '1');
+INSERT INTO `tk_set_keeper` VALUES ('1', '1', '10000', '1', '1');
 
 -- ----------------------------
 -- Table structure for tk_tag
