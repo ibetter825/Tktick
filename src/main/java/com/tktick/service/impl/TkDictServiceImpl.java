@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.tktick.bean.constant.CacheConstant;
 import com.tktick.bean.entity.TkDict;
+import com.tktick.bean.model.TreeModel;
 import com.tktick.bean.rq.QueryRq;
 import com.tktick.dao.mapper.TkDictMapper;
 import com.tktick.service.TkDictService;
@@ -35,9 +36,9 @@ public class TkDictServiceImpl implements TkDictService {
 
 	@Override
 	@Cacheable(value = CacheConstant.DICT_CACHE_NAME, key = "'FNO_'+#fno")
-	public List<TkDict> queryDictForTreeListByFno(String fno) {
+	public List<TreeModel> queryDictForTreeListByFno(String fno) {
 		List<TkDict> dicts = dictMapper.selectListByFno(fno);
-		return dicts;
+		return null;
 	}
 	
 }

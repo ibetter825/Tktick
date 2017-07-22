@@ -1,8 +1,11 @@
 package com.tktick.bean.entity;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.tktick.bean.model.TreeModel;
 
 /**
  * 字典表
@@ -22,6 +25,17 @@ public class TkDict extends BaseEntity {
 	private Integer dictSeq;
 	private String dictIcon;
 	private String dictPar;
+	
+	/**
+	 * 获取树形结构数据
+	 * @param list
+	 * @param fno
+	 * @return
+	 */
+	public static List<TreeModel> listRoTree(List<TkDict> list, String fno){
+		return null;
+	}
+	
 	public String getDictNo() {
 		return dictNo;
 	}

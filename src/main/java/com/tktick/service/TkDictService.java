@@ -2,7 +2,9 @@ package com.tktick.service;
 
 import java.util.List;
 import java.util.Map;
+
 import com.tktick.bean.entity.TkDict;
+import com.tktick.bean.model.TreeModel;
 import com.tktick.bean.rq.QueryRq;
 
 public interface TkDictService {
@@ -23,5 +25,5 @@ public interface TkDictService {
 	 * @param fno
 	 * @return
 	 */
-	public List<TkDict> queryDictForTreeListByFno(String fno);
+	public List<TreeModel> queryDictForTreeListByFno(String fno);
 }
