@@ -6,8 +6,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.tktick.bean.constant.CacheConstant;
 import com.tktick.bean.entity.TkDict;
 import com.tktick.bean.rq.QueryRq;
 import com.tktick.dao.mapper.TkDictMapper;
@@ -29,6 +31,13 @@ public class TkDictServiceImpl implements TkDictService {
 	@Override
 	public List<Map<?, ?>> queryDictForMapList(QueryRq rq) {
 		return dictMapper.selectListByRq(rq.getQrq());
+	}
+
+	@Override
+	@Cacheable(value = CacheConstant.DICT_CACHE_NAME, key = "'FNO_'+#fno")
+	public List<TkDict> queryDictForTreeListByFno(String fno) {
+		List<TkDict> dicts = dictMapper.selectListByFno(fno);
+		return dicts;
 	}
 	
 }

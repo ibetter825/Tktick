@@ -22,6 +22,8 @@ public class TkSetKeeper extends BaseEntity {
 	private Integer setId;
 	private Integer userId;
 	private Short kprType;
+	private Short kprState;
+	
 	public Integer getKprId() {
 		return kprId;
 	}
@@ -46,4 +48,11 @@ public class TkSetKeeper extends BaseEntity {
 	public void setKprType(Short kprType) {
 		this.kprType = kprType;
 	}
+	public Short getKprState() {
+		return kprState;
+	}
+	public void setKprState(Short kprState) {
+		this.kprState = kprState;
+	}
+	
 }

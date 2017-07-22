@@ -18,4 +18,10 @@ public interface TkDictService {
 	 * @return
 	 */
 	public List<Map<?, ?>> queryDictForMapList(QueryRq rq);
+	/**
+	 * 根据父菜单查询字典
+	 * @param fno
+	 * @return
+	 */
+	public List<TkDict> queryDictForTreeListByFno(String fno);
 }

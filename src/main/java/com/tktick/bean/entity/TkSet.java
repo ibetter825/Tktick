@@ -23,6 +23,7 @@ public class TkSet extends BaseEntity {
 	private Long addTime;
 	private Long editTime;
 	private String setDesc;
+	private Short setState;
 	
 	public Integer getSetId() {
 		return setId;
@@ -60,4 +61,11 @@ public class TkSet extends BaseEntity {
 	public void setSetDesc(String setDesc) {
 		this.setDesc = setDesc;
 	}
+	public Short getSetState() {
+		return setState;
+	}
+	public void setSetState(Short setState) {
+		this.setState = setState;
+	}
+	
 }

@@ -13,4 +13,10 @@ public interface TkDictMapper extends BaseMapper<TkDict> {
 	 * @return
 	 */
 	public List<Map<?, ?>> selectListByRq(Map<String, Object> rq);
+	/**
+	 * 根据父级字典编码查询所有的子字典
+	 * @param fno
+	 * @return
+	 */
+	public List<TkDict> selectListByFno(String fno);
 }
