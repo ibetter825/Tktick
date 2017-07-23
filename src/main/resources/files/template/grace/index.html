@@ -1,15 +1,282 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<#assign page_title = "首页"/>
-	<#include "/web/common/header.html"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
+    <meta name="google-site-verification" content="cwFIjySGa1NUoeXvLSqovpkzfMDQ5p-5l1yfltMYLL4" />
+    <meta name="baidu-site-verification" content="AFZETgY7OA" />
+    <meta name="360-site-verification" content="58d8d0979e32afdc9688fcd3e51c8b77" />
+    <meta name="description" content="">
+    <meta name="keywords" content="远方,雪山,西藏记忆,骑行之旅,萨龙龙,2012,唯美摄影,拉萨,旅行,梦想之旅,wordpress使用,旅行地图,WordPress,网站建设,大理" />
+
+    <title>GRACE主题演示站 - 苏醒主题</title>
+    <link rel="Shortcut Icon" href="http://grace.wpbyg.com/wp-content/themes/Grace_7_0/img/favicon.ico" type="image/x-icon">
+    <link rel="pingback" href="http://grace.wpbyg.com/xmlrpc.php">
+    <link rel="stylesheet" id="animate-css" href="css/animate.css?ver=Grace7" type="text/css" media="all">
+    <link rel="stylesheet" id="fontello-css" href="css/fontello.css?ver=Grace7" type="text/css" media="all">
+    <link rel="stylesheet" id="bootstrap-css" href="css/bootstrap.min.css?ver=Grace7" type="text/css" media="all">
+    <link rel="stylesheet" id="Grace-style-css" href="css/style.css?ver=Grace7" type="text/css" media="all">
+
+    <!--[if lt IE 9]>
+	<script type='text/javascript' src='js/html5shiv.js?ver=Grace7'></script>
+	<![endif]-->
+    <!--[if lt IE 9]>
+	<script type='text/javascript' src='js/respond.min.js?ver=Grace7'></script>
+	<![endif]-->
 </head>
+
 <body class="home blog off-canvas-nav-left">
-    <#include "/web/common/nav.html"/>
+    <div id="header" class="navbar-fixed-top navbar-hidden">
+        <div class="container">
+            <h1 class="logo">
+                <a href="http://grace.wpbyg.com" title="GRACE主题演示站" style="background-image: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/img/logo.png);">
+
+                </a>
+            </h1>
+            <div role="navigation" class="site-nav  primary-menu">
+                <div class="menu-fix-box">
+                    <ul id="menu-navigation" class="menu">
+                        <li class="current-menu-item"><a href="http://grace.wpbyg.com/">首页</a></li>
+                        <li><a target="_blank" href="http://www.suxing.me">购买主题</a></li>
+                        <li><a href="http://grace.wpbyg.com/category/szj">说正经</a></li>
+                        <li><a href="http://grace.wpbyg.com/contribute-page">投稿</a></li>
+                        <li class="menu-item-has-children"><a href="http://grace.wpbyg.com/sample-page">示例页面</a>
+                            <ul class="sub-menu">
+                                <li><a href="http://grace.wpbyg.com/like-page">人气文章排行榜</a></li>
+                                <li><a href="http://grace.wpbyg.com/links-page">友情链接</a></li>
+                                <li><a href="http://grace.wpbyg.com/archives-page">年度归档</a></li>
+                                <li><a href="http://grace.wpbyg.com/tags-page">标签页面</a></li>
+                                <li><a href="http://grace.wpbyg.com/su123">网址导航</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-nav">
+                <div class="js-toggle-message">
+                    <button id="sitemessage" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    	<i class="icon-megaphone"></i>
+                        <span class="red-tips"></span>					</button>
+                    <div class="dropdown-menu" role="menu" aria-labelledby="sitemessage">
+                        <ul>
+                            <li class="first"><span class="time">16.08.26</span><a target="_blank" href="http://grace.wpbyg.com/1739.html">致盗版用户的忠告</a></li>
+                            <li><span class="time">15.10.23</span><a target="_blank" href="http://grace.wpbyg.com/1125.html">零食成为电商下个必争地，零食小喵能成为下个三只松鼠吗？</a></li>
+                            <li><span class="time">15.10.22</span><a target="_blank" href="http://grace.wpbyg.com/1160.html">吐血整理：2015版杭州互联网创业指南3.0</a></li>
+                            <li><span class="time">15.10.22</span><a target="_blank" href="http://grace.wpbyg.com/1035.html">作为创业者，你真的了解什么是“创业生态系统”么？</a></li>
+                            <li><span class="time">15.10.19</span><a target="_blank" href="http://grace.wpbyg.com/1090.html">见的投资人不懂你做的事情怎么办？来看看资深游戏人姚姚丸怎么说</a></li>
+                        </ul>
+                        <div class="more-messages"><a target="_blank" href="http://grace.wpbyg.com/category/ncc">更多</a></div>
+                    </div>
+                </div>
+                <button class="js-toggle-search"><i class=" icon-search"></i></button>
+            </div>
+
+        </div>
+    </div>
+
     <div id="page-content" class="page-content-110">
+        <div class="owl-carousel top-slide-three owl-theme owl-center owl-loaded">
+
+
+
+
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="width: 11850px; transition-duration: 0.25s; transform: translate3d(-3465.5px, 0px, 0px);">
+                    <div class="owl-item cloned" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1280.html" title="今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717283477.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item cloned" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1269.html" title="【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717234548.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item cloned active" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1173.html" title="今日嗅评： 阿里股票只不过跌破发行价，还是可以吃很多年？">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717261623.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>今日嗅评： 阿里股票只不过跌破发行价，还是可以吃很多年？</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item active center" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1739.html" title="致盗版用户的忠告">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717340722.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">弄创潮</div>
+                                            <div class="slider-title">
+                                                <h2>致盗版用户的忠告</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item active" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1280.html" title="今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717283477.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1269.html" title="【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717234548.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1173.html" title="今日嗅评： 阿里股票只不过跌破发行价，还是可以吃很多年？">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717261623.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>今日嗅评： 阿里股票只不过跌破发行价，还是可以吃很多年？</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item cloned center" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1739.html" title="致盗版用户的忠告">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717340722.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">弄创潮</div>
+                                            <div class="slider-title">
+                                                <h2>致盗版用户的忠告</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item cloned" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1280.html" title="今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717283477.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>今日嗅评：VC已把市场带坏，培养出一个个虚胖的大头娃娃</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="owl-item cloned" style="margin-right: 15px;">
+                        <div class="item">
+                            <a href="http://grace.wpbyg.com/1269.html" title="【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费">
+                                <div class="slider-content" style="background: url(http://grace.wpbyg.com/wp-content/themes/Grace_7_0/timthumb.php?src=http://grace.wpbyg.com/wp-content/uploads/2015/10/2016011717234548.jpg&amp;h=500&amp;w=1120); background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                                    <div class="slider-content-box">
+                                        <div class="slider-content-item">
+                                            <div class="post-categories">早晚见</div>
+                                            <div class="slider-title">
+                                                <h2>【早报】微信免费转账的好日子到头了，超过2万要交0.1%手续费</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-controls">
+                <div class="owl-nav">
+                    <div class="owl-prev"></div>
+                    <div class="owl-next"></div>
+                </div>
+                <div class="owl-dots">
+                    <div class="owl-dot active"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                </div>
+            </div>
+        </div>
+
         <div class="recommend-content">
             <div class="container">
                 <div class="row">
+
                     <div class="cat">
                         <div class="thumbnail-cat">
                             <div class="image">
@@ -737,6 +1004,9 @@
             <span class="close-bottom"></span>
         </div>
     </div>
+    <script type="text/javascript" src="js/jquery.js?ver=1.12.4"></script>
+    <script type="text/javascript" src="js/jquery-migrate.min.js?ver=1.4.1"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js?ver=Grace7"></script>
     <script type="text/javascript">
         /* <![CDATA[ */
         var suxingme_url = {
@@ -749,8 +1019,9 @@
         };
         /* ]]> */
     </script>
-    <#include "/web/common/footer.html"/>
-	 <script type="text/javascript" src="/js/jquery.lazyload.min.js?ver=Grace7"></script>
+    <script type="text/javascript" src="js/tktick.js?ver=Grace7"></script>
+    <script type="text/javascript" src="js/jquery.lazyload.min.js?ver=Grace7"></script>
+
     <a class="to-top" style="cursor: pointer; position: fixed; right: 38px; bottom: 38px; display: none;"><i class="icon-up-small"></i></a></body>
 
 </html>
