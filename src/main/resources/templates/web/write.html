@@ -4,7 +4,7 @@
 <head>
     <#assign page_title="写文章" />
     <#include "/web/common/header.html"/>
-    <link rel="stylesheet" id="style-css" href="/css/wangEditor.min.css?ver=titick1" type="text/css" media="all">
+    <!-- <link rel="stylesheet" id="style-css" href="/css/wangEditor.min.css?ver=titick1" type="text/css" media="all"> -->
 </head>
 
 <body class="home blog off-canvas-nav-left">
@@ -12,7 +12,7 @@
     <div id="page-content" class="page-content-110">
         <div class="container">
             <div class="row">
-            	<div class="sidebar col-xs-12 col-sm-4 col-md-4">
+            	<div class="col-xs-12 col-sm-4 col-md-4">
                     <div class="widget suxingme_tag">
                         <h3><span>热门标签</span></h3>
                         <div class="widge_tags">
@@ -27,12 +27,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="article col-xs-12 col-sm-8 col-md-8">
-                    <div class="posts-top-cjtz clearfix">
-                        <a title="苏醒博客" href="http://www.suxing.me" target="_blank"><img src="http://grace.wpbyg.com/wp-content/uploads/2016/11/2016110317042938.png" alt="苏醒博客"></a>
-                    </div>
+                <div class="col-xs-12 col-sm-8 col-md-8">
                     <div class="post">
-
+						<div id="editor"></div>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -53,7 +50,12 @@
         /* ]]> */
     </script>
     <#include "/web/common/footer.html"/>
-    <script type="text/javascript" src="/js/wangEditor.min.js?ver=tktick1"></script>
-    
+    <script type="text/javascript" src="/js/wangEditor.min.js?ver=3.04"></script>
+    <script type="text/javascript">
+    	var E = window.wangEditor
+        var editor = new E('#editor')
+        // 或者 var editor = new E( document.getElementById('#editor') )
+        editor.create()
+    </script>
     <a class="to-top" style="cursor: pointer; position: fixed; right: 38px; bottom: 38px; display: none;"><i class="icon-up-small"></i></a></body>
 </html>
