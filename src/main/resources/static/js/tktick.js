@@ -13,9 +13,9 @@ jQuery(document).ready(function($) {
     // }
 
 
-    // if (suxingme_url.headfixed) {
-    //     $("div.navbar-fixed-top").autoHidingNavbar();
-    // }
+     if (suxingme_url.headfixed) {
+         $("div.navbar-fixed-top").autoHidingNavbar();
+     }
 
     // if (suxingme_url.roll) {
 

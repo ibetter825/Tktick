@@ -4,7 +4,9 @@
 <head>
     <#assign page_title="写文章" />
     <#include "/web/common/header.html"/>
-    <!-- <link rel="stylesheet" id="style-css" href="/css/wangEditor.min.css?ver=titick1" type="text/css" media="all"> -->
+    <style type="text/css">
+    	#editor .w-e-text {overflow-y: auto;}
+    </style>
 </head>
 
 <body class="home blog off-canvas-nav-left">
@@ -18,18 +20,18 @@
                         <div class="widge_tags">
                             <div class="tag-items"><a href="http://grace.wpbyg.com/tag/%e9%bb%84%e7%89%9b" class="tag-item" title="浏览和黄牛有关的文章">黄牛</a><a href="http://grace.wpbyg.com/tag/%e9%b9%85%e6%af%9b" class="tag-item" title="浏览和鹅毛有关的文章">鹅毛</a><a href="http://grace.wpbyg.com/tag/%e9%ad%85%e6%97%8f"
                                     class="tag-item" title="浏览和魅族有关的文章">魅族</a><a href="http://grace.wpbyg.com/tag/%e9%a6%96%e5%af%8c" class="tag-item" title="浏览和首富有关的文章">首富</a><a href="http://grace.wpbyg.com/tag/%e9%a3%9e%e8%b5%b7" class="tag-item" title="浏览和飞起有关的文章">飞起</a>
-                                <a
-                                    href="http://grace.wpbyg.com/tag/%e9%a3%9e%e4%ba%ba" class="tag-item" title="浏览和飞人有关的文章">飞人</a><a href="http://grace.wpbyg.com/tag/%e9%a2%9c%e8%89%b2" class="tag-item" title="浏览和颜色有关的文章">颜色</a><a href="http://grace.wpbyg.com/tag/%e9%a1%b9%e7%9b%ae" class="tag-item" title="浏览和项目有关的文章">项目</a><a href="http://grace.wpbyg.com/tag/%e9%9f%b3%e4%b9%90"
+                                <a href="http://grace.wpbyg.com/tag/%e9%a3%9e%e4%ba%ba" class="tag-item" title="浏览和飞人有关的文章">飞人</a><a href="http://grace.wpbyg.com/tag/%e9%a2%9c%e8%89%b2" class="tag-item" title="浏览和颜色有关的文章">颜色</a><a href="http://grace.wpbyg.com/tag/%e9%a1%b9%e7%9b%ae" class="tag-item" title="浏览和项目有关的文章">项目</a><a href="http://grace.wpbyg.com/tag/%e9%9f%b3%e4%b9%90"
                                         class="tag-item" title="浏览和音乐有关的文章">音乐</a><a href="http://grace.wpbyg.com/tag/%e9%9e%8b%e9%9d%a2" class="tag-item" title="浏览和鞋面有关的文章">鞋面</a><a href="http://grace.wpbyg.com/tag/%e9%9d%9e%e6%a0%87" class="tag-item" title="浏览和非标有关的文章">非标</a>
-                                    <a
-                                        href="http://grace.wpbyg.com/tag/%e9%9c%80%e6%b1%82" class="tag-item" title="浏览和需求有关的文章">需求</a><a href="http://grace.wpbyg.com/tag/%e9%9b%b6%e9%a3%9f" class="tag-item" title="浏览和零食有关的文章">零食</a><a href="http://grace.wpbyg.com/tag/%e9%9b%86%e5%9b%a2" class="tag-item" title="浏览和集团有关的文章">集团</a><a href="http://grace.wpbyg.com/tag/%e9%9b%85%e8%99%8e"
-                                            class="tag-item" title="浏览和雅虎有关的文章">雅虎</a></div>
+                                <a href="http://grace.wpbyg.com/tag/%e9%9c%80%e6%b1%82" class="tag-item" title="浏览和需求有关的文章">需求</a><a href="http://grace.wpbyg.com/tag/%e9%9b%b6%e9%a3%9f" class="tag-item" title="浏览和零食有关的文章">零食</a><a href="http://grace.wpbyg.com/tag/%e9%9b%86%e5%9b%a2" class="tag-item" title="浏览和集团有关的文章">集团</a><a href="http://grace.wpbyg.com/tag/%e9%9b%85%e8%99%8e"
+                                        class="tag-item" title="浏览和雅虎有关的文章">雅虎</a></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8">
-                    <div class="post">
-						<div id="editor"></div>
+                    <div class="post" style="padding: 0;">
+                    	<div id="toolbar" class="toolbar"></div>
+                    	<div><input type="text" value="这里是文章的标题" style="width: 90%; margin: 0 5%; border-width: 0 0 1px 0;"/></div>
+						<div id="editor" style="height: 520px;"></div>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -53,7 +55,7 @@
     <script type="text/javascript" src="/js/wangEditor.min.js?ver=3.04"></script>
     <script type="text/javascript">
     	var E = window.wangEditor
-        var editor = new E('#editor')
+        var editor = new E('#toolbar', '#editor')
         // 或者 var editor = new E( document.getElementById('#editor') )
         editor.create()
     </script>
