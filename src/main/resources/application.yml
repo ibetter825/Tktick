@@ -1,8 +1,8 @@
 # yml配置文件是的值属性前面必须有一个空格，如果没有空格，Spring的解析器会忽略此配置项。
 #系统自定义属性配置
 properties:
-    #上传文件根目录
-    uploadRootPath: upload
+    #上传文件根目录 打包成jar的话不能上传到项目根目录 因此需要将文件上传到磁盘其他地方 然后在soring.mv中将此目录配置进去
+    uploadRootPath: D:/temp/tktick/upload
 #框架需要的属性配置
 # Server settings
 server: 
@@ -26,6 +26,10 @@ spring:
         encoding.charset: UTF-8
         encoding.enable: true
         encoding.force: true
+    mvc: 
+        static-path-pattern: /**
+    resources: 
+        static-locations: classpath:/META-INF/resources/,classpath:/resources/,\classpath:/static/,classpath:/public/,file:${properties.uploadRootPath}
     task:
         pool:
             corePoolSize: 10

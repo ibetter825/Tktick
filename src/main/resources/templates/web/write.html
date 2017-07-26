@@ -11,7 +11,7 @@
 
 <body class="home blog off-canvas-nav-left">
     <#include "/web/common/nav.html"/>
-    <div id="page-content" class="page-content-110">
+    <div id="page-content" class="page-content-110" style="padding-bottom: 0;">
         <div class="container">
             <div class="row">
             	<div class="col-xs-12 col-sm-4 col-md-4">
@@ -29,9 +29,11 @@
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8">
                     <div class="post" style="padding: 0;">
-                    	<div id="toolbar" class="toolbar"></div>
-                    	<div><input type="text" value="这里是文章的标题" style="width: 90%; margin: 0 5%; border-width: 0 0 1px 0;"/></div>
-						<div id="editor" style="height: 520px;"></div>
+                    	<div id="toolbar" class="toolbar" style="padding: 8px; position: relative; z-index: 1; border-bottom: 1px solid #E5E7EC;"></div>
+                    	<div><input type="text" value="" placeholder="这里是文章的标题" style="width: 90%; height: 60px; text-align: center; color: #A3ABBF; font-size: 20px; margin: 0 5%; border-width: 0 0 1px 0;"/></div>
+						<div id="editor" style="height: 520px; padding: 0 5%;">
+							<p>这里开始写正文</p>
+						</div>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -56,7 +58,33 @@
     <script type="text/javascript">
     	var E = window.wangEditor
         var editor = new E('#toolbar', '#editor')
-        // 或者 var editor = new E( document.getElementById('#editor') )
+        editor.customConfig.menus = [
+		    'head',  // 标题
+		    'bold',  // 粗体
+		    'italic',  // 斜体
+		    'underline',  // 下划线
+		    'strikeThrough',  // 删除线
+		    'foreColor',  // 文字颜色
+		    'backColor',  // 背景颜色
+		    'link',  // 插入链接
+		    'list',  // 列表
+		    'justify',  // 对齐方式
+		    'quote',  // 引用
+		    'emoticon',  // 表情
+		    'image',  // 插入图片
+		    'table',  // 表格
+		    'video',  // 插入视频
+		    'undo',  // 撤销
+		    'redo'  // 重复
+	    ];
+	    // 配置服务器端地址
+    	editor.customConfig.uploadImgServer = '/common/upload';
+    	//可自定义filename
+    	editor.customConfig.uploadFileName = 'file';
+    	editor.customConfig.customAlert = function (info) {
+		    // info 是需要提示的内容
+		    layer.msg(info);
+		}
         editor.create()
     </script>
     <a class="to-top" style="cursor: pointer; position: fixed; right: 38px; bottom: 38px; display: none;"><i class="icon-up-small"></i></a></body>
