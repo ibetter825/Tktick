@@ -29,7 +29,7 @@ spring:
     mvc: 
         static-path-pattern: /**
     resources: 
-        static-locations: classpath:/META-INF/resources/,classpath:/resources/,\classpath:/static/,classpath:/public/,file:${properties.uploadRootPath}
+        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${properties.uploadRootPath}
     task:
         pool:
             corePoolSize: 10
