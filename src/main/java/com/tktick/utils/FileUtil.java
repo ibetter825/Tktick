@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileUtil {
 	// /**  
     // * 获取获取系统根目录下xml文件的路径的方法；  
@@ -63,8 +65,44 @@ public class FileUtil {
 				if(out != null) out.close();
 			} catch (IOException e) {}
 		}
-    }  
-  
+    }
+    /**
+     * 将文件保存在磁盘中
+     * @param file 目标文件
+     * @param path 保存的目录
+     * @param name 文件名称
+     */
+    public static void writeFile(MultipartFile file, String path, String name){
+    	InputStream in = null;
+		FileOutputStream out = null;
+			try {
+				in = file.getInputStream();
+				File folder = new File(path);
+				if(!folder.exists()) folder.mkdirs();
+				String savedFilePath = path + File.separator + name;
+				out = new FileOutputStream(new File(savedFilePath));
+				byte[] temp = new byte[1024];
+				int i = in.read(temp);
+				while (i != -1){
+					out.write(temp, 0, temp.length);
+					out.flush();
+					i = in.read(temp);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if(in != null){
+					try {
+						in.close();
+						if(out != null)
+							out.close();
+					} catch (IOException e) {
+					}
+				}
+			}
+    }
     /***  
      * 覆盖原来的内容；  
      *   
@@ -102,7 +140,7 @@ public class FileUtil {
      *            要删除的目录或文件  
      *@return 删除成功返回 true，否则返回 false。  
      */  
-    public static boolean DeleteFolder(String sPath) {  
+    public static boolean deleteFolder(String sPath) {  
         boolean flag = false;  
         File file = new File(sPath);  
         // 判断目录或文件是否存在  

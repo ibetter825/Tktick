@@ -33,26 +33,19 @@ public class CommonController extends WebBaseController {
 	 */
 	@RequestMapping("/upload/{from}.json")
 	public Object upload(MultipartFile file, @PathVariable("from") String from){
-		String root = CustomPropertiesConfig.getProperty(CommonConstant.UPLOAD_ROOT_PATH);
+		//上传文件存放的位置，没使用springboot的默认位置，存放在磁盘的另外一个地方
+		String uploadRootPath = CustomPropertiesConfig.getProperty(CommonConstant.UPLOAD_ROOT_PATH);
 		InputStream in = null;
 		FileOutputStream out = null;
 		try {
 			in = file.getInputStream();
-			File folder = new File(root);
+			File folder = new File(uploadRootPath);
 			if(!folder.exists()) folder.mkdirs();
 			String savedFileName = StringUtil.uuid(false) + "." + FileUtil.getExtensionName(file.getOriginalFilename());
-			String savedFilePath = root+File.separator+savedFileName;
-			out = new FileOutputStream(new File(savedFilePath));
-			byte[] temp = new byte[1024];
-			int i = in.read(temp);
-			while (i != -1){
-				out.write(temp,0,temp.length);
-				out.flush();
-				i = in.read(temp);
-			}
-			if("editor".equalsIgnoreCase(from)){
+			FileUtil.writeFile(file, uploadRootPath, savedFileName);
+			if(CommonConstant.UPLOAD_FROM_EDITOR.equalsIgnoreCase(from)){
 				//返回的地址为 upload/***.jpg
-				String returnFilePath = File.separator + root.substring(root.lastIndexOf("/") + 1) + File.separator + savedFileName;
+				String returnFilePath = File.separator + uploadRootPath.substring(uploadRootPath.lastIndexOf("/") + 1) + File.separator + savedFileName;
 				return new WangModel().setData(new String[]{returnFilePath});
 			}else
 				return null;
