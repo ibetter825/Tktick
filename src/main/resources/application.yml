@@ -2,7 +2,10 @@
 #系统自定义属性配置
 properties:
     #上传文件根目录 打包成jar的话不能上传到项目根目录 因此需要将文件上传到磁盘其他地方 然后在soring.mv中将此目录配置进去
+    #存放上传文件的根目录
     uploadRootPath: D:/temp/tktick/upload
+    #存放上传图片的跟目录
+    uploadImagePath: /images
 #框架需要的属性配置
 # Server settings
 server: 
