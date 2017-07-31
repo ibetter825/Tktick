@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
 <mapper namespace="com.tktick.dao.mapper.TkArticleMapper" >
 	<sql id="baseColumnList">
-		id, art_title as artTitle, art_desc as artDesc, clz_id as clzId, user_id as userId, add_time as addTime, edit_time as editTime, art_state as artState, art_auth as artAuth, art_cont as artCont, art_tag_nms as artTagNms, art_tag_ids as artTagIds, art_imgs as artImgs
+		id, art_title artTitle, art_desc artDesc, clz_id clzId, user_id userId, add_time addTime, edit_time editTime, art_state artState, art_auth artAuth, art_cont artCont, art_tag_nms artTagNms, art_tag_ids artTagIds, art_imgs artImgs, art_cover artCover
 	</sql>
     <select id="selectListByRq" parameterType="java.util.Map" resultType="java.util.Map">
     	select id, art_title as artTitle, art_desc as artDesc, clz_id as clzId, user_id as userId, add_time as addTime, art_tag_nms as artTagNms, art_tag_ids as artTagIds, art_imgs as artImgs from tk_article 

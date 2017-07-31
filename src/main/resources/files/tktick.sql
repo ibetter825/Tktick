@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-07-22 16:02:26
+Date: 2017-07-31 21:53:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `tk_article` (
   `art_auth` tinyint(4) NOT NULL DEFAULT '1' COMMENT '文章权限: 0:仅自己可见 1: 所有人可见 2:部分可见(另外一张表配合)',
   `art_cont` text COMMENT '文章内容',
   `art_imgs` varchar(4000) DEFAULT '' COMMENT '文章中的图片地址，每张图片之间用";"隔开',
+  `art_cover` varchar(500) DEFAULT NULL COMMENT '文章封面',
   `art_tag_nms` varchar(200) DEFAULT '' COMMENT '文章标签名","隔开',
   `art_tag_ids` varchar(100) DEFAULT '',
   PRIMARY KEY (`id`)
