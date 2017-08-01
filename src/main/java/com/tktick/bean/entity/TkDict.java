@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.tktick.bean.model.TreeModel;
 
 /**
@@ -37,24 +38,25 @@ public class TkDict extends BaseEntity {
 	 * @return
 	 */
 	public static List<TreeModel> listToTree(List<TkDict> list, String fno){
-		List<TreeModel> tree = new ArrayList<>();
+		if(fno == null)
+			return null;
+		List<TreeModel> res = new ArrayList<TreeModel>();
 		TreeModel model = null;
-		List<TreeModel> children = new ArrayList<>();
-		String dictNo = null;
-		boolean fnoIsNotBlank = StringUtils.isNotBlank(fno);
 		for (TkDict dict : list) {
-			dictNo = dict.getDictNo();
-			if(StringUtils.isEmpty(dict.getDictFno())){
-				
+			if(fno == null){
+				if(StringUtils.isNotEmpty((String) dict.getDictFno()))//这是一级菜单
+					continue;
 			}else{
-				
+				if(!fno.equals(dict.getDictFno()))
+					continue;
 			}
 			model = new TreeModel();
-			model.setIcon(dict.getDictIcon());
 			model.setId(dict.getDictNo());
 			model.setText(dict.getDictNm());
+        	model.setChildren(listToTree(list, dict.getDictNo()));
+        	res.add(model);
 		}
-		return tree;
+		return res;
 	}
 	
 	public String getDictNo() {
@@ -123,6 +125,6 @@ public class TkDict extends BaseEntity {
 		dict.setDictFno("D001");
 		dicts.add(dict);
 		
-		System.err.println(JSONUtils.toJSONString(listToTree(dicts, "D001")));
+		System.err.println(JSON.toJSONString(listToTree(dicts, "D001")));
 	}
 }
