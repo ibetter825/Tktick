@@ -5,10 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.StringUtils;
-
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.tktick.bean.model.TreeModel;
 
@@ -38,8 +35,6 @@ public class TkDict extends BaseEntity {
 	 * @return
 	 */
 	public static List<TreeModel> listToTree(List<TkDict> list, String fno){
-		if(fno == null)
-			return null;
 		List<TreeModel> res = new ArrayList<TreeModel>();
 		TreeModel model = null;
 		for (TkDict dict : list) {
