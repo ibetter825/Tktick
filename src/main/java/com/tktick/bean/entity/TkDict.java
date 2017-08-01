@@ -1,10 +1,14 @@
 package com.tktick.bean.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.alibaba.druid.support.json.JSONUtils;
 import com.tktick.bean.model.TreeModel;
 
 /**
@@ -32,8 +36,25 @@ public class TkDict extends BaseEntity {
 	 * @param fno
 	 * @return
 	 */
-	public static List<TreeModel> listRoTree(List<TkDict> list, String fno){
-		return null;
+	public static List<TreeModel> listToTree(List<TkDict> list, String fno){
+		List<TreeModel> tree = new ArrayList<>();
+		TreeModel model = null;
+		List<TreeModel> children = new ArrayList<>();
+		String dictNo = null;
+		boolean fnoIsNotBlank = StringUtils.isNotBlank(fno);
+		for (TkDict dict : list) {
+			dictNo = dict.getDictNo();
+			if(StringUtils.isEmpty(dict.getDictFno())){
+				
+			}else{
+				
+			}
+			model = new TreeModel();
+			model.setIcon(dict.getDictIcon());
+			model.setId(dict.getDictNo());
+			model.setText(dict.getDictNm());
+		}
+		return tree;
 	}
 	
 	public String getDictNo() {
@@ -85,4 +106,23 @@ public class TkDict extends BaseEntity {
 		this.dictPar = dictPar;
 	}
 
+	public static void main(String[] args) {
+		List<TkDict> dicts = new ArrayList<>();
+		TkDict dict = new TkDict();
+		dict.setDictNo("D001");
+		dict.setDictNm("01");
+		dicts.add(dict);
+		dict = new TkDict();
+		dict.setDictNo("D00101");
+		dict.setDictNm("0101");
+		dict.setDictFno("D001");
+		dicts.add(dict);
+		dict = new TkDict();
+		dict.setDictNo("D00102");
+		dict.setDictNm("0102");
+		dict.setDictFno("D001");
+		dicts.add(dict);
+		
+		System.err.println(JSONUtils.toJSONString(listToTree(dicts, "D001")));
+	}
 }

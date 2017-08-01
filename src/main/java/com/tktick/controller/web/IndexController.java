@@ -32,7 +32,7 @@ public class IndexController extends WebBaseController {
 		Map<String, List<?>> model = Maps.newHashMap();
 		model.put("navs", navs);
 		//首页的内容大部分是后台专门的一张表来管理
-		//轮播图
+		//轮播图（内容为测评）
 		//专题4个
 		//合集列表
 		//最新的文章
