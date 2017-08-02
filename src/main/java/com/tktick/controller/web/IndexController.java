@@ -11,6 +11,7 @@ import com.google.common.collect.Maps;
 import com.tktick.bean.entity.TkUser;
 import com.tktick.bean.model.TreeModel;
 import com.tktick.service.TkDictService;
+import com.tktick.service.TkHomeService;
 import com.tktick.service.TkUserService;
 
 /**
@@ -25,12 +26,15 @@ public class IndexController extends WebBaseController {
 	private TkUserService userService;
 	@Autowired
 	private TkDictService dictService;
+	@Autowired
+	private TkHomeService homeService;
 	
 	@RequestMapping("/")
 	public ModelAndView index(){
 		List<TreeModel> navs = dictService.queryForTreeListByFno("D001");//导航条
 		Map<String, List<?>> model = Maps.newHashMap();
 		model.put("navs", navs);
+		homeService.queryHomeCont();
 		//首页的内容大部分是后台专门的一张表来管理
 		//轮播图（内容为测评）
 		//专题4个

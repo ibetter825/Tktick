@@ -39,7 +39,7 @@ public class TkDict extends BaseEntity {
 		TreeModel model = null;
 		for (TkDict dict : list) {
 			if(fno == null){
-				if(StringUtils.isNotEmpty((String) dict.getDictFno()))//这是一级菜单
+				if(StringUtils.isNotEmpty(dict.getDictFno()))//这是一级菜单
 					continue;
 			}else{
 				if(!fno.equals(dict.getDictFno()))
@@ -48,6 +48,7 @@ public class TkDict extends BaseEntity {
 			model = new TreeModel();
 			model.setId(dict.getDictNo());
 			model.setText(dict.getDictNm());
+			model.setIcon(dict.getDictIcon());
         	model.setChildren(listToTree(list, dict.getDictNo()));
         	res.add(model);
 		}
@@ -120,6 +121,6 @@ public class TkDict extends BaseEntity {
 		dict.setDictFno("D001");
 		dicts.add(dict);
 		
-		System.err.println(JSON.toJSONString(listToTree(dicts, "D001")));
+		System.err.println(JSON.toJSONString(listToTree(dicts, null)));
 	}
 }

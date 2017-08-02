@@ -14,4 +14,9 @@ public interface TkHomeMapper extends BaseMapper<TkHome> {
 	 * @return
 	 */
 	public List<Map<?, ?>> selectListForMapByRq(Map<String, Object> rq);
+	/**
+	 * 查询所有的首页内容
+	 * @return
+	 */
+	public List<TkHome> selectList();
 }

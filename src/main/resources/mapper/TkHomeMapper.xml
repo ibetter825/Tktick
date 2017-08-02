@@ -14,14 +14,19 @@
 	    	<if test="hmType != null and hmType != ''">
 	    		and hm_type = #{hmType, jdbcType=VARCHAR}
 	    	</if>
-	    	<if test="hm_state != null and hm_state != ''">
+	    	<if test="hmState != null and hmState != ''">
 	    		and hm_state = #{hmState, jdbcType=INTEGER}
 	    	</if>
-	    	<if test="hm_state == null or hm_state == ''">
+	    	<if test="hmState == null or hmState == ''">
 	    		and hm_state <![CDATA[<>]]> -1
 	    	</if>
     	</trim>
     	order by hm_seq
     </select>
-    
+    <select id="selectList" resultType="com.tktick.bean.entity.TkHome">
+    	select <include refid="baseColumnList"/> 
+    	from tk_home 
+    	where hm_state <![CDATA[<>]]> -1
+    	order by hm_seq
+    </select>
 </mapper>  

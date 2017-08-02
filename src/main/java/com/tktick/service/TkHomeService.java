@@ -19,4 +19,10 @@ public interface TkHomeService {
 	 * @return
 	 */
 	public List<Map<?, ?>> queryListForMap(QueryRq rq);
+	/**
+	 * 查询首页正常状态下的数据
+	 * 并将其分类封装
+	 * @return
+	 */
+	public Map<String, List<TkHome>> queryHomeCont();
 }
