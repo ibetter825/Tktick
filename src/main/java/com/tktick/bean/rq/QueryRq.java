@@ -3,6 +3,8 @@ package com.tktick.bean.rq;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 /**
  * 查询条件对象
  * @author user
@@ -12,7 +14,7 @@ public class QueryRq {
 	/**
 	 * 查询的参数封到rq中
 	 */
-	private Map<String, Object> qrq;
+	private Map<String, Object> qrq = Maps.newHashMap();
 	/**
 	 * 排序对象
 	 * 使用时需要将or转成为字符串的order以供Pagerhelper使用

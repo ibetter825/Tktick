@@ -27,6 +27,25 @@
 	    	</if>
     	</trim>
     </select>
+    <select id="selectListByRqAndPager" resultType="java.util.Map">
+    	select id, art_title as artTitle, art_desc as artDesc, clz_id as clzId, user_id as userId, add_time as addTime, art_tag_nms as artTagNms, art_tag_ids as artTagIds, art_imgs as artImgs from tk_article 
+    	<trim prefix="WHERE" prefixOverrides="AND|OR">
+	    	<if test="rq.clzId != null and rq.clzId != ''">
+	    		clz_id = #{rq.clzId, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="rq.userId != null and rq.userId != ''">
+	    		and user_id = #{rq.userId, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="rq.artState != null and rq.artState != ''">
+	    		and art_state = #{rq.artState, jdbcType=INTEGER}
+	    	</if>
+	    	<if test="rq.artState == null or rq.artState == ''">
+	    		and art_state <![CDATA[<>]]> -1
+	    	</if>
+    	</trim>
+    	order by id desc
+    	limit #{pager.start, jdbcType=INTEGER}, #{pager.size, jdbcType=INTEGER}
+    </select>
     <select id="selectOneByIdForMap" parameterType="java.util.Map" resultType="java.lang.Long">
     	select <include refid="baseColumnList"/> from tk_article where id = #{id, jdbcType=BIGINT}
     </select>

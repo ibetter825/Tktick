@@ -7,9 +7,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;
+import com.tktick.bean.constant.CacheConstant;
 import com.tktick.bean.entity.TkHome;
 import com.tktick.bean.rq.QueryRq;
 import com.tktick.dao.mapper.TkHomeMapper;
@@ -34,6 +36,7 @@ public class TkHomeServiceImpl implements TkHomeService {
 	}
 
 	@Override
+	@Cacheable(value = CacheConstant.HOME_DATA_CAHE_NAME)
 	public Map<String, List<TkHome>> queryHomeCont() {
 		List<TkHome> list = homeMapper.selectList();
 		Map<String, List<TkHome>> res = Maps.newHashMap();
