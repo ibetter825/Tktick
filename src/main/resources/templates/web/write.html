@@ -40,7 +40,14 @@
             </div>
         </div>
     </div>
-
+    <div class="clearfix"></div>
+	<div class="two-s-footer affix" style="bottom: 0; width: 100%;">
+		<div class="footer-box">
+			<div class="container">
+				
+			</div>
+		</div>
+	</div>
     <script type="text/javascript">
         /* <![CDATA[ */
         var suxingme_url = {
@@ -53,7 +60,12 @@
         };
         /* ]]> */
     </script>
-    <#include "/web/common/footer.html"/>
+    <script type="text/javascript" src="/js/jquery.js?ver=1.12.4"></script>
+	<script type="text/javascript" src="/layer/layer.js"></script>
+    <script type="text/javascript" src="/js/jquery-migrate.min.js?ver=1.4.1"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js?ver=tktick1"></script>
+    <script type="text/javascript" src="/js/jquery.bootstrap-autohidingnavbar.min.js?ver=Grace7"></script>
+    <script type="text/javascript" src="/js/tktick.js?ver=tktick1"></script>
     <script type="text/javascript" src="/js/wangEditor.min.js?ver=3.04"></script>
     <script type="text/javascript">
     	var E = window.wangEditor
@@ -79,6 +91,8 @@
 	    ];
 	    // 配置服务器端地址
     	editor.customConfig.uploadImgServer = '/common/upload/editor.json';
+    	// 将图片大小限制为 15M
+		editor.customConfig.uploadImgMaxSize = 15 * 1024 * 1024
     	//可自定义filename
     	editor.customConfig.uploadFileName = 'file';
     	editor.customConfig.customAlert = function (info) {
@@ -87,5 +101,4 @@
 		}
         editor.create()
     </script>
-    <a class="to-top" style="cursor: pointer; position: fixed; right: 38px; bottom: 38px; display: none;"><i class="icon-up-small"></i></a></body>
 </html>
