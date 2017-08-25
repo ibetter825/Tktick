@@ -8,7 +8,7 @@ public class CacheConstant {
 	/**
 	 * 字典数据缓存名
 	 */
-	public final static String DICT_DATE_CACHE_NAME = "DICTS";
+	public final static String DICT_DATA_CACHE_NAME = "DICTS";
 	/**
 	 * 首页数据缓存名
 	 */

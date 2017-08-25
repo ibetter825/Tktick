@@ -43,7 +43,7 @@ public class IndexController extends WebBaseController {
 		//导航条
 		model.put("navs", navs);
 		//轮播图（内容为测评）, 专题4个, 合集列表
-		Map<String, List<TkHome>> homes = homeService.queryHomeCont();
+		Map<String, List<TkHome>> homeConts = homeService.queryHomeCont();
 		//最新的文章
 		articleService.queryForMapList(new QueryRq(), new PagerRq().setSize(10));
 		return new ModelAndView("web/index", model);

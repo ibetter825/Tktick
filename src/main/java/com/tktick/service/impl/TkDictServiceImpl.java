@@ -35,7 +35,7 @@ public class TkDictServiceImpl implements TkDictService {
 	}
 
 	@Override
-	@Cacheable(value = CacheConstant.DICT_DATE_CACHE_NAME, key = "'FNO_'+#fno")
+	@Cacheable(value = CacheConstant.DICT_DATA_CACHE_NAME, key = "'FNO_'+#fno")
 	public List<TreeModel> queryForTreeListByFno(String fno) {
 		List<TkDict> dicts = dictMapper.selectListByFno(fno);
 		return TkDict.listToTree(dicts, fno);
