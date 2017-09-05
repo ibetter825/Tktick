@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tktick.bean.entity.TkArticle;
+import com.tktick.bean.rq.PagerRq;
 import com.tktick.bean.rq.QueryRq;
 import com.tktick.dao.mapper.TkArticleMapper;
 import com.tktick.service.TkArticleService;
@@ -41,6 +42,11 @@ public class TkArticleServiceImpl implements TkArticleService {
 	@Override
 	public List<Map<?, ?>> queryForMapList(QueryRq rq) {
 		return articleMapper.selectListByRq(rq.getQrq());
+	}
+	
+	@Override
+	public List<Map<?, ?>> queryForMapList(QueryRq rq, PagerRq pager){
+		return articleMapper.selectListByRqAndPager(rq.getQrq(), pager);
 	}
 	
 	@Override

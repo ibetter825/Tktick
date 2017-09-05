@@ -26,24 +26,31 @@ public class PagerRq {
 	 * 排序呢方式
 	 */
 	private String order;
+	/**
+	 * 由于mysql中limit的参数不能使用计算公式，只能放置常量，因此需要这个字段
+	 */
+	private Integer start;
 	
 	public Integer getPage() {
 		return page;
 	}
-	public void setPage(Integer page) {
+	public PagerRq setPage(Integer page) {
 		this.page = page;
+		return this;
 	}
 	public Integer getSize() {
 		return size;
 	}
-	public void setSize(Integer size) {
+	public PagerRq setSize(Integer size) {
 		this.size = size;
+		return this;
 	}
 	public String getSort() {
 		return sort;
 	}
-	public void setSort(String sort) {
+	public PagerRq setSort(String sort) {
 		this.sort = sort;
+		return this;
 	}
 	public String getOrder() {
 		if(StringUtils.isNotEmpty(this.sort))
@@ -51,7 +58,12 @@ public class PagerRq {
 		else
 			return null;
 	}
-	public void setOrder(String order) {
+	public PagerRq setOrder(String order) {
 		this.order = order;
+		return this;
+	}
+	public Integer getStart() {
+		if(start == null) return (page - 1) * size;
+		return start;
 	}
 }
