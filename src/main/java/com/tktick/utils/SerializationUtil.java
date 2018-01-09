@@ -103,12 +103,12 @@ public class SerializationUtil {
         }
         return result;
 	}
-	public static void main(String[] args) {
-		/*QtTag tag = new QtTag();
+	/*public static void main(String[] args) {
+		QtTag tag = new QtTag();
 		tag.setTag_name("测试");
 		tag.setTag_num(100);
 		QtTag t = null;
 		t = protoStuffDeserialize(protoStuffSerialize(tag), QtTag.class);
-		System.err.println(t.getTag_num());*/
-	}
+		System.err.println(t.getTag_num());
+	}*/
 }

@@ -141,11 +141,11 @@ public class SecretUtil {
 		return b2;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String en = SecretUtil.encrypt("1234576");
 		String de = SecretUtil.decrypt(en);
 		System.err.println(en);
 		System.err.println(de);
-	}
+	}*/
 
 }
