@@ -21,7 +21,7 @@ public class CrawlerUtil {
     int c = 0;
     public static final Object signal = new Object();   //线程间通信变量  
       
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         final CrawlerUtil wc = new CrawlerUtil();  
         wc.addUrl("http://www.cnblogs.com", 1);  
         long start= System.currentTimeMillis();  
@@ -37,7 +37,7 @@ public class CrawlerUtil {
             }  
               
         }  
-    }  
+    }  */
     private void begin() {  
         for(int i=0;i<threadCount;i++){  
             new Thread(new Runnable(){  

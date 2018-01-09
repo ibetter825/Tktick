@@ -2231,10 +2231,10 @@ public class StringUtil {
 		return fileExt;
 	}
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //System.out.println(formatSize(1546513));
     	System.out.println(uuid(false));
-        /*System.out.println(System.getProperty("file.separator"));
+        System.out.println(System.getProperty("file.separator"));
         Properties p = System.getProperties();
         System.out.println(formatPath("C:///\\xxxx\\\\\\\\\\///\\\\R5555555.txt"));
  
@@ -2242,6 +2242,6 @@ public class StringUtil {
          System.out.println(result.size());
          for (String s : result) {
              System.out.println(s);
-         }*/
-    }
+         }
+    }*/
 }

@@ -104,7 +104,7 @@ public class TkDict extends BaseEntity {
 		this.dictPar = dictPar;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		List<TkDict> dicts = new ArrayList<>();
 		TkDict dict = new TkDict();
 		dict.setDictNo("D001");
@@ -122,5 +122,5 @@ public class TkDict extends BaseEntity {
 		dicts.add(dict);
 		
 		System.err.println(JSON.toJSONString(listToTree(dicts, null)));
-	}
+	}*/
 }
